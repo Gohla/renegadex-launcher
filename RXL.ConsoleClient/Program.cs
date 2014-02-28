@@ -9,6 +9,7 @@ namespace RXL.ConsoleClient
         {
             ServerList serverList = new ServerList(null);
             serverList.Refresh();
+            serverList.Refresh();
 
             foreach(Server server in serverList.Servers) {
                 Console.WriteLine(server);

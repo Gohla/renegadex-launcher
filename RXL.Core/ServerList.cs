@@ -36,6 +36,7 @@ namespace RXL.Core
                 {
                     Add(server);
                 }
+                removedServers.Remove(server);
             }
 
             foreach(Server server in removedServers)
