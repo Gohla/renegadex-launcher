@@ -10,14 +10,12 @@ namespace RXL.Util
         TKey Key { get; }
     }
 
-    public class SynchronizedKeyedCollection<TKey, TItem> :
+    public class KeyedCollection<TKey, TItem> :
         System.Collections.ObjectModel.KeyedCollection<TKey, TItem>,
         IDisposable,
         IObservableCollection<TItem>
         where TItem : class, IKeyedObject<TKey>
     {
-        private SynchronizationContext _context;
-
         public System.Collections.Generic.IEnumerable<TKey> Keys
         {
             get
@@ -40,10 +38,10 @@ namespace RXL.Util
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        public SynchronizedKeyedCollection(SynchronizationContext context)
+        public KeyedCollection()
             : base()
         {
-            _context = context;
+
         }
 
         public void Dispose()
@@ -67,15 +65,13 @@ namespace RXL.Util
         protected override void SetItem(int index, TItem item)
         {
             base.SetItem(index, item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
-                item, index));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, item, index));
         }
 
         protected override void InsertItem(int index, TItem item)
         {
             base.InsertItem(index, item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-                item, index));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
         }
 
         protected override void ClearItems()
@@ -88,28 +84,13 @@ namespace RXL.Util
         {
             TItem item = this[index];
             base.RemoveItem(index);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item,
-                index));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
         }
 
-        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
+        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if(_context != null)
-            {
-                _context.Send(SendOnCollectionChanged, args);
-            }
-            else
-            {
-                if(CollectionChanged != null)
-                    CollectionChanged(this, args);
-            }
-        }
-
-        private void SendOnCollectionChanged(object state)
-        {
-            NotifyCollectionChangedEventArgs args = state as NotifyCollectionChangedEventArgs;
             if(CollectionChanged != null)
-                CollectionChanged(this, args);
+                CollectionChanged(this, e);
         }
     }
 }

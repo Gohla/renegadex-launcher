@@ -14,14 +14,9 @@ namespace RXL.Core
         private const String SERVERLIST_ADDRESS = "http://renegadexgs.appspot.com/browser_2.jsp?view=false";
 
         private ServerListParser _parser = new ServerListParser();
-        private SynchronizedKeyedCollection<String, Server> _servers;
+        private KeyedCollection<String, Server> _servers = new KeyedCollection<String, Server>();
 
         public IObservableCollection<Server> Servers { get { return _servers; } }
-
-        public ServerList(SynchronizationContext syncContext)
-        {
-            _servers = new SynchronizedKeyedCollection<String, Server>(syncContext);
-        }
 
         public void Refresh()
         {

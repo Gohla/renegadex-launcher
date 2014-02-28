@@ -7,7 +7,7 @@ namespace RXL.ConsoleClient
     {
         static void Main(string[] args)
         {
-            ServerList serverList = new ServerList(null);
+            ServerList serverList = new ServerList();
             serverList.Refresh();
             serverList.Refresh();
 
