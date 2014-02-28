@@ -8,13 +8,22 @@ namespace RXL.ConsoleClient
         static void Main(string[] args)
         {
             ServerList serverList = new ServerList();
-            serverList.Refresh();
-            serverList.Refresh();
-            serverList.Ping();
 
-            foreach(Server server in serverList.Servers) {
-                Console.WriteLine(server);
-            }
+            serverList.Refreshed += servers =>
+            {
+                foreach(Server server in servers)
+                {
+                    Console.WriteLine(server);
+                }
+            };
+
+            serverList.Pinged += pingResults =>
+            {
+                foreach(PingResult result in pingResults)
+                    Console.WriteLine("{0}: {1}", result.Reply.Status, result.Server.Address);
+            };
+
+            serverList.Refresh();
 
             Console.ReadKey();
         }

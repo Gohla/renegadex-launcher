@@ -1,12 +1,12 @@
 ﻿using RXL.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 
 namespace RXL.Core
 {
@@ -14,50 +14,88 @@ namespace RXL.Core
     {
         private const String SERVERLIST_ADDRESS = "http://renegadexgs.appspot.com/browser_2.jsp?view=false";
 
-        private ServerListParser _parser = new ServerListParser();
-        private KeyedCollection<String, Server> _servers = new KeyedCollection<String, Server>();
+        private readonly ServerListParser _parser = new ServerListParser();
+        private readonly KeyedCollection<String, Server> _servers = new KeyedCollection<String, Server>();
+
+        private readonly BackgroundWorker _refreshWorker = new BackgroundWorker();
+        private readonly BackgroundWorker _pingWorker = new BackgroundWorker();
 
         public IObservableCollection<Server> Servers { get { return _servers; } }
 
+        public event Action<IEnumerable<Server>> Refreshed;
+        public event Action<IEnumerable<PingResult>> Pinged;
+
+        public ServerList()
+        {
+            _refreshWorker.WorkerSupportsCancellation = true;
+            _refreshWorker.DoWork += delegate(object obj, DoWorkEventArgs args)
+            {
+                args.Result = Request()
+                    .Select(_parser.ParseServer)
+                    .Where(v => v != null)
+                    ; 
+            };
+            _refreshWorker.RunWorkerCompleted += delegate(object obj, RunWorkerCompletedEventArgs args)
+            {
+                ISet<Server> removedServers = new HashSet<Server>(_servers.Values);
+                foreach(Server server in args.Result as IEnumerable<Server>)
+                {
+                    if(!Update(server))
+                    {
+                        Add(server);
+                    }
+                    removedServers.Remove(server);
+                }
+
+                foreach(Server server in removedServers)
+                {
+                    Remove(server.Address);
+                }
+
+                Ping();
+
+                if(Refreshed != null)
+                    Refreshed.Invoke(_servers);
+            };
+
+            _pingWorker.WorkerSupportsCancellation = true;
+            _pingWorker.DoWork += delegate(object obj, DoWorkEventArgs args)
+            {
+                args.Result = _servers
+                    .AsParallel()
+                    .WithDegreeOfParallelism(32)
+                    .Select(s => new PingResult(s, new Ping().Send(String.Concat(s.Address.TakeWhile(c => c != ':')), 500)))
+                    .ToArray()
+                    ;
+            };
+            _pingWorker.RunWorkerCompleted += delegate(object obj, RunWorkerCompletedEventArgs args)
+            {
+                IEnumerable<PingResult> results = args.Result as IEnumerable<PingResult>;
+                foreach(PingResult result in results)
+                {
+                    if(result.Reply.Status == IPStatus.Success)
+                        result.Server.Latency = result.Reply.RoundtripTime;
+                    else
+                        result.Server.Latency = -1;
+                }
+
+                if(Pinged != null)
+                    Pinged.Invoke(results);
+            };
+        }
+
         public void Refresh()
         {
-            IEnumerable<Server> servers = Request()
-                .Select(_parser.ParseServer)
-                .Where(v => v != null)
-                ;
-            ISet<Server> removedServers = new HashSet<Server>(_servers.Values);
-            foreach(Server server in servers)
-            {
-                if(!Update(server))
-                {
-                    Add(server);
-                }
-                removedServers.Remove(server);
-            }
-
-            foreach(Server server in removedServers)
-            {
-                Remove(server.Address);
-            }
+            // TODO: Properly handle multiple requests.
+            if(!_refreshWorker.IsBusy)
+                _refreshWorker.RunWorkerAsync();
         }
 
         public void Ping()
         {
-            Ping pinger = new Ping();
-            foreach(Server server in _servers)
-            {
-                Console.WriteLine("Ping!");
-                PingReply reply = pinger.Send(String.Concat(server.Address.TakeWhile(c => c != ':')), 1000);
-                if(reply.Status == IPStatus.Success)
-                {
-                    server.Latency = reply.RoundtripTime;
-                    Console.WriteLine("Pong! " + reply.RoundtripTime);
-                }
-                else
-                {
-                    Console.WriteLine("Timeout!");
-                }
-            }
+            // TODO: Properly handle multiple requests.
+            if(!_pingWorker.IsBusy)
+                _pingWorker.RunWorkerAsync();
         }
 
         private IEnumerable<String> Request()
