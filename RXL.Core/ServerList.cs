@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 
@@ -37,6 +38,25 @@ namespace RXL.Core
             foreach(Server server in removedServers)
             {
                 Remove(server.Address);
+            }
+        }
+
+        public void Ping()
+        {
+            Ping pinger = new Ping();
+            foreach(Server server in _servers)
+            {
+                Console.WriteLine("Ping!");
+                PingReply reply = pinger.Send(String.Concat(server.Address.TakeWhile(c => c != ':')), 1000);
+                if(reply.Status == IPStatus.Success)
+                {
+                    server.Latency = reply.RoundtripTime;
+                    Console.WriteLine("Pong! " + reply.RoundtripTime);
+                }
+                else
+                {
+                    Console.WriteLine("Timeout!");
+                }
             }
         }
 

@@ -23,8 +23,8 @@ namespace RXL.Core
         private uint _maxPlayers;
         public uint MaxPlayers { get { return _maxPlayers; } set { SetField(ref _maxPlayers, value, "MaxPlayers"); } }
 
-        private uint _ping;
-        public uint Ping { get { return _ping; } set { SetField(ref _ping, value, "Ping"); } }
+        private long _latency;
+        public long Latency { get { return _latency; } set { SetField(ref _latency, value, "Latency"); } }
 
         private bool _requiresPW;
         public bool RequiresPW { get { return _requiresPW; } set { SetField(ref _requiresPW, value, "RequiresPW"); } }
@@ -42,7 +42,7 @@ namespace RXL.Core
             this.Players = server.Players;
             this.Bots = server.Bots;
             this.MaxPlayers = server.MaxPlayers;
-            this.Ping = server.Ping;
+            this.Latency = server.Latency;
             this.RequiresPW = server.RequiresPW;
             this.MapIndex = server.MapIndex;
             if(this.ServerSettings != null && server.ServerSettings != null)
