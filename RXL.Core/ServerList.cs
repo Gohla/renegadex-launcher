@@ -1,11 +1,11 @@
-﻿using System;
+﻿using RXL.Util;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace RXL.Core
 {
@@ -14,14 +14,19 @@ namespace RXL.Core
         private const String SERVERLIST_ADDRESS = "http://renegadexgs.appspot.com/browser_2.jsp?view=false";
 
         private ServerListParser _parser = new ServerListParser();
-        private ObservableDictionary<String, Server> _servers = new ObservableDictionary<String, Server>();
+        private SynchronizedKeyedCollection<String, Server> _servers;
 
-        public ObservableDictionary<String, Server> Servers { get { return _servers; } }
+        public IObservableCollection<Server> Servers { get { return _servers; } }
+
+        public ServerList(SynchronizationContext syncContext)
+        {
+            _servers = new SynchronizedKeyedCollection<String, Server>(syncContext);
+        }
 
         public void Refresh()
         {
             IEnumerable<Server> servers = Request()
-                .Select(_parser.Parse)
+                .Select(_parser.ParseServer)
                 .Where(v => v != null)
                 ;
             ISet<Server> removedServers = new HashSet<Server>(_servers.Values);
@@ -53,14 +58,14 @@ namespace RXL.Core
 
         private void Add(Server server)
         {
-            _servers.Add(server.Address, server);
+            _servers.Add(server);
         }
 
         private bool Update(Server server)
         {
-            Server existingServer;
-            if(_servers.TryGetValue(server.Address, out existingServer))
+            if(_servers.Contains(server.Address))
             {
+                Server existingServer = _servers[server.Address];
                 existingServer.Update(server);
                 return true;
             }

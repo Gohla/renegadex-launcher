@@ -87,9 +87,17 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RXL.ConsoleClient\RXL.ConsoleClient.csproj">
+      <Project>{7b1cdec8-6ec9-4c54-9404-06c27af69135}</Project>
+      <Name>RXL.ConsoleClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RXL.Core\RXL.Core.csproj">
       <Project>{d6321fb5-afa9-4d7f-9edb-10db4a413076}</Project>
       <Name>RXL.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RXL.Util\RXL.Util.csproj">
+      <Project>{01d91b08-010d-4dbc-8c21-6745fc255f23}</Project>
+      <Name>RXL.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

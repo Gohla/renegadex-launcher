@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C736DC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RXL.ConsoleClient", "RXL.ConsoleClient\RXL.ConsoleClient.csproj", "{7B1CDEC8-6EC9-4C54-9404-06C27AF69135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RXL.Util", "RXL.Util\RXL.Util.csproj", "{01D91B08-010D-4DBC-8C21-6745FC255F23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,12 +40,17 @@ Global
 		{7B1CDEC8-6EC9-4C54-9404-06C27AF69135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B1CDEC8-6EC9-4C54-9404-06C27AF69135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B1CDEC8-6EC9-4C54-9404-06C27AF69135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D91B08-010D-4DBC-8C21-6745FC255F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D91B08-010D-4DBC-8C21-6745FC255F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D91B08-010D-4DBC-8C21-6745FC255F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D91B08-010D-4DBC-8C21-6745FC255F23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D6321FB5-AFA9-4D7F-9EDB-10DB4A413076} = {A1EA670C-48D7-4621-A621-BCB7186F4517}
+		{01D91B08-010D-4DBC-8C21-6745FC255F23} = {A1EA670C-48D7-4621-A621-BCB7186F4517}
 		{D4858BBF-9253-4F53-927A-11B29757A55F} = {4AFDB91F-BE6D-4159-989F-F72CA8E09AE8}
 		{7B1CDEC8-6EC9-4C54-9404-06C27AF69135} = {4AFDB91F-BE6D-4159-989F-F72CA8E09AE8}
 	EndGlobalSection

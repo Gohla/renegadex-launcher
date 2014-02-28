@@ -1,9 +1,5 @@
 ﻿using RXL.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RXL.ConsoleClient
 {
@@ -11,8 +7,12 @@ namespace RXL.ConsoleClient
     {
         static void Main(string[] args)
         {
-            ServerList serverList = new ServerList();
-            serverList.Update();
+            ServerList serverList = new ServerList(null);
+            serverList.Refresh();
+
+            foreach(Server server in serverList.Servers) {
+                Console.WriteLine(server);
+            }
 
             Console.ReadKey();
         }

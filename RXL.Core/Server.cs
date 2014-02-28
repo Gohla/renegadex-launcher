@@ -1,16 +1,18 @@
-﻿using System;
+﻿using RXL.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace RXL.Core
 {
-    public class Server : INotifyPropertyChanged
+    public class Server : INotifyPropertyChanged, IKeyedObject<String>
     {
         private String _name;
         public String Name { get { return _name; } set { SetField(ref _name, value, "Name"); } }
 
         private String _address;
         public String Address { get { return _address; } set { SetField(ref _address, value, "Address"); } }
+        public String Key { get { return Address; } }
 
         private uint _players;
         public uint Players { get { return _players; } set { SetField(ref _players, value, "Players"); } }
@@ -30,8 +32,8 @@ namespace RXL.Core
         private String _mapIndex;
         public String MapIndex { get { return _mapIndex; } set { SetField(ref _mapIndex, value, "MapIndex"); } }
 
-        private String _serverSettings;
-        public String ServerSettings { get { return _serverSettings; } set { SetField(ref _serverSettings, value, "ServerSettings"); } }
+        private ServerSettings _serverSettings;
+        public ServerSettings ServerSettings { get { return _serverSettings; } set { SetField(ref _serverSettings, value, "ServerSettings"); } }
 
         public void Update(Server server)
         {
@@ -43,19 +45,25 @@ namespace RXL.Core
             this.Ping = server.Ping;
             this.RequiresPW = server.RequiresPW;
             this.MapIndex = server.MapIndex;
-            this.ServerSettings = server.ServerSettings;
+            if(this.ServerSettings != null && server.ServerSettings != null)
+            {
+                this.ServerSettings.Update(server.ServerSettings);
+                OnPropertyChanged("ServerSettings");
+            }
+            else
+                this.ServerSettings = server.ServerSettings;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            if(handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
         protected bool SetField<T>(ref T field, T value, String propertyName)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value))
+            if(EqualityComparer<T>.Default.Equals(field, value))
                 return false;
             field = value;
             OnPropertyChanged(propertyName);
@@ -74,7 +82,7 @@ namespace RXL.Core
 
         public bool Equals(Server other)
         {
-            if (other == null)
+            if(other == null)
                 return false;
             return this.Address.Equals(other.Address);
         }
