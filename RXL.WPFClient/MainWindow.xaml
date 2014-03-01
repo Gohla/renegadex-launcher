@@ -9,6 +9,17 @@
     </Window.DataContext>
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Servers}" />
+        <DataGrid ItemsSource="{Binding Servers}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" MinWidth="350" Width="Auto" IsReadOnly="True" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Players" Width="Auto" IsReadOnly="True" Binding="{Binding Players}"/>
+                <DataGridTextColumn Header="Bots" Width="Auto" IsReadOnly="True" Binding="{Binding Bots}"/>
+                <DataGridTextColumn Header="Max players" Width="Auto" IsReadOnly="True" Binding="{Binding MaxPlayers}"/>
+                <DataGridTextColumn Header="Latency" Width="Auto" IsReadOnly="True" Binding="{Binding Latency}"/>
+                <DataGridTextColumn Header="Map" Width="Auto" IsReadOnly="True" Binding="{Binding MapIndex}"/>
+                <DataGridTextColumn Header="Address" MinWidth="140" Width="Auto" IsReadOnly="True" Binding="{Binding Address}"/>
+                <DataGridCheckBoxColumn Header="Password" IsReadOnly="True" Binding="{Binding RequiresPW}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
