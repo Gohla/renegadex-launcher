@@ -42,7 +42,6 @@ namespace RXL.Core
             this.Players = server.Players;
             this.Bots = server.Bots;
             this.MaxPlayers = server.MaxPlayers;
-            this.Latency = server.Latency;
             this.RequiresPW = server.RequiresPW;
             this.MapIndex = server.MapIndex;
             if(this.ServerSettings != null && server.ServerSettings != null)
