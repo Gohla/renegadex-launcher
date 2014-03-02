@@ -13,9 +13,14 @@
     <SolidColorBrush x:Key="ListTextColor2"
                      Color="#FFE7ECC7" />
 
+    <SolidColorBrush x:Key="InfoTextColor"
+                     Color="White" />
+    <SolidColorBrush x:Key="InfoTextColor2"
+                     Color="#FFE7ECC7" />
+
     <SolidColorBrush x:Key="ListBackgroundBrush"
                      Color="#9002020F" />
-
+    
     <SolidColorBrush x:Key="ListBackgroundBrush2"
                      Color="#BF02020F" />
 
@@ -72,6 +77,44 @@
                 Value="15" />
         <Setter Property="Foreground"
                 Value="{StaticResource ListTextColor2}" />
+    </Style>
+
+    <Style x:Key="ServerInfoLabelTextBlockStyle"
+           TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontWeight"
+                Value="Normal" />
+        <Setter Property="TextWrapping"
+                Value="NoWrap" />
+        <Setter Property="FontSize"
+                Value="20" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="LineStackingStrategy"
+                Value="BlockLineHeight" />
+        <Setter Property="LineHeight"
+                Value="25" />
+        <Setter Property="Foreground"
+                Value="{StaticResource InfoTextColor2}" />
+    </Style>
+
+    <Style x:Key="ServerInfoTextBlockStyle"
+           TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontWeight"
+                Value="Normal" />
+        <Setter Property="TextWrapping"
+                Value="NoWrap" />
+        <Setter Property="FontSize"
+                Value="20" />
+        <Setter Property="LineStackingStrategy"
+                Value="BlockLineHeight" />
+        <Setter Property="LineHeight"
+                Value="25" />
+        <Setter Property="Foreground"
+                Value="{StaticResource InfoTextColor}" />
     </Style>
 
     <Style x:Key="MenuButtonStyle"
