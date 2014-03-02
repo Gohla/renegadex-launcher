@@ -5,12 +5,12 @@ namespace RXL.Core
 {
     public class PingResult
     {
-        public readonly Server Server;
+        public readonly String Address;
         public readonly PingReply Reply;
 
-        public PingResult(Server server, PingReply reply)
+        public PingResult(String address, PingReply reply)
         {
-            Server = server;
+            Address = address;
             Reply = reply;
         }
     }

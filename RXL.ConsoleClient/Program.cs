@@ -1,5 +1,6 @@
 ﻿using RXL.Core;
 using System;
+using System.Linq;
 
 namespace RXL.ConsoleClient
 {
@@ -9,21 +10,17 @@ namespace RXL.ConsoleClient
         {
             ServerList serverList = new ServerList();
 
-            serverList.Refreshed += servers =>
+            var servers = serverList.Refresh();
+            servers.Wait();
+            foreach(Server server in servers.Result)
             {
-                foreach(Server server in servers)
-                {
-                    Console.WriteLine(server);
-                }
-            };
+                Console.WriteLine(server.Name);
+            }
 
-            serverList.Pinged += pingResults =>
-            {
-                foreach(PingResult result in pingResults)
-                    Console.WriteLine("{0}: {1}", result.Reply.Status, result.Server.Address);
-            };
-
-            serverList.Refresh();
+            var pings = serverList.Ping(servers.Result.Select(s => s.Address));
+            pings.Wait();
+            foreach(PingResult result in pings.Result)
+                Console.WriteLine("{0}: {1}", result.Reply.Status, result.Address);
 
             Console.ReadKey();
         }
