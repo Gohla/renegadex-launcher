@@ -8,15 +8,18 @@ using RXL.Core;
 using RXL.Util;
 using RXL.WPFClient.Observables;
 using RXL.WPFClient.Utils;
+using System.Threading;
+using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace RXL.WPFClient.ViewModels
 {
     public class ServersViewModel : BaseViewModel
     {
         private readonly ServerList _serverList;
-
-        private readonly KeyedCollection<String, ServerObservable> _servers = new KeyedCollection<String, ServerObservable>();
+        private readonly KeyedCollection<String, ServerObservable> _servers;
         private ServerObservable _selectedServer;
+
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
 
         public ServerObservable SelectedServer
@@ -24,7 +27,7 @@ namespace RXL.WPFClient.ViewModels
             get { return _selectedServer; }
             set
             {
-                _selectedServer = value; 
+                _selectedServer = value;
                 RaisePropertyChanged(() => SelectedServer);
             }
         }
@@ -35,6 +38,7 @@ namespace RXL.WPFClient.ViewModels
         public ServersViewModel()
         {
             _serverList = new ServerList();
+            _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
             Ping = new RelayCommand(_ => true, _ => DoPing());
@@ -50,24 +54,27 @@ namespace RXL.WPFClient.ViewModels
         {
             IEnumerable<Server> newServers = await _serverList.Refresh();
 
-            ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
-            foreach (Server server in newServers)
+            await Task.Factory.StartNew(() =>
             {
-                ServerObservable serverObservable = Mapper.Map<Server, ServerObservable>(server);
-
-                if (!UpdateServer(serverObservable))
+                ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
+                foreach(Server server in newServers)
                 {
-                    AddServer(serverObservable);
+                    ServerObservable serverObservable = Mapper.Map<Server, ServerObservable>(server);
+
+                    if(!UpdateServer(serverObservable))
+                    {
+                        AddServer(serverObservable);
+                    }
+                    removedServers.Remove(serverObservable);
                 }
-                removedServers.Remove(serverObservable);
-            }
 
-            foreach (ServerObservable server in removedServers)
-            {
-                RemoveServer(server.Key);
-            }
+                foreach(ServerObservable server in removedServers)
+                {
+                    RemoveServer(server.Key);
+                }
 
-            DoPing();
+                DoPing();
+            });
         }
 
         private void AddServer(ServerObservable server)
@@ -77,7 +84,7 @@ namespace RXL.WPFClient.ViewModels
 
         private bool UpdateServer(ServerObservable server)
         {
-            if (_servers.Contains(server.Key))
+            if(_servers.Contains(server.Key))
             {
                 ServerObservable existingServer = _servers[server.Address];
                 existingServer.Update(server);
@@ -95,10 +102,10 @@ namespace RXL.WPFClient.ViewModels
         {
             IEnumerable<PingResult> results = await _serverList.Ping(_servers.Keys);
 
-            foreach (PingResult result in results)
+            foreach(PingResult result in results)
             {
                 ServerObservable server = _servers[result.Address];
-                if (result.Reply.Status == IPStatus.Success)
+                if(result.Reply.Status == IPStatus.Success)
                     server.Latency = result.Reply.RoundtripTime;
                 else
                     server.Latency = -1;
