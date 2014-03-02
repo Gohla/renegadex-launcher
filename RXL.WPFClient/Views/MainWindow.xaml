@@ -71,7 +71,7 @@
                 </Grid.RowDefinitions>
                 <!--  Title  -->
                 <Border Grid.Row="0"
-                        BorderThickness="1"
+                        BorderThickness="1,1,1,0"
                         BorderBrush="Transparent">
                     <Grid Background="{StaticResource ListBackgroundBrush}">
                         <Grid.ColumnDefinitions>
@@ -88,12 +88,25 @@
                     </Grid>
                 </Border>
                 <!-- Data -->
-                <ListBox Grid.Row="1"
+                <ListView Grid.Row="1"
                          BorderThickness="0"
-                         Background="{StaticResource ListBackgroundBrush}"
+                         Margin="0"
+                         Padding="0"
+                         Background="Transparent"
                          ItemsSource="{Binding Servers}"
                          ItemTemplate="{StaticResource ServerDataTemplate}">
-                </ListBox>
+                    <!--<ListBox.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="BorderThickness"
+                                    Value="0.5" />
+                            <Setter Property="Margin"
+                                    Value="0" />
+                            <Setter Property="Padding"
+                                    Value="0" />
+                        </Style>
+                        
+                    </ListBox.ItemContainerStyle>-->
+                </ListView>
 
             </Grid>
 
