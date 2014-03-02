@@ -18,8 +18,10 @@ namespace RXL.WPFClient.Observables
         {
             if (EqualityComparer<T>.Default.Equals(field, value))
                 return false;
+
             field = value;
             OnPropertyChanged(propertyName);
+
             return true;
         }
     }

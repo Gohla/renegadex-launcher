@@ -15,8 +15,14 @@ namespace RXL.WPFClient.ViewModels
         private readonly ServerList _serverList;
 
         private readonly KeyedCollection<String, ServerObservable> _servers = new KeyedCollection<String, ServerObservable>();
+        private ServerObservable _selectedServer;
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
-        public ServerObservable SelectedServer { get; set; }
+
+        public ServerObservable SelectedServer
+        {
+            get { return _selectedServer; }
+            set { _selectedServer = value; }
+        }
 
         public ICommand Refresh { get; private set; }
         public ICommand Ping { get; private set; }
