@@ -4,8 +4,6 @@ using RXL.Util;
 using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RXL.WPFClient
