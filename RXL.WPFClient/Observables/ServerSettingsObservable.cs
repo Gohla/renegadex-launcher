@@ -8,9 +8,9 @@ namespace RXL.WPFClient.Observables
         private uint _vehicleLimit;
         private uint _mineLimit;
         private bool _spawnCrates;
-        private bool _crateRespawn;
+        private TimeSpan _crateRespawnTime;
         private bool _autoBalance;
-        private String _timeLimit;
+        private TimeSpan _timeLimit;
         private bool _allowPm;
         private bool _pmTeamOnly;
         private bool _steamRequired;
@@ -40,10 +40,10 @@ namespace RXL.WPFClient.Observables
             set { SetField(ref _spawnCrates, value, () => SpawnCrates); }
         }
 
-        public bool RespawnCrates
+        public TimeSpan CrateRespawnTime
         {
-            get { return _crateRespawn; }
-            set { SetField(ref _crateRespawn, value, () => RespawnCrates); }
+            get { return _crateRespawnTime; }
+            set { SetField(ref _crateRespawnTime, value, () => CrateRespawnTime); }
         }
 
         public bool AutoBalance
@@ -52,7 +52,7 @@ namespace RXL.WPFClient.Observables
             set { SetField(ref _autoBalance, value, () => AutoBalance); }
         }
 
-        public String TimeLimit
+        public TimeSpan TimeLimit
         {
             get { return _timeLimit; }
             set { SetField(ref _timeLimit, value, () => TimeLimit); }
@@ -88,7 +88,7 @@ namespace RXL.WPFClient.Observables
             VehicleLimit = serverSettings.VehicleLimit;
             MineLimit = serverSettings.MineLimit;
             SpawnCrates = serverSettings.SpawnCrates;
-            RespawnCrates = serverSettings.RespawnCrates;
+            CrateRespawnTime = serverSettings.CrateRespawnTime;
             AutoBalance = serverSettings.AutoBalance;
             TimeLimit = serverSettings.TimeLimit;
             AllowPm = serverSettings.AllowPm;

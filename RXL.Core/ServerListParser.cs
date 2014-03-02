@@ -24,12 +24,12 @@ namespace RXL.Core
                 {
                     Name = data[0],
                     Address = data[1],
-                    Bots = uint.Parse(data[2]),
-                    RequiresPw = bool.Parse(data[3]),
-                    MapIndex = data[4],
+                    Bots = ParseUInt(data[2]),
+                    RequiresPw = ParseBool(data[3]),
+                    Map = data[4],
                     ServerSettings = ParseServerSettings(data[5]),
-                    Players = uint.Parse(data[6]),
-                    MaxPlayers = uint.Parse(data[7]),
+                    Players = ParseUInt(data[6]),
+                    MaxPlayers = ParseUInt(data[7]),
                 };
 
                 return server;
@@ -48,30 +48,49 @@ namespace RXL.Core
             if(data.Length < 10)
                 return null;
 
-            try
+            ServerSettings settings = new ServerSettings
             {
-                ServerSettings settings = new ServerSettings
-                {
-                    MaxPlayers = uint.Parse(data[0]),
-                    VehicleLimit = uint.Parse(data[1]),
-                    MineLimit = uint.Parse(data[2]),
-                    SpawnCrates = bool.Parse(data[3]),
-                    RespawnCrates = bool.Parse(data[4]),
-                    AutoBalance = bool.Parse(data[5]),
-                    TimeLimit = data[6],
-                    AllowPm = bool.Parse(data[7]),
-                    PmTeamOnly = bool.Parse(data[8]),
-                    SteamRequired = bool.Parse(data[9]),
-                    Version = data[10],
-                };
+                MaxPlayers = ParseUInt(data[0]),
+                VehicleLimit = ParseUInt(data[1]),
+                MineLimit = ParseUInt(data[2]),
+                SpawnCrates = ParseBool(data[3]),
+                CrateRespawnTime = TimeSpan.FromSeconds(ParseDouble(data[4])),
+                AutoBalance = ParseBool(data[5]),
+                TimeLimit = TimeSpan.FromMinutes(ParseDouble(data[6])),
+                AllowPm = ParseBool(data[7]),
+                PmTeamOnly = ParseBool(data[8]),
+                SteamRequired = ParseBool(data[9]),
+                Version = data[10],
+            };
 
-                return settings;
-            }
-            catch(FormatException e)
-            {
-                Console.Error.WriteLine("Could not parse server setting data: " + e.Message);
-                return null;
-            }
+            return settings;
+        }
+
+        private static bool ParseBool(String str, bool def = false)
+        {
+            bool b;
+            if(bool.TryParse(str, out b))
+                return b;
+            else
+                return def;
+        }
+
+        private static uint ParseUInt(String str, uint def = 0)
+        {
+            uint i;
+            if(uint.TryParse(str, out i))
+                return i;
+            else
+                return def;
+        }
+
+        private static double ParseDouble(String str, double def = 0)
+        {
+            double d;
+            if(double.TryParse(str, out d))
+                return d;
+            else
+                return def;
         }
     }
 }

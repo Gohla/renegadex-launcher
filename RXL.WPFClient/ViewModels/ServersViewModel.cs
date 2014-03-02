@@ -54,27 +54,24 @@ namespace RXL.WPFClient.ViewModels
         {
             IEnumerable<Server> newServers = await _serverList.Refresh();
 
-            await Task.Factory.StartNew(() =>
+            ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
+            foreach(Server server in newServers)
             {
-                ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
-                foreach(Server server in newServers)
+                ServerObservable serverObservable = Mapper.Map<Server, ServerObservable>(server);
+
+                if(!UpdateServer(serverObservable))
                 {
-                    ServerObservable serverObservable = Mapper.Map<Server, ServerObservable>(server);
-
-                    if(!UpdateServer(serverObservable))
-                    {
-                        AddServer(serverObservable);
-                    }
-                    removedServers.Remove(serverObservable);
+                    AddServer(serverObservable);
                 }
+                removedServers.Remove(serverObservable);
+            }
 
-                foreach(ServerObservable server in removedServers)
-                {
-                    RemoveServer(server.Key);
-                }
+            foreach(ServerObservable server in removedServers)
+            {
+                RemoveServer(server.Key);
+            }
 
-                DoPing();
-            });
+            DoPing();
         }
 
         private void AddServer(ServerObservable server)
@@ -104,6 +101,9 @@ namespace RXL.WPFClient.ViewModels
 
             foreach(PingResult result in results)
             {
+                if(result == null)
+                    continue;
+
                 ServerObservable server = _servers[result.Address];
                 if(result.Reply.Status == IPStatus.Success)
                     server.Latency = result.Reply.RoundtripTime;

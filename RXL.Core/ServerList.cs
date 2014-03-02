@@ -24,6 +24,17 @@ namespace RXL.Core
                 ;
         }
 
+        private async Task<IEnumerable<String>> Request()
+        {
+            HttpWebRequest request = WebRequest.Create(SERVERLIST_ADDRESS) as HttpWebRequest;
+            HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
+            Encoding responseEncoding = Encoding.GetEncoding(response.CharacterSet);
+            using(StreamReader reader = new StreamReader(response.GetResponseStream(), responseEncoding))
+            {
+                return reader.ReadToEnd().Split(new String[] { "\r\n", "\n" }, StringSplitOptions.None);
+            }
+        }
+
         public async Task<PingResult[]> Ping(IEnumerable<String> addresses)
         {
             return await Task.WhenAll(addresses.Select(a => PingOne(a)));
@@ -33,18 +44,15 @@ namespace RXL.Core
         {
             String hostname = String.Concat(address.TakeWhile(c => c != ':'));
             Ping pinger = new Ping();
-            PingReply reply = await pinger.SendPingAsync(hostname, 500);
-            return new PingResult(address, reply);
-        }
 
-        private async Task<IEnumerable<String>> Request()
-        {
-            HttpWebRequest request = WebRequest.Create(SERVERLIST_ADDRESS) as HttpWebRequest;
-            HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
-            Encoding responseEncoding = Encoding.GetEncoding(response.CharacterSet);
-            using(StreamReader reader = new StreamReader(response.GetResponseStream(), responseEncoding))
+            try
             {
-                return reader.ReadToEnd().Split(new String[] { "\r\n", "\n" }, StringSplitOptions.None);
+                PingReply reply = await pinger.SendPingAsync(hostname, 1000);
+                return new PingResult(address, reply);
+            }
+            catch (PingException)
+            {
+                return null;
             }
         }
     }
