@@ -11,52 +11,100 @@
         <local:ServersViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="90" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <DataGrid  Grid.Row="1"
-                   ItemsSource="{Binding Servers}"
-                   AutoGenerateColumns="False"
-                   CanUserAddRows="False"
-                   CanUserDeleteRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"
-                                    MinWidth="350"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Players"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding Players}" />
-                <DataGridTextColumn Header="Bots"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding Bots}" />
-                <DataGridTextColumn Header="Max players"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding MaxPlayers}" />
-                <DataGridTextColumn Header="Latency"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding Latency}" />
-                <DataGridTextColumn Header="Map"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding MapIndex}" />
-                <DataGridTextColumn Header="Address"
-                                    MinWidth="140"
-                                    Width="Auto"
-                                    IsReadOnly="True"
-                                    Binding="{Binding Address}" />
-                <DataGridCheckBoxColumn Header="Password"
+        <Border BorderThickness="0,0,0,1"
+                BorderBrush="#FFC9BEBE">
+            <Grid Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource HeaderTextBlockStyle}"
+                               Margin="0,10,0,0"
+                               Text="LOL" />
+
+                    <Image Grid.Column="1"
+                           Source="/Assets/RenegadeXLogo.png" />
+
+                </Grid>
+
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal">
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            Width="150"
+                            Content="Home" />
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            Width="150"
+                            Margin="10,0,10,0"
+                            Content="Mutliplayer" />
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            Width="150"
+                            Content="Stats" />
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="1"
+                    Margin="10,10,10,0">
+            <ListView>
+
+            </ListView>
+
+            <!--<DataGrid ItemsSource="{Binding Servers}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name"
+                                        MinWidth="350"
+                                        Width="Auto"
                                         IsReadOnly="True"
-                                        Binding="{Binding RequiresPW}" />
-            </DataGrid.Columns>
-        </DataGrid>
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Players"
+                                        Width="Auto"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Players}" />
+                    <DataGridTextColumn Header="Bots"
+                                        Width="Auto"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Bots}" />
+                    <DataGridTextColumn Header="Max players"
+                                        Width="Auto"
+                                        IsReadOnly="True"
+                                        Binding="{Binding MaxPlayers}" />
+                    <DataGridTextColumn Header="Latency"
+                                        Width="Auto"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Latency}" />
+                    <DataGridTextColumn Header="Map"
+                                        Width="Auto"
+                                        IsReadOnly="True"
+                                        Binding="{Binding MapIndex}" />
+                    <DataGridTextColumn Header="Address"
+                                        MinWidth="140"
+                                        Width="Auto"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Address}" />
+                    <DataGridCheckBoxColumn Header="Password"
+                                            IsReadOnly="True"
+                                            Binding="{Binding RequiresPW}" />
+                </DataGrid.Columns>
+            </DataGrid>-->
+        </StackPanel>
     </Grid>
 </Window>

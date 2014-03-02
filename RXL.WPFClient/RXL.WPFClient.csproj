@@ -67,6 +67,10 @@
     <Compile Include="Observables\ServerObservable.cs" />
     <Compile Include="Observables\ServerSettingsObservable.cs" />
     <Compile Include="ViewModels\ServersViewModel.cs" />
+    <Page Include="Common\CustomStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,7 +126,9 @@
   <ItemGroup>
     <Resource Include="Assets\RenegadeX.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\RenegadeXLogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
