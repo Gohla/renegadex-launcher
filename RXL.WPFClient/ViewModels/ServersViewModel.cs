@@ -6,6 +6,7 @@ using AutoMapper;
 using RXL.Core;
 using RXL.Util;
 using RXL.WPFClient.Observables;
+using RXL.WPFClient.Utils;
 
 namespace RXL.WPFClient.ViewModels
 {
