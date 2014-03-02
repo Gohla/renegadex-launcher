@@ -39,6 +39,9 @@
   <PropertyGroup>
     <ApplicationIcon>Assets\RenegadeX.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RXL.WPFClient.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
