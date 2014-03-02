@@ -1,9 +1,9 @@
-﻿using RXL.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using RXL.Util;
 
-namespace RXL.WPFClient
+namespace RXL.WPFClient.Observables
 {
     public class ServerObservable : INotifyPropertyChanged, IKeyedObject<String>
     {

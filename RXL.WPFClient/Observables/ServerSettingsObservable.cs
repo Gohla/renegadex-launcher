@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace RXL.WPFClient
+namespace RXL.WPFClient.Observables
 {
     public class ServerSettingsObservable : INotifyPropertyChanged
     {

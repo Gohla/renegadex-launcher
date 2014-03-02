@@ -1,12 +1,13 @@
-﻿using AutoMapper;
-using RXL.Core;
-using RXL.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Windows.Input;
+using AutoMapper;
+using RXL.Core;
+using RXL.Util;
+using RXL.WPFClient.Observables;
 
-namespace RXL.WPFClient
+namespace RXL.WPFClient.ViewModels
 {
     public class ServersViewModel
     {

@@ -1,7 +1,8 @@
-﻿<Window x:Class="RXL.WPFClient.MainWindow"
+﻿<Window x:Class="RXL.WPFClient.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RXL.WPFClient"
+        xmlns:viewModels="clr-namespace:RXL.WPFClient.ViewModels"
         Title="MainWindow"
         Height="900"
         Width="1150">
