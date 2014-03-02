@@ -11,7 +11,10 @@
         <local:ServersViewModel />
     </Window.DataContext>
 
-    <Grid Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg" />
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="90" />
             <RowDefinition Height="*" />
@@ -62,29 +65,30 @@
         <StackPanel Grid.Row="1"
                     Margin="10,10,10,0">
             <Grid Grid.IsSharedSizeScope="True">
-                <!-- Look HERE -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="7*" />
                 </Grid.RowDefinitions>
                 <!--  Title  -->
-                <Grid>
+                <Grid Grid.Row="0"
+                      Background="{StaticResource ListBackgroundBrush}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="FirstNameColumn" />
-                        <!-- Look HERE -->
+                        <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
+                        <ColumnDefinition SharedSizeGroup="PlayersColumn" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Border>
-                        <TextBlock Text="FirstName"
+                        <TextBlock Text="Server"
                                    Foreground="White" />
                     </Border>
                     <Border Grid.Column="1">
-                        <TextBlock Text="SecondName"
+                        <TextBlock Text="Players"
                                    Foreground="White" />
                     </Border>
                 </Grid>
                 <!-- Data -->
                 <ListBox Grid.Row="1"
+                         Background="{StaticResource ListBackgroundBrush}"
                          ItemsSource="{Binding Servers}"
                          ItemTemplate="{StaticResource ServerDataTemplate}">
                 </ListBox>
