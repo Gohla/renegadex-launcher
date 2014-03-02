@@ -1,0 +1,61 @@
+﻿<Window x:Class="RXL.WPFClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RXL.WPFClient"
+        Title="MainWindow"
+        Height="900"
+        Width="1150">
+    <Window.DataContext>
+        <!-- Declaratively create an instance of our SongViewModel -->
+        <local:ServersViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DataGrid  Grid.Row="1"
+                   ItemsSource="{Binding Servers}"
+                   AutoGenerateColumns="False"
+                   CanUserAddRows="False"
+                   CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"
+                                    MinWidth="350"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Players"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Players}" />
+                <DataGridTextColumn Header="Bots"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Bots}" />
+                <DataGridTextColumn Header="Max players"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding MaxPlayers}" />
+                <DataGridTextColumn Header="Latency"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Latency}" />
+                <DataGridTextColumn Header="Map"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding MapIndex}" />
+                <DataGridTextColumn Header="Address"
+                                    MinWidth="140"
+                                    Width="Auto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Address}" />
+                <DataGridCheckBoxColumn Header="Password"
+                                        IsReadOnly="True"
+                                        Binding="{Binding RequiresPW}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
