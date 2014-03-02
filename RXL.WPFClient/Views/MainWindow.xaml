@@ -66,28 +66,30 @@
                     Margin="10,10,10,0">
             <Grid Grid.IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="7*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--  Title  -->
-                <Grid Grid.Row="0"
-                      Background="{StaticResource ListBackgroundBrush}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
-                        <ColumnDefinition SharedSizeGroup="PlayersColumn" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Border>
-                        <TextBlock Text="Server"
-                                   Foreground="White" />
-                    </Border>
-                    <Border Grid.Column="1">
-                        <TextBlock Text="Players"
-                                   Foreground="White" />
-                    </Border>
-                </Grid>
+                <Border Grid.Row="0"
+                        BorderThickness="1"
+                        BorderBrush="Transparent">
+                    <Grid Background="{StaticResource ListBackgroundBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
+                            <ColumnDefinition SharedSizeGroup="PlayersColumn" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Server"
+                                   Foreground="{StaticResource ListHeaderTextColor}" />
+                        <TextBlock Grid.Column="1"
+                                   Text="Players"
+                                   Foreground="{StaticResource ListHeaderTextColor}" />
+                    </Grid>
+                </Border>
                 <!-- Data -->
                 <ListBox Grid.Row="1"
+                         BorderThickness="0"
                          Background="{StaticResource ListBackgroundBrush}"
                          ItemsSource="{Binding Servers}"
                          ItemTemplate="{StaticResource ServerDataTemplate}">
