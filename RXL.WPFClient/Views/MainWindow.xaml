@@ -65,7 +65,8 @@
         </Border>
 
         <StackPanel Grid.Row="1"
-                    Margin="10,10,10,0">
+                    Margin="10,10,10,0"
+                    Orientation="Horizontal">
             <ScrollViewer Height="775">
                 <Grid Grid.IsSharedSizeScope="True"
                       Width="750"
@@ -104,10 +105,42 @@
                               Padding="0"
                               Background="Transparent"
                               ItemsSource="{Binding Servers}"
-                              ItemTemplate="{StaticResource ServerDataTemplate}">
+                              ItemTemplate="{StaticResource ServerDataTemplate}"
+                              SelectionChanged="ServerListOnSelectionChanged">
                     </ListView>
                 </Grid>
             </ScrollViewer>
+
+            <Grid Margin="20,0,0,0"
+                  Width="320">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="250" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="250" />
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0"
+                       Source="/Assets/Maps/cnc-field.png"
+                       Stretch="UniformToFill" />
+
+                <Button Grid.Row="1"
+                        Margin="0,10,0,0"
+                        BorderBrush="#FFD6BC14"
+                        Background="{StaticResource ListBackgroundBrush2}">
+                    <TextBlock Text="Join dat serva"
+                               FontSize="30"
+                               Foreground="#FFD6BC14"/>
+                </Button>
+
+                <StackPanel Grid.Row="2"
+                            Margin="0,10,0,0"
+                            Background="{StaticResource ListBackgroundBrush}">
+                    <StackPanel>
+                        <TextBlock Text="Iets"></TextBlock>
+                        <TextBlock></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

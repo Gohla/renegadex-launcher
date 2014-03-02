@@ -16,6 +16,7 @@ namespace RXL.WPFClient.ViewModels
 
         private readonly KeyedCollection<String, ServerObservable> _servers = new KeyedCollection<String, ServerObservable>();
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
+        public ServerObservable SelectedServer { get; set; }
 
         public ICommand Refresh { get; private set; }
         public ICommand Ping { get; private set; }
@@ -39,18 +40,18 @@ namespace RXL.WPFClient.ViewModels
             IEnumerable<Server> newServers = await _serverList.Refresh();
 
             ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
-            foreach(Server server in newServers)
+            foreach (Server server in newServers)
             {
                 ServerObservable serverObservable = Mapper.Map<Server, ServerObservable>(server);
 
-                if(!UpdateServer(serverObservable))
+                if (!UpdateServer(serverObservable))
                 {
                     AddServer(serverObservable);
                 }
                 removedServers.Remove(serverObservable);
             }
 
-            foreach(ServerObservable server in removedServers)
+            foreach (ServerObservable server in removedServers)
             {
                 RemoveServer(server.Key);
             }
@@ -65,7 +66,7 @@ namespace RXL.WPFClient.ViewModels
 
         private bool UpdateServer(ServerObservable server)
         {
-            if(_servers.Contains(server.Key))
+            if (_servers.Contains(server.Key))
             {
                 ServerObservable existingServer = _servers[server.Address];
                 existingServer.Update(server);
@@ -83,10 +84,10 @@ namespace RXL.WPFClient.ViewModels
         {
             IEnumerable<PingResult> results = await _serverList.Ping(_servers.Keys);
 
-            foreach(PingResult result in results)
+            foreach (PingResult result in results)
             {
                 ServerObservable server = _servers[result.Address];
-                if(result.Reply.Status == IPStatus.Success)
+                if (result.Reply.Status == IPStatus.Success)
                     server.Latency = result.Reply.RoundtripTime;
                 else
                     server.Latency = -1;

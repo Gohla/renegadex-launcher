@@ -16,6 +16,9 @@
     <SolidColorBrush x:Key="ListBackgroundBrush"
                      Color="#9002020F" />
 
+    <SolidColorBrush x:Key="ListBackgroundBrush2"
+                     Color="#BF02020F" />
+
 
     <Style x:Key="HeaderTextBlockStyle"
            TargetType="{x:Type TextBlock}">
@@ -215,6 +218,8 @@
                             <!--<Setter Property="Background"
                                     TargetName="Bd"
                                     Value="White" />-->
+                            <Setter Property="Background"
+                                    Value="White" />
                             <Setter Property="Foreground"
                                     Value="White" />
                             <Setter Property="BorderThickness"
