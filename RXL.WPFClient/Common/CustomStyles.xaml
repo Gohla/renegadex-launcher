@@ -70,5 +70,13 @@
         </Setter>
     </Style>
 
+    <DataTemplate x:Key="ServerDataTemplate">
+        <StackPanel Orientation="Horizontal"
+                    Width="310"
+                    Height="70">
+            <TextBlock Text="{Binding Name}"/>
+        </StackPanel>
+    </DataTemplate>
+
 
 </ResourceDictionary>

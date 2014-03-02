@@ -61,9 +61,47 @@
 
         <StackPanel Grid.Row="1"
                     Margin="10,10,10,0">
-            <ListView>
+            <Grid Grid.IsSharedSizeScope="True">
+                <!-- Look HERE -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="7*" />
+                </Grid.RowDefinitions>
+                <!--  Title  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="FirstNameColumn" />
+                        <!-- Look HERE -->
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border>
+                        <TextBlock Text="FirstName"
+                                   Foreground="White" />
+                    </Border>
+                    <Border Grid.Column="1">
+                        <TextBlock Text="SecondName"
+                                   Foreground="White" />
+                    </Border>
+                </Grid>
+                <!-- Data -->
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding Servers}"
+                         ItemTemplate="{StaticResource ServerDataTemplate}">
+                </ListBox>
 
-            </ListView>
+            </Grid>
+
+            <!--<ListView ItemsSource="{Binding Servers}"
+                      ItemTemplate="{StaticResource ServerDataTemplate}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn 
+                                        Header="First Name"
+                                        Width="100" />
+                       
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
 
             <!--<DataGrid ItemsSource="{Binding Servers}"
                       AutoGenerateColumns="False"
