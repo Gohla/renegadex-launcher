@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RXL.WPFClient.ViewModels"
         Title="MainWindow"
+        Icon="/Assets/RenegadeX.ico"
         Height="900"
         Width="1150">
     <Window.DataContext>
