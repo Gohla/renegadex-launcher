@@ -5,7 +5,9 @@
         Title="MainWindow"
         Icon="/Assets/RenegadeX.ico"
         Height="900"
-        Width="1150">
+        Width="1150"
+        MinHeight="900"
+        MinWidth="1150">
     <Window.DataContext>
         <!-- Declaratively create an instance of our SongViewModel -->
         <local:ServersViewModel />
@@ -64,104 +66,48 @@
 
         <StackPanel Grid.Row="1"
                     Margin="10,10,10,0">
-            <Grid Grid.IsSharedSizeScope="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <!--  Title  -->
-                <Border Grid.Row="0"
-                        BorderThickness="1,1,1,0"
-                        BorderBrush="Transparent">
-                    <Grid Background="{StaticResource ListBackgroundBrush}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
-                            <ColumnDefinition SharedSizeGroup="PlayersColumn" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                                   Text="Server"
-                                   Foreground="{StaticResource ListHeaderTextColor}" />
-                        <TextBlock Grid.Column="1"
-                                   Text="Players"
-                                   Foreground="{StaticResource ListHeaderTextColor}" />
-                    </Grid>
-                </Border>
-                <!-- Data -->
-                <ListView Grid.Row="1"
-                         BorderThickness="0"
-                         Margin="0"
-                         Padding="0"
-                         Background="Transparent"
-                         ItemsSource="{Binding Servers}"
-                         ItemTemplate="{StaticResource ServerDataTemplate}">
-                    <!--<ListBox.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="BorderThickness"
-                                    Value="0.5" />
-                            <Setter Property="Margin"
-                                    Value="0" />
-                            <Setter Property="Padding"
-                                    Value="0" />
-                        </Style>
-                        
-                    </ListBox.ItemContainerStyle>-->
-                </ListView>
-
-            </Grid>
-
-            <!--<ListView ItemsSource="{Binding Servers}"
-                      ItemTemplate="{StaticResource ServerDataTemplate}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn 
-                                        Header="First Name"
-                                        Width="100" />
-                       
-                    </GridView>
-                </ListView.View>
-            </ListView>-->
-
-            <!--<DataGrid ItemsSource="{Binding Servers}"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name"
-                                        MinWidth="350"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Players"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding Players}" />
-                    <DataGridTextColumn Header="Bots"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding Bots}" />
-                    <DataGridTextColumn Header="Max players"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding MaxPlayers}" />
-                    <DataGridTextColumn Header="Latency"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding Latency}" />
-                    <DataGridTextColumn Header="Map"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding MapIndex}" />
-                    <DataGridTextColumn Header="Address"
-                                        MinWidth="140"
-                                        Width="Auto"
-                                        IsReadOnly="True"
-                                        Binding="{Binding Address}" />
-                    <DataGridCheckBoxColumn Header="Password"
-                                            IsReadOnly="True"
-                                            Binding="{Binding RequiresPW}" />
-                </DataGrid.Columns>
-            </DataGrid>-->
+            <ScrollViewer Height="775">
+                <Grid Grid.IsSharedSizeScope="True"
+                      Width="750"
+                      HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--  Title  -->
+                    <Border Grid.Row="0"
+                            BorderThickness="1,1,1,0"
+                            BorderBrush="Transparent">
+                        <Grid Background="{StaticResource ListBackgroundBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
+                                <ColumnDefinition SharedSizeGroup="PlayersColumn" />
+                                <ColumnDefinition SharedSizeGroup="LatencyColumn" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Text="Server"
+                                       Margin="10,0,0,0"
+                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                            <TextBlock Grid.Column="1"
+                                       Text="Players"
+                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                            <TextBlock Grid.Column="2"
+                                       Text="Latency"
+                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                        </Grid>
+                    </Border>
+                    <!-- Data -->
+                    <ListView Grid.Row="1"
+                              BorderThickness="0"
+                              Margin="0"
+                              Padding="0"
+                              Background="Transparent"
+                              ItemsSource="{Binding Servers}"
+                              ItemTemplate="{StaticResource ServerDataTemplate}">
+                    </ListView>
+                </Grid>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Window>
