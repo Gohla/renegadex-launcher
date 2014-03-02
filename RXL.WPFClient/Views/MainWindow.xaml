@@ -12,7 +12,7 @@
         <!-- Declaratively create an instance of our SongViewModel -->
         <local:ServersViewModel />
     </Window.DataContext>
-    
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg" />
@@ -67,48 +67,59 @@
         <StackPanel Grid.Row="1"
                     Margin="10,10,10,0"
                     Orientation="Horizontal">
-                <Grid Grid.IsSharedSizeScope="True"
-                      Width="767"
-                      HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <!--  Title  -->
-                    <Border Grid.Row="0"
-                            BorderThickness="1,1,1,0"
-                            BorderBrush="Transparent">
-                        <Grid Background="{StaticResource ListBackgroundBrush}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
-                                <ColumnDefinition SharedSizeGroup="PlayersColumn" />
-                                <ColumnDefinition SharedSizeGroup="LatencyColumn" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Text="Server"
-                                       Margin="10,0,0,0"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
-                            <TextBlock Grid.Column="1"
-                                       Text="Players"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
-                            <TextBlock Grid.Column="2"
-                                       Text="Latency"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
-                        </Grid>
-                    </Border>
-                    <!-- Data -->
-                    <ListView Grid.Row="1"
-                              BorderThickness="0"
-                              Margin="0"
-                              Padding="0"
-                              Height="775"
-                              Background="Transparent"
-                              ItemsSource="{Binding Servers}"
-                              ItemTemplate="{StaticResource ServerDataTemplate}"
-                              SelectionChanged="ServerListOnSelectionChanged">
-                    </ListView>
-                </Grid>
+            <Grid Grid.IsSharedSizeScope="True"
+                  Width="767"
+                  HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--  Title  -->
+                <Border Grid.Row="0"
+                        BorderThickness="1,1,1,0"
+                        BorderBrush="Transparent">
+                    <Grid Background="{StaticResource ListBackgroundBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
+                            <ColumnDefinition SharedSizeGroup="PlayersColumn" />
+                            <ColumnDefinition SharedSizeGroup="LatencyColumn" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Server"
+                                   Margin="10,0,0,0"
+                                   Foreground="{StaticResource ListHeaderTextColor}" />
+                        <TextBlock Grid.Column="1"
+                                   Text="Players"
+                                   Foreground="{StaticResource ListHeaderTextColor}" />
+                        <TextBlock Grid.Column="2"
+                                   Text="Latency"
+                                   Foreground="{StaticResource ListHeaderTextColor}" />
+                    </Grid>
+                </Border>
+                <!-- Data -->
+                <ListView Grid.Row="1"
+                          BorderThickness="0"
+                          Margin="0"
+                          Padding="0"
+                          Height="775"
+                          Background="Transparent"
+                          ItemsSource="{Binding Servers}"
+                          ItemTemplate="{StaticResource ServerDataTemplate}"
+                          SelectionChanged="ServerListOnSelectionChanged">
+
+                    <ListView.Resources>
+                        <Style TargetType="Thumb">
+                            <Setter Property="Foreground"
+                                    Value="Yellow"></Setter>
+                        </Style>
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background"
+                                    Value="Transparent"></Setter>
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
+            </Grid>
 
             <Grid Margin="20,0,0,0"
                   Width="320">
