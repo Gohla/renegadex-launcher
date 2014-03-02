@@ -19,13 +19,13 @@ namespace RXL.WPFClient.Observables
         public String Name
         {
             get { return _name; }
-            set { SetField(ref _name, value, "Name"); }
+            set { SetField(ref _name, value, () => Name); }
         }
 
         public String Address
         {
             get { return _address; }
-            set { SetField(ref _address, value, "Address"); }
+            set { SetField(ref _address, value, () => Address); }
         }
 
         public String Key
@@ -36,43 +36,43 @@ namespace RXL.WPFClient.Observables
         public uint Players
         {
             get { return _players; }
-            set { SetField(ref _players, value, "Players"); }
+            set { SetField(ref _players, value, () => Players); }
         }
 
         public uint Bots
         {
             get { return _bots; }
-            set { SetField(ref _bots, value, "Bots"); }
+            set { SetField(ref _bots, value, () => Bots); }
         }
 
         public uint MaxPlayers
         {
             get { return _maxPlayers; }
-            set { SetField(ref _maxPlayers, value, "MaxPlayers"); }
+            set { SetField(ref _maxPlayers, value, () => MaxPlayers); }
         }
 
         public long Latency
         {
             get { return _latency; }
-            set { SetField(ref _latency, value, "Latency"); }
+            set { SetField(ref _latency, value, () => Latency); }
         }
 
         public bool RequiresPw
         {
             get { return _requiresPw; }
-            set { SetField(ref _requiresPw, value, "RequiresPW"); }
+            set { SetField(ref _requiresPw, value, () => RequiresPw); }
         }
 
         public String MapIndex
         {
             get { return _mapIndex; }
-            set { SetField(ref _mapIndex, value, "MapIndex"); }
+            set { SetField(ref _mapIndex, value, () => MapIndex); }
         }
 
         public ServerSettingsObservable ServerSettings
         {
             get { return _serverSettings; }
-            set { SetField(ref _serverSettings, value, "ServerSettings"); }
+            set { SetField(ref _serverSettings, value, () => ServerSettings); }
         }
 
         public void Update(ServerObservable server)
@@ -87,7 +87,7 @@ namespace RXL.WPFClient.Observables
             if (ServerSettings != null && server.ServerSettings != null)
             {
                 ServerSettings.Update(server.ServerSettings);
-                OnPropertyChanged("ServerSettings");
+                RaisePropertyChanged(() => ServerSettings);
             }
             else
                 ServerSettings = server.ServerSettings;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Input;
 using AutoMapper;
 using RXL.Core;
@@ -10,7 +11,7 @@ using RXL.WPFClient.Utils;
 
 namespace RXL.WPFClient.ViewModels
 {
-    public class ServersViewModel
+    public class ServersViewModel : BaseViewModel
     {
         private readonly ServerList _serverList;
 
@@ -21,7 +22,11 @@ namespace RXL.WPFClient.ViewModels
         public ServerObservable SelectedServer
         {
             get { return _selectedServer; }
-            set { _selectedServer = value; }
+            set
+            {
+                _selectedServer = value; 
+                RaisePropertyChanged(() => SelectedServer);
+            }
         }
 
         public ICommand Refresh { get; private set; }
