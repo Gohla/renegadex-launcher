@@ -12,7 +12,7 @@
         <!-- Declaratively create an instance of our SongViewModel -->
         <local:ServersViewModel />
     </Window.DataContext>
-
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg" />
@@ -67,9 +67,8 @@
         <StackPanel Grid.Row="1"
                     Margin="10,10,10,0"
                     Orientation="Horizontal">
-            <ScrollViewer Height="775">
                 <Grid Grid.IsSharedSizeScope="True"
-                      Width="750"
+                      Width="767"
                       HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20" />
@@ -103,13 +102,13 @@
                               BorderThickness="0"
                               Margin="0"
                               Padding="0"
+                              Height="775"
                               Background="Transparent"
                               ItemsSource="{Binding Servers}"
                               ItemTemplate="{StaticResource ServerDataTemplate}"
                               SelectionChanged="ServerListOnSelectionChanged">
                     </ListView>
                 </Grid>
-            </ScrollViewer>
 
             <Grid Margin="20,0,0,0"
                   Width="320">

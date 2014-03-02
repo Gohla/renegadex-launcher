@@ -43,7 +43,7 @@ namespace RXL.Core
 
         public ServerSettings ParseServerSettings(String segment)
         {
-            String[] data = segment.Split(SERVER_SEPARATOR);
+            String[] data = segment.Split(SETTING_SEPARATOR);
 
             if(data.Length < 10)
                 return null;
