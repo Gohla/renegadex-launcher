@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace RXL.WPFClient.Observables
 {
@@ -13,7 +11,7 @@ namespace RXL.WPFClient.Observables
         private bool _crateRespawn;
         private bool _autoBalance;
         private String _timeLimit;
-        private bool _allowPM;
+        private bool _allowPm;
         private bool _pmTeamOnly;
         private bool _steamRequired;
         private String _version;
@@ -60,13 +58,13 @@ namespace RXL.WPFClient.Observables
             set { SetField(ref _timeLimit, value, "TimeLimit"); }
         }
 
-        public bool AllowPM
+        public bool AllowPm
         {
-            get { return _allowPM; }
-            set { SetField(ref _allowPM, value, "AllowPM"); }
+            get { return _allowPm; }
+            set { SetField(ref _allowPm, value, "AllowPM"); }
         }
 
-        public bool PMTeamOnly
+        public bool PmTeamOnly
         {
             get { return _pmTeamOnly; }
             set { SetField(ref _pmTeamOnly, value, "PMTeamOnly"); }
@@ -93,8 +91,8 @@ namespace RXL.WPFClient.Observables
             RespawnCrates = serverSettings.RespawnCrates;
             AutoBalance = serverSettings.AutoBalance;
             TimeLimit = serverSettings.TimeLimit;
-            AllowPM = serverSettings.AllowPM;
-            PMTeamOnly = serverSettings.PMTeamOnly;
+            AllowPm = serverSettings.AllowPm;
+            PmTeamOnly = serverSettings.PmTeamOnly;
             SteamRequired = serverSettings.SteamRequired;
             Version = serverSettings.Version;
         }

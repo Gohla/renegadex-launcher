@@ -10,7 +10,7 @@ namespace RXL.Core
         public uint Bots { get; set; }
         public uint MaxPlayers { get; set; }
         public long Latency { get; set; }
-        public bool RequiresPW { get; set; }
+        public bool RequiresPw { get; set; }
         public String MapIndex { get; set; }
         public ServerSettings ServerSettings { get; set; }
     }

@@ -11,7 +11,7 @@ namespace RXL.WPFClient.Observables
         private uint _bots;
         private uint _maxPlayers;
         private long _latency;
-        private bool _requiresPW;
+        private bool _requiresPw;
         private String _mapIndex;
 
         private ServerSettingsObservable _serverSettings;
@@ -57,10 +57,10 @@ namespace RXL.WPFClient.Observables
             set { SetField(ref _latency, value, "Latency"); }
         }
 
-        public bool RequiresPW
+        public bool RequiresPw
         {
-            get { return _requiresPW; }
-            set { SetField(ref _requiresPW, value, "RequiresPW"); }
+            get { return _requiresPw; }
+            set { SetField(ref _requiresPw, value, "RequiresPW"); }
         }
 
         public String MapIndex
@@ -82,7 +82,7 @@ namespace RXL.WPFClient.Observables
             Players = server.Players;
             Bots = server.Bots;
             MaxPlayers = server.MaxPlayers;
-            RequiresPW = server.RequiresPW;
+            RequiresPw = server.RequiresPw;
             MapIndex = server.MapIndex;
             if (ServerSettings != null && server.ServerSettings != null)
             {

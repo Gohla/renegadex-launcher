@@ -11,8 +11,8 @@ namespace RXL.Core
         public bool RespawnCrates { get; set; }
         public bool AutoBalance { get; set; }
         public String TimeLimit { get; set; }
-        public bool AllowPM { get; set; }
-        public bool PMTeamOnly { get; set; }
+        public bool AllowPm { get; set; }
+        public bool PmTeamOnly { get; set; }
         public bool SteamRequired { get; set; }
         public String Version { get; set; }
     }
