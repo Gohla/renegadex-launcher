@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Input;
-using AutoMapper;
+﻿using AutoMapper;
 using RXL.Core;
 using RXL.Util;
 using RXL.WPFClient.Observables;
 using RXL.WPFClient.Utils;
+using System;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Threading;
-using System.Windows.Threading;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace RXL.WPFClient.ViewModels
 {
@@ -33,7 +30,8 @@ namespace RXL.WPFClient.ViewModels
         }
 
         public ICommand Refresh { get; private set; }
-        public ICommand Ping { get; private set; }
+        public ICommand PingAll { get; private set; }
+        public ICommand PingOne { get; private set; }
 
         public ServersViewModel()
         {
@@ -41,10 +39,11 @@ namespace RXL.WPFClient.ViewModels
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
-            Ping = new RelayCommand(_ => true, _ => DoPing());
+            PingAll = new RelayCommand(_ => true, _ => DoPingAll());
 
             Mapper.CreateMap<Server, ServerObservable>();
             Mapper.CreateMap<ServerSettings, ServerSettingsObservable>();
+            Mapper.CreateMap<ServerObservable, ServerObservable>().ForMember(s => s.Latency, opt => opt.Ignore());
             Mapper.AssertConfigurationIsValid();
 
             DoRefresh();
@@ -55,47 +54,31 @@ namespace RXL.WPFClient.ViewModels
             IEnumerable<Server> newServers = await _serverList.Refresh();
 
             ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
-            foreach(Server server in newServers)
+            foreach(Server serverData in newServers)
             {
-                ServerObservable serverObservable = Mapper.Map<Server, ServerObservable>(server);
+                ServerObservable server = Mapper.Map<Server, ServerObservable>(serverData);
 
-                if(!UpdateServer(serverObservable))
+                if(_servers.Contains(server.Key))
                 {
-                    AddServer(serverObservable);
+                    ServerObservable existingServer = _servers[serverData.Address];
+                    Mapper.Map<ServerObservable, ServerObservable>(server, existingServer);
                 }
-                removedServers.Remove(serverObservable);
+                else
+                {
+                    _servers.Add(server);
+                }
+                removedServers.Remove(server);
             }
 
-            foreach(ServerObservable server in removedServers)
+            foreach(ServerObservable serverData in removedServers)
             {
-                RemoveServer(server.Key);
+                _servers.Remove(serverData.Key);
             }
 
-            DoPing();
+            DoPingAll();
         }
 
-        private void AddServer(ServerObservable server)
-        {
-            _servers.Add(server);
-        }
-
-        private bool UpdateServer(ServerObservable server)
-        {
-            if(_servers.Contains(server.Key))
-            {
-                ServerObservable existingServer = _servers[server.Address];
-                existingServer.Update(server);
-                return true;
-            }
-            return false;
-        }
-
-        private void RemoveServer(String key)
-        {
-            _servers.Remove(key);
-        }
-
-        public async void DoPing()
+        public async void DoPingAll()
         {
             IEnumerable<PingResult> results = await _serverList.Ping(_servers.Keys);
 
@@ -104,11 +87,14 @@ namespace RXL.WPFClient.ViewModels
                 if(result == null)
                     continue;
 
-                ServerObservable server = _servers[result.Address];
-                if(result.Reply.Status == IPStatus.Success)
-                    server.Latency = result.Reply.RoundtripTime;
-                else
-                    server.Latency = -1;
+                if(_servers.Contains(result.Address))
+                {
+                    ServerObservable server = _servers[result.Address];
+                    if(result.Reply.Status == IPStatus.Success)
+                        server.Latency = result.Reply.RoundtripTime;
+                    else
+                        server.Latency = -1;
+                }
             }
         }
     }

@@ -7,15 +7,15 @@ namespace RXL.WPFClient.Observables
 {
     public abstract class ObservableBase : INotifyPropertyChanged
     {
-        public  event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void RaisePropertyChanged<T>(Expression<Func<T>> selectorExpression)
         {
-            if (selectorExpression == null)
+            if(selectorExpression == null)
                 throw new ArgumentNullException("selectorExpression");
 
             var body = selectorExpression.Body as MemberExpression;
-            if (body == null)
+            if(body == null)
                 throw new ArgumentException("The body must be a member expression");
 
             RaisePropertyChanged(body.Member.Name);
@@ -23,7 +23,7 @@ namespace RXL.WPFClient.Observables
 
         protected bool SetField<T>(ref T field, T value, Expression<Func<T>> selectorExpression)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if(EqualityComparer<T>.Default.Equals(field, value)) return false;
 
             field = value;
             RaisePropertyChanged(selectorExpression);
@@ -34,7 +34,7 @@ namespace RXL.WPFClient.Observables
         private void RaisePropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            if(handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -42,14 +42,14 @@ namespace RXL.WPFClient.Observables
         protected virtual void OnPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            if(handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         [Obsolete("Please use SetField<T>(ref T field, T value, Expression<Func<T>> selectorExpression)")]
         protected bool SetField<T>(ref T field, T value, String propertyName)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value))
+            if(EqualityComparer<T>.Default.Equals(field, value))
                 return false;
 
             field = value;

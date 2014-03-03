@@ -81,20 +81,5 @@ namespace RXL.WPFClient.Observables
             get { return _version; }
             set { SetField(ref _version, value, () => Version); }
         }
-
-        public void Update(ServerSettingsObservable serverSettings)
-        {
-            MaxPlayers = serverSettings.MaxPlayers;
-            VehicleLimit = serverSettings.VehicleLimit;
-            MineLimit = serverSettings.MineLimit;
-            SpawnCrates = serverSettings.SpawnCrates;
-            CrateRespawnTime = serverSettings.CrateRespawnTime;
-            AutoBalance = serverSettings.AutoBalance;
-            TimeLimit = serverSettings.TimeLimit;
-            AllowPm = serverSettings.AllowPm;
-            PmTeamOnly = serverSettings.PmTeamOnly;
-            SteamRequired = serverSettings.SteamRequired;
-            Version = serverSettings.Version;
-        }
     }
 }

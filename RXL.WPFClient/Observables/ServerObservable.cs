@@ -1,5 +1,5 @@
-﻿using System;
-using RXL.Util;
+﻿using RXL.Util;
+using System;
 
 namespace RXL.WPFClient.Observables
 {
@@ -75,24 +75,6 @@ namespace RXL.WPFClient.Observables
             set { SetField(ref _serverSettings, value, () => ServerSettings); }
         }
 
-        public void Update(ServerObservable server)
-        {
-            Name = server.Name;
-            Address = server.Address;
-            Players = server.Players;
-            Bots = server.Bots;
-            MaxPlayers = server.MaxPlayers;
-            RequiresPw = server.RequiresPw;
-            Map = server.Map;
-            if (ServerSettings != null && server.ServerSettings != null)
-            {
-                ServerSettings.Update(server.ServerSettings);
-                RaisePropertyChanged(() => ServerSettings);
-            }
-            else
-                ServerSettings = server.ServerSettings;
-        }
-
         public override bool Equals(Object other)
         {
             return Equals(other as ServerObservable);
@@ -100,7 +82,7 @@ namespace RXL.WPFClient.Observables
 
         public bool Equals(ServerObservable other)
         {
-            if (other == null)
+            if(other == null)
                 return false;
             return Address.Equals(other.Address);
         }
