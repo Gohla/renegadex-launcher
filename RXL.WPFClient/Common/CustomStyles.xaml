@@ -191,7 +191,7 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="0,5">
                     <Image Margin="10,0,10,0"
-                           Source="/Assets/Maps/cnc-field.png"></Image>
+                           Source="{Binding Map, Converter={StaticResource MapImageConverter}}"/>
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name}"

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RXL.WPFClient.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:RXL.WPFClient.ViewModels"
+        xmlns:vm="clr-namespace:RXL.WPFClient.ViewModels"
         Title="MainWindow"
         Icon="/Assets/RenegadeX.ico"
         Height="900"
@@ -10,7 +10,7 @@
         MinWidth="1150">
     <Window.DataContext>
         <!-- Declaratively create an instance of our SongViewModel -->
-        <local:ServersViewModel />
+        <vm:ServersViewModel />
     </Window.DataContext>
 
     <Grid>
@@ -130,7 +130,7 @@
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0"
-                       Source="/Assets/Maps/cnc-field.png"
+                       Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"
                        Stretch="UniformToFill" />
 
                 <Button Grid.Row="1"
