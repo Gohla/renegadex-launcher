@@ -18,29 +18,21 @@ namespace RXL.Core
             if(data.Length < 7)
                 return null;
 
-            try
+            Server server = new Server
             {
-                Server server = new Server
-                {
-                    Name = data[0],
-                    Address = data[1],
-                    Bots = ParseUInt(data[2]),
-                    RequiresPw = ParseBool(data[3]),
-                    Map = data[4],
-                    ServerSettings = ParseServerSettings(data[5]),
-                    Players = ParseUInt(data[6]),
-                    MaxPlayers = ParseUInt(data[7]),
+                Name = data[0],
+                Address = data[1],
+                Bots = ParseUInt(data[2]),
+                RequiresPw = ParseBool(data[3]),
+                Map = data[4],
+                ServerSettings = ParseServerSettings(data[5]),
+                Players = ParseUInt(data[6]),
+                MaxPlayers = ParseUInt(data[7]),
 
-                    Latency = -1,
-                };
+                Latency = -1,
+            };
 
-                return server;
-            }
-            catch(FormatException e)
-            {
-                Console.Error.WriteLine("Could not parse server data: " + e.Message);
-                return null;
-            }
+            return server;
         }
 
         public ServerSettings ParseServerSettings(String segment)
