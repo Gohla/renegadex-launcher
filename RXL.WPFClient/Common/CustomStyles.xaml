@@ -165,18 +165,6 @@
     <DataTemplate x:Key="ServerDataTemplate">
         <Grid Height="50"
               Margin="0">
-            <Grid.InputBindings>
-                <MouseBinding 
-                    Gesture="LeftDoubleClick" 
-                    Command="{Binding Path=DataContext.Join, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" 
-                    CommandParameter="{Binding}"
-                />
-                <MouseBinding 
-                    Gesture="LeftClick" 
-                    Command="{Binding Path=DataContext.PingOne, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" 
-                    CommandParameter="{Binding}"
-                />
-            </Grid.InputBindings>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
                 <ColumnDefinition SharedSizeGroup="PlayersColumn" />

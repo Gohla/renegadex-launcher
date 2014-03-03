@@ -17,6 +17,8 @@ namespace RXL.WPFClient.Views
             get { return (ServersViewModel)DataContext; }
         }
 
+        private ServerObservable _serverObservableCheck;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -24,7 +26,15 @@ namespace RXL.WPFClient.Views
 
         private void ServerListOnSelectionChanged(Object sender, SelectionChangedEventArgs e)
         {
-            ViewModel.SelectedServer = (ServerObservable)e.AddedItems[0];
+            ViewModel.SelectedServer = _serverObservableCheck = (ServerObservable)e.AddedItems[0];
+            ViewModel.DoPingOneSelectedServer();
+        }
+
+        private void ServerBrowser_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!ViewModel.SelectedServer.Equals(_serverObservableCheck))
+                throw new ArgumentException("Selected server not ze zame");
+            ViewModel.DoJoinSelectedServer();
         }
     }
 }

@@ -102,6 +102,13 @@ namespace RXL.WPFClient.ViewModels
             HandlePingResult(result);
         }
 
+        public async void DoPingOneSelectedServer()
+        {
+            var tmp = SelectedServer.Address;
+            PingResult result = await _serverList.PingOne(tmp);
+            HandlePingResult(result);
+        }
+
         private void HandlePingResult(PingResult result)
         {
             if(result == null)
@@ -121,6 +128,12 @@ namespace RXL.WPFClient.ViewModels
         {
             ServerObservable server = obj as ServerObservable;
             ProcessResults results = await _launcher.Launch(server.Address);
+        }
+
+        public async void DoJoinSelectedServer()
+        {
+            var tmp = SelectedServer.Address;
+            ProcessResults results = await _launcher.Launch(tmp);
         }
     }
 }
