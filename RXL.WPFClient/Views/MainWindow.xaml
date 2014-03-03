@@ -107,8 +107,8 @@
                           Background="Transparent"
                           ItemsSource="{Binding Servers}"
                           ItemTemplate="{StaticResource ServerDataTemplate}"
-                          MouseDoubleClick="ServerBrowser_OnMouseDoubleClick"
-                          SelectionChanged="ServerListOnSelectionChanged">
+                          MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
+                          SelectionChanged="ServerBrowserOnSelectionChanged">
                     <ListView.Resources>
                         <Style TargetType="Thumb">
                             <Setter Property="Foreground"

@@ -24,13 +24,13 @@ namespace RXL.WPFClient.Views
             InitializeComponent();
         }
 
-        private void ServerListOnSelectionChanged(Object sender, SelectionChangedEventArgs e)
+        private void ServerBrowserOnSelectionChanged(Object sender, SelectionChangedEventArgs e)
         {
             ViewModel.SelectedServer = _serverObservableCheck = (ServerObservable)e.AddedItems[0];
             ViewModel.DoPingOneSelectedServer();
         }
 
-        private void ServerBrowser_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ServerBrowserOnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (!ViewModel.SelectedServer.Equals(_serverObservableCheck))
                 throw new ArgumentException("Selected server not ze zame");
