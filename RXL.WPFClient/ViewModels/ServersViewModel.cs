@@ -32,6 +32,7 @@ namespace RXL.WPFClient.ViewModels
         public ICommand Refresh { get; private set; }
         public ICommand PingAll { get; private set; }
         public ICommand PingOne { get; private set; }
+        public ICommand Join { get; private set; }
 
         public ServersViewModel()
         {
@@ -40,6 +41,8 @@ namespace RXL.WPFClient.ViewModels
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
             PingAll = new RelayCommand(_ => true, _ => DoPingAll());
+            PingOne = new RelayCommand(_ => true, o => DoPingOne(o));
+            Join = new RelayCommand(_ => true, o => DoJoin(o));
 
             Mapper.CreateMap<Server, ServerObservable>();
             Mapper.CreateMap<ServerSettings, ServerSettingsObservable>();
@@ -81,21 +84,39 @@ namespace RXL.WPFClient.ViewModels
         public async void DoPingAll()
         {
             IEnumerable<PingResult> results = await _serverList.Ping(_servers.Keys);
-
             foreach(PingResult result in results)
             {
-                if(result == null)
-                    continue;
-
-                if(_servers.Contains(result.Address))
-                {
-                    ServerObservable server = _servers[result.Address];
-                    if(result.Reply.Status == IPStatus.Success)
-                        server.Latency = result.Reply.RoundtripTime;
-                    else
-                        server.Latency = -1;
-                }
+                HandlePingResult(result);
             }
+        }
+
+        public async void DoPingOne(Object obj)
+        {
+            ServerObservable server = obj as ServerObservable;
+            PingResult result = await _serverList.PingOne(server.Address);
+            HandlePingResult(result);
+        }
+
+        private void HandlePingResult(PingResult result)
+        {
+            if(result == null)
+                return;
+
+            if(_servers.Contains(result.Address))
+            {
+                ServerObservable server = _servers[result.Address];
+                if(result.Reply.Status == IPStatus.Success)
+                    server.Latency = result.Reply.RoundtripTime;
+                else
+                    server.Latency = -1;
+            }
+        }
+
+        public void DoJoin(Object obj)
+        {
+            ServerObservable server = obj as ServerObservable;
+
+            // TODO: join server!
         }
     }
 }

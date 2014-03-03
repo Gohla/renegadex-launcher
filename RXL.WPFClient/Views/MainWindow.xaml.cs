@@ -1,8 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using RXL.WPFClient.Observables;
+﻿using RXL.WPFClient.Observables;
 using RXL.WPFClient.ViewModels;
-using System.Linq;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace RXL.WPFClient.Views
 {
@@ -13,7 +14,7 @@ namespace RXL.WPFClient.Views
     {
         public ServersViewModel ViewModel
         {
-            get { return (ServersViewModel) DataContext; }
+            get { return (ServersViewModel)DataContext; }
         }
 
         public MainWindow()
@@ -21,7 +22,7 @@ namespace RXL.WPFClient.Views
             InitializeComponent();
         }
 
-        private void ServerListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ServerListOnSelectionChanged(Object sender, SelectionChangedEventArgs e)
         {
             ViewModel.SelectedServer = (ServerObservable)e.AddedItems[0];
         }
