@@ -139,7 +139,7 @@
                         Background="{StaticResource ListBackgroundBrush2}"
                         Command="{Binding Join}" 
                         CommandParameter="{Binding ElementName=ServerBrowser, Path=SelectedItem}">
-                    <TextBlock Text="Join dat serva"
+                    <TextBlock Text="Join server"
                                FontSize="30"
                                Foreground="#FFD6BC14" />
                 </Button>

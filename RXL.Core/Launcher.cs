@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
+using RunProcessAsTask;
+using System;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.Win32;
-using RunProcessAsTask;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace RXL.Core
 {
@@ -19,11 +17,15 @@ namespace RXL.Core
 
         public Task<ProcessResults> Launch(String path, String address, String name = "Harvester", String password = "")
         {
+            if(path == null)
+                throw new ArgumentNullException("path");
+
             StringBuilder argumentsBuilder = new StringBuilder();
             argumentsBuilder.Append(address);
             argumentsBuilder.Append("?name=");
             argumentsBuilder.Append(name);
-            if(!password.Equals(String.Empty)) {
+            if(!password.Equals(String.Empty))
+            {
                 argumentsBuilder.Append("?Password=");
                 argumentsBuilder.Append(password);
             }
