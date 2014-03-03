@@ -10,7 +10,7 @@ namespace RXL.WPFClient.Observables
         private uint _players;
         private uint _bots;
         private uint _maxPlayers;
-        private long _latency;
+        private long _latency = -1;
         private bool _requiresPw;
         private String _map;
 
@@ -54,7 +54,18 @@ namespace RXL.WPFClient.Observables
         public long Latency
         {
             get { return _latency; }
-            set { SetField(ref _latency, value, () => Latency); }
+            set { if(SetField(ref _latency, value, () => Latency)) RaisePropertyChanged(() => LatencyString); }
+        }
+
+        public String LatencyString
+        {
+            get
+            {
+                if(Latency == -1)
+                    return "-";
+                else
+                    return Latency.ToString();
+            }
         }
 
         public bool RequiresPw

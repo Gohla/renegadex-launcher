@@ -30,6 +30,8 @@ namespace RXL.Core
                     ServerSettings = ParseServerSettings(data[5]),
                     Players = ParseUInt(data[6]),
                     MaxPlayers = ParseUInt(data[7]),
+
+                    Latency = -1,
                 };
 
                 return server;

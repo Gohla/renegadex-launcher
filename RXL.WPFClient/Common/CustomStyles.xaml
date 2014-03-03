@@ -175,7 +175,6 @@
                     Gesture="LeftClick" 
                     Command="{Binding Path=DataContext.PingOne, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}" 
                     CommandParameter="{Binding}"
-                    
                 />
             </Grid.InputBindings>
             <Grid.ColumnDefinitions>
@@ -234,7 +233,7 @@
                     Background="{StaticResource ListBackgroundBrush}"
                     BorderBrush="Transparent"
                     Width="50">
-                <TextBlock Text="{Binding Latency}"
+                <TextBlock Text="{Binding LatencyString}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Foreground="{StaticResource ListTextColor}" />
