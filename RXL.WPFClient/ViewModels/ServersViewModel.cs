@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RunProcessAsTask;
 using RXL.Core;
 using RXL.Util;
 using RXL.WPFClient.Observables;
@@ -14,6 +15,8 @@ namespace RXL.WPFClient.ViewModels
     public class ServersViewModel : BaseViewModel
     {
         private readonly ServerList _serverList;
+        private readonly Launcher _launcher;
+
         private readonly KeyedCollection<String, ServerObservable> _servers;
         private ServerObservable _selectedServer;
 
@@ -37,6 +40,8 @@ namespace RXL.WPFClient.ViewModels
         public ServersViewModel()
         {
             _serverList = new ServerList();
+            _launcher = new Launcher();
+
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
@@ -112,11 +117,10 @@ namespace RXL.WPFClient.ViewModels
             }
         }
 
-        public void DoJoin(Object obj)
+        public async void DoJoin(Object obj)
         {
             ServerObservable server = obj as ServerObservable;
-
-            // TODO: join server!
+            ProcessResults results = await _launcher.Launch(server.Address);
         }
     }
 }

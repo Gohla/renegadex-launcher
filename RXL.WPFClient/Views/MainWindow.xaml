@@ -98,7 +98,8 @@
                     </Grid>
                 </Border>
                 <!-- Data -->
-                <ListView Grid.Row="1"
+                <ListView x:Name="ServerBrowser"
+                          Grid.Row="1"
                           BorderThickness="0"
                           Margin="0"
                           Padding="0"
@@ -135,7 +136,9 @@
                 <Button Grid.Row="1"
                         Margin="0,10,0,0"
                         BorderBrush="#FFD6BC14"
-                        Background="{StaticResource ListBackgroundBrush2}">
+                        Background="{StaticResource ListBackgroundBrush2}"
+                        Command="{Binding Join}" 
+                        CommandParameter="{Binding ElementName=ServerBrowser, Path=SelectedItem}">
                     <TextBlock Text="Join dat serva"
                                FontSize="30"
                                Foreground="#FFD6BC14" />
