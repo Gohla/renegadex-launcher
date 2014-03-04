@@ -29,13 +29,15 @@ namespace RXL.WPFClient.ViewModels
             {
                 _selectedServer = value;
                 RaisePropertyChanged(() => SelectedServer);
+                PingSelected.NotifyCanExecuteChanged(_selectedServer);
+                JoinSelected.NotifyCanExecuteChanged(_selectedServer);
             }
         }
 
-        public ICommand Refresh { get; private set; }
-        public ICommand PingAll { get; private set; }
-        public ICommand PingOne { get; private set; }
-        public ICommand Join { get; private set; }
+        public RelayCommand Refresh { get; private set; }
+        public RelayCommand PingAll { get; private set; }
+        public RelayCommand PingSelected { get; private set; }
+        public RelayCommand JoinSelected { get; private set; }
 
         public ServersViewModel()
         {
@@ -46,8 +48,8 @@ namespace RXL.WPFClient.ViewModels
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
             PingAll = new RelayCommand(_ => true, _ => DoPingAll());
-            PingOne = new RelayCommand(_ => true, o => DoPingOne(o));
-            Join = new RelayCommand(_ => true, o => DoJoin(o));
+            PingSelected = new RelayCommand(_ => _selectedServer != null, _ => DoPingOne(_selectedServer));
+            JoinSelected = new RelayCommand(_ => _selectedServer != null, _ => DoJoin(_selectedServer));
 
             Mapper.CreateMap<Server, ServerObservable>();
             Mapper.CreateMap<ServerSettings, ServerSettingsObservable>();
@@ -95,18 +97,15 @@ namespace RXL.WPFClient.ViewModels
             }
         }
 
-        public async void DoPingOne(Object obj)
+        public async void DoPingOne(ServerObservable server)
         {
-            ServerObservable server = obj as ServerObservable;
             PingResult result = await _serverList.PingOne(server.Address);
             HandlePingResult(result);
         }
 
-        public async void DoPingOneSelectedServer()
+        public void DoPingOneSelectedServer()
         {
-            var tmp = SelectedServer.Address;
-            PingResult result = await _serverList.PingOne(tmp);
-            HandlePingResult(result);
+            DoPingOne(SelectedServer);
         }
 
         private void HandlePingResult(PingResult result)
@@ -124,16 +123,14 @@ namespace RXL.WPFClient.ViewModels
             }
         }
 
-        public async void DoJoin(Object obj)
+        public async void DoJoin(ServerObservable server)
         {
-            ServerObservable server = obj as ServerObservable;
             ProcessResults results = await _launcher.Launch(server.Address);
         }
 
-        public async void DoJoinSelectedServer()
+        public void DoJoinSelectedServer()
         {
-            var tmp = SelectedServer.Address;
-            ProcessResults results = await _launcher.Launch(tmp);
+            DoJoin(SelectedServer);
         }
     }
 }
