@@ -1,5 +1,7 @@
 ﻿using RXL.Util;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace RXL.WPFClient.Observables
 {
@@ -101,6 +103,19 @@ namespace RXL.WPFClient.Observables
         public override int GetHashCode()
         {
             return Address.GetHashCode();
+        }
+    }
+
+    public class ServerObservableComparer : IComparer<ServerObservable>, IComparer
+    {
+        public int Compare(ServerObservable x, ServerObservable y)
+        {
+            return x.Name.CompareTo(y.Name);
+        }
+
+        public int Compare(Object x, Object y)
+        {
+            return Compare(x as ServerObservable, y as ServerObservable);
         }
     }
 }

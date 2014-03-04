@@ -6,9 +6,10 @@ using RXL.WPFClient.Observables;
 using RXL.WPFClient.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.NetworkInformation;
 using System.Threading;
-using System.Windows.Input;
+using System.Windows.Data;
 
 namespace RXL.WPFClient.ViewModels
 {
@@ -18,9 +19,11 @@ namespace RXL.WPFClient.ViewModels
         private readonly Launcher _launcher;
 
         private readonly KeyedCollection<String, ServerObservable> _servers;
+        private readonly ICollectionViewLiveShaping _serversSorted;
         private ServerObservable _selectedServer;
 
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
+        public ICollectionViewLiveShaping ServersSorted { get { return _serversSorted; } }
 
         public ServerObservable SelectedServer
         {
@@ -46,6 +49,15 @@ namespace RXL.WPFClient.ViewModels
 
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
 
+            ListCollectionView serversView = new CollectionViewSource { Source = _servers }.View as ListCollectionView;
+            serversView.Filter = FilterServer;
+            serversView.CustomSort = new ServerObservableComparer();
+            _serversSorted = serversView as ICollectionViewLiveShaping;
+            _serversSorted.LiveFilteringProperties.Add("Latency");
+            _serversSorted.LiveSortingProperties.Add("Latency");
+            _serversSorted.IsLiveFiltering = true;
+            _serversSorted.IsLiveSorting = true;
+
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
             PingAll = new RelayCommand(_ => true, _ => DoPingAll());
             PingSelected = new RelayCommand(_ => _selectedServer != null, _ => DoPingOne(_selectedServer));
@@ -57,6 +69,16 @@ namespace RXL.WPFClient.ViewModels
             Mapper.AssertConfigurationIsValid();
 
             DoRefresh();
+        }
+
+        private bool FilterServer(Object obj)
+        {
+            return FilterServer(obj as ServerObservable);
+        }
+
+        private bool FilterServer(ServerObservable server)
+        {
+            return true;
         }
 
         public async void DoRefresh()

@@ -13,7 +13,6 @@
         MaxWidth="1150"
         >
     <Window.DataContext>
-        <!-- Declaratively create an instance of our SongViewModel -->
         <vm:ServersViewModel />
     </Window.DataContext>
 
@@ -44,7 +43,7 @@
                     <TextBlock Grid.Column="0"
                                Style="{StaticResource HeaderTextBlockStyle}"
                                Margin="0,10,0,0"
-                               Text="LOL" />
+                               Text="" />
 
                     <Image Grid.Column="1"
                            Source="/Assets/RenegadeXLogo.png" />
@@ -112,7 +111,7 @@
                           SelectionMode="Single"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          ItemsSource="{Binding Servers}"
+                          ItemsSource="{Binding ServersSorted}"
                           ItemTemplate="{StaticResource ServerDataTemplate}"
                           MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
                           SelectionChanged="ServerBrowserOnSelectionChanged">
@@ -146,7 +145,7 @@
                         BorderBrush="#FFD6BC14"
                         Background="{StaticResource ListBackgroundBrush2}"
                         Command="{Binding JoinSelected}">
-                    <TextBlock Text="Join server"
+                    <TextBlock Text="Join Server"
                                FontSize="30"
                                Foreground="#FFD6BC14" />
                 </Button>
