@@ -4,6 +4,7 @@
         xmlns:vm="clr-namespace:RXL.WPFClient.ViewModels"
         Title="RenegadeX Launcher"
         Icon="/Assets/RenegadeX.ico"
+        WindowStartupLocation="CenterScreen"
         Height="945"
         Width="1150"
         MinHeight="945"
