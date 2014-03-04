@@ -71,7 +71,7 @@
                     Margin="10,10,10,0"
                     Orientation="Horizontal">
             <Grid Grid.IsSharedSizeScope="True"
-                  Width="767"
+                  Width="770"
                   HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
