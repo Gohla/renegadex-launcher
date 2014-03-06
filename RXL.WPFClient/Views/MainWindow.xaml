@@ -107,7 +107,7 @@
                           SelectionMode="Single"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          ItemsSource="{Binding ServersSorted}"
+                          ItemsSource="{Binding ServersView}"
                           ItemTemplate="{StaticResource ServerDataTemplate}"
                           MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
                           SelectionChanged="ServerBrowserOnSelectionChanged">

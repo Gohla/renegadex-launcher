@@ -1,7 +1,5 @@
 ﻿using RXL.Util;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace RXL.WPFClient.Observables
 {
@@ -12,7 +10,7 @@ namespace RXL.WPFClient.Observables
         private uint _players;
         private uint _bots;
         private uint _maxPlayers;
-        private long _latency = -1;
+        private uint _latency = uint.MaxValue;
         private bool _requiresPw;
         private String _map;
 
@@ -53,7 +51,7 @@ namespace RXL.WPFClient.Observables
             set { SetField(ref _maxPlayers, value, () => MaxPlayers); }
         }
 
-        public long Latency
+        public uint Latency
         {
             get { return _latency; }
             set { if(SetField(ref _latency, value, () => Latency)) RaisePropertyChanged(() => LatencyString); }
@@ -63,7 +61,7 @@ namespace RXL.WPFClient.Observables
         {
             get
             {
-                if(Latency == -1)
+                if(Latency == uint.MaxValue)
                     return "-";
                 else
                     return Latency.ToString();
@@ -103,19 +101,6 @@ namespace RXL.WPFClient.Observables
         public override int GetHashCode()
         {
             return Address.GetHashCode();
-        }
-    }
-
-    public class ServerObservableComparer : IComparer<ServerObservable>, IComparer
-    {
-        public int Compare(ServerObservable x, ServerObservable y)
-        {
-            return x.Name.CompareTo(y.Name);
-        }
-
-        public int Compare(Object x, Object y)
-        {
-            return Compare(x as ServerObservable, y as ServerObservable);
         }
     }
 }

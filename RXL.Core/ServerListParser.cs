@@ -29,7 +29,7 @@ namespace RXL.Core
                 Players = ParseUInt(data[6]),
                 MaxPlayers = ParseUInt(data[7]),
 
-                Latency = -1,
+                Latency = uint.MaxValue,
             };
 
             return server;

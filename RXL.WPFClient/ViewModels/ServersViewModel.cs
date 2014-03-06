@@ -5,8 +5,8 @@ using RXL.Util;
 using RXL.WPFClient.Observables;
 using RXL.WPFClient.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Data;
@@ -19,11 +19,23 @@ namespace RXL.WPFClient.ViewModels
         private readonly Launcher _launcher;
 
         private readonly KeyedCollection<String, ServerObservable> _servers;
-        private readonly ICollectionViewLiveShaping _serversSorted;
+        private readonly ListCollectionView _serversView;
         private ServerObservable _selectedServer;
 
+        private bool _showEmpty = true;
+        private bool _showFull = true;
+        private bool _showPassworded = true;
+        private uint _minPlayers = 0;
+        private uint _maxPlayers = 64;
+        private uint _maxLatency = 600;
+
+        private readonly IComparer _serverNameComparer = new GenericComparer<ServerObservable, String>(s => s.Name);
+        private readonly IComparer _serverLatencyComparer = new GenericComparer<ServerObservable, uint>(s => s.Latency);
+        private readonly IComparer _serverPlayersComparer = new GenericComparer<ServerObservable, uint>(s => s.Players, true);
+        private IComparer _comparer;
+
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
-        public ICollectionViewLiveShaping ServersSorted { get { return _serversSorted; } }
+        public ListCollectionView ServersView { get { return _serversView; } }
 
         public ServerObservable SelectedServer
         {
@@ -37,6 +49,15 @@ namespace RXL.WPFClient.ViewModels
             }
         }
 
+        public bool ShowEmpty { get { return _showEmpty; } set { _showEmpty = value; RefreshView(); } }
+        public bool ShowFull { get { return _showFull; } set { _showFull = value; RefreshView(); } }
+        public bool ShowPassworded { get { return _showPassworded; } set { _showPassworded = value; RefreshView(); } }
+        public uint MinPlayers { get { return _minPlayers; } set { _minPlayers = value; RefreshView(); } }
+        public uint MaxPlayers { get { return _maxPlayers; } set { _maxPlayers = value; RefreshView(); } }
+        public uint MaxLatency { get { return _maxLatency; } set { _maxLatency = value; RefreshView(); } }
+
+        public IComparer Comparer { get { return _comparer; } set { _comparer = value; RefreshView(); } }
+
         public RelayCommand Refresh { get; private set; }
         public RelayCommand PingAll { get; private set; }
         public RelayCommand PingSelected { get; private set; }
@@ -49,14 +70,18 @@ namespace RXL.WPFClient.ViewModels
 
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
 
-            ListCollectionView serversView = new CollectionViewSource { Source = _servers }.View as ListCollectionView;
-            serversView.Filter = FilterServer;
-            serversView.CustomSort = new ServerObservableComparer();
-            _serversSorted = serversView as ICollectionViewLiveShaping;
-            _serversSorted.LiveFilteringProperties.Add("Latency");
-            _serversSorted.LiveSortingProperties.Add("Latency");
-            _serversSorted.IsLiveFiltering = true;
-            _serversSorted.IsLiveSorting = true;
+            _comparer = _serverPlayersComparer;
+
+            _serversView = new CollectionViewSource { Source = _servers }.View as ListCollectionView;
+            _serversView.Filter = FilterServer;
+            _serversView.CustomSort = _comparer;
+            foreach(String liveProperty in new[] { "Name", "Players", "Bots", "MaxPlayers", "RequiresPw", "Map", "Latency" })
+            {
+                _serversView.LiveFilteringProperties.Add(liveProperty);
+                _serversView.LiveSortingProperties.Add(liveProperty);
+            }
+            _serversView.IsLiveFiltering = true;
+            _serversView.IsLiveSorting = true;
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
             PingAll = new RelayCommand(_ => true, _ => DoPingAll());
@@ -78,7 +103,25 @@ namespace RXL.WPFClient.ViewModels
 
         private bool FilterServer(ServerObservable server)
         {
+            if(!_showEmpty && server.Players == 0)
+                return false;
+            if(!_showFull && server.Players == server.MaxPlayers)
+                return false;
+            if(!_showPassworded && server.RequiresPw)
+                return false;
+            if(server.Players < _minPlayers)
+                return false;
+            if(server.Players > _maxPlayers)
+                return false;
+            if(server.Latency > _maxLatency)
+                return false;
+
             return true;
+        }
+
+        private void RefreshView()
+        {
+            _serversView.Refresh();
         }
 
         public async void DoRefresh()
@@ -122,7 +165,13 @@ namespace RXL.WPFClient.ViewModels
         public async void DoPingOne(ServerObservable server)
         {
             PingResult result = await _serverList.PingOne(server.Address);
+
+            // Disable and enable filtering and sorting on latency to prevent servers from moving/disappearing.
+            _serversView.LiveFilteringProperties.Remove("Latency");
+            _serversView.LiveSortingProperties.Remove("Latency");
             HandlePingResult(result);
+            _serversView.LiveFilteringProperties.Add("Latency");
+            _serversView.LiveSortingProperties.Add("Latency");
         }
 
         private void HandlePingResult(PingResult result)
@@ -134,9 +183,9 @@ namespace RXL.WPFClient.ViewModels
             {
                 ServerObservable server = _servers[result.Address];
                 if(result.Reply.Status == IPStatus.Success)
-                    server.Latency = result.Reply.RoundtripTime;
+                    server.Latency = (uint)result.Reply.RoundtripTime;
                 else
-                    server.Latency = -1;
+                    server.Latency = uint.MaxValue;
             }
         }
 
