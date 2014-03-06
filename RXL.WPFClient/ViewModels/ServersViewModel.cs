@@ -125,11 +125,6 @@ namespace RXL.WPFClient.ViewModels
             HandlePingResult(result);
         }
 
-        public void DoPingOneSelectedServer()
-        {
-            DoPingOne(SelectedServer);
-        }
-
         private void HandlePingResult(PingResult result)
         {
             if(result == null)
@@ -148,11 +143,6 @@ namespace RXL.WPFClient.ViewModels
         public async void DoJoin(ServerObservable server)
         {
             ProcessResults results = await _launcher.Launch(server.Address);
-        }
-
-        public void DoJoinSelectedServer()
-        {
-            DoJoin(SelectedServer);
         }
     }
 }

@@ -14,8 +14,6 @@ namespace RXL.WPFClient.Views
             get { return (ServersViewModel)DataContext; }
         }
 
-        private ServerObservable _lastClickedServer;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -25,21 +23,19 @@ namespace RXL.WPFClient.Views
         {
             if(e.AddedItems.Count == 0)
             {
-                _lastClickedServer = null;
                 ViewModel.SelectedServer = null;
                 return;
             }
 
-            _lastClickedServer = e.AddedItems[0] as ServerObservable;
-            ViewModel.SelectedServer = _lastClickedServer;
-            ViewModel.DoPingOneSelectedServer();
+            ViewModel.SelectedServer = e.AddedItems[0] as ServerObservable;
+            ViewModel.DoPingOne(ViewModel.SelectedServer);
         }
 
         private void ServerBrowserOnMouseDoubleClick(Object sender, MouseButtonEventArgs e)
         {
-            if(!ViewModel.SelectedServer.Equals(_lastClickedServer))
-                throw new ArgumentException("Selected server not ze zame");
-            ViewModel.DoJoinSelectedServer();
+            FrameworkElement source = e.OriginalSource as FrameworkElement;
+            ServerObservable server = source.DataContext as ServerObservable;
+            ViewModel.DoJoin(server);
         }
     }
 }
