@@ -9,13 +9,12 @@ namespace RXL.WPFClient.Views
 {
     public partial class MainWindow : Window
     {
-        public ServersViewModel ViewModel
-        {
-            get { return (ServersViewModel)DataContext; }
-        }
+        private readonly ServersViewModel _viewModel;
 
         public MainWindow()
         {
+            _viewModel = new ServersViewModel();
+            DataContext = _viewModel;
             InitializeComponent();
         }
 
@@ -23,19 +22,20 @@ namespace RXL.WPFClient.Views
         {
             if(e.AddedItems.Count == 0)
             {
-                ViewModel.SelectedServer = null;
+                _viewModel.SelectedServer = null;
                 return;
             }
 
-            ViewModel.SelectedServer = e.AddedItems[0] as ServerObservable;
-            ViewModel.DoPingOne(ViewModel.SelectedServer);
+            ServerObservable server = e.AddedItems[0] as ServerObservable;
+            _viewModel.SelectedServer = server;
+            _viewModel.DoPingOne(server);
         }
 
         private void ServerBrowserOnMouseDoubleClick(Object sender, MouseButtonEventArgs e)
         {
             FrameworkElement source = e.OriginalSource as FrameworkElement;
             ServerObservable server = source.DataContext as ServerObservable;
-            ViewModel.DoJoin(server);
+            _viewModel.DoJoin(server);
         }
     }
 }

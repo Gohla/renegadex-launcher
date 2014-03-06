@@ -12,10 +12,6 @@
         MaxHeight="945"
         MaxWidth="1150"
         >
-    <Window.DataContext>
-        <vm:ServersViewModel />
-    </Window.DataContext>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg" Stretch="UniformToFill" />
