@@ -118,7 +118,7 @@ namespace RXL.WPFClient.ViewModels
                 return false;
             if(server.Latency > _maxLatency)
                 return false;
-            if(!_searchString.Equals(String.Empty) && Regex.IsMatch(server.Name, ".+" + _searchString + ".+", RegexOptions.IgnoreCase))
+            if(!_searchString.Equals(String.Empty) && !Regex.IsMatch(server.Name, ".+" + _searchString + ".+", RegexOptions.IgnoreCase))
                 return false;
 
             return true;
