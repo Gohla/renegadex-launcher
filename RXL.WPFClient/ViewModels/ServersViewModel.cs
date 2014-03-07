@@ -28,6 +28,7 @@ namespace RXL.WPFClient.ViewModels
         private uint _minPlayers = 0;
         private uint _maxPlayers = 64;
         private uint _maxLatency = 600;
+        private String _searchString = String.Empty;
 
         private readonly IComparer _serverNameComparer = new GenericComparer<ServerObservable, String>(s => s.Name);
         private readonly IComparer _serverLatencyComparer = new GenericComparer<ServerObservable, uint>(s => s.Latency);
@@ -55,6 +56,7 @@ namespace RXL.WPFClient.ViewModels
         public uint MinPlayers { get { return _minPlayers; } set { _minPlayers = value; RefreshView(); } }
         public uint MaxPlayers { get { return _maxPlayers; } set { _maxPlayers = value; RefreshView(); } }
         public uint MaxLatency { get { return _maxLatency; } set { _maxLatency = value; RefreshView(); } }
+        public String SearchString { get { return _searchString; } set { _searchString = value; RefreshView(); } }
 
         public IComparer Comparer { get { return _comparer; } set { _comparer = value; RefreshView(); } }
 
@@ -114,6 +116,8 @@ namespace RXL.WPFClient.ViewModels
             if(server.Players > _maxPlayers)
                 return false;
             if(server.Latency > _maxLatency)
+                return false;
+            if(!_searchString.Equals(String.Empty) && !server.Name.Contains(_searchString))
                 return false;
 
             return true;
