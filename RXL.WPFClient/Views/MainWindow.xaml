@@ -10,11 +10,11 @@
         MinHeight="945"
         MinWidth="1150"
         MaxHeight="945"
-        MaxWidth="1150"
-        >
+        MaxWidth="1150">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg"
+                        Stretch="UniformToFill" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="90" />
@@ -66,16 +66,14 @@
         <StackPanel Grid.Row="1"
                     Margin="10,10,10,0"
                     Orientation="Horizontal">
-            <Grid Grid.IsSharedSizeScope="True"
-                  Width="770"
-                  HorizontalAlignment="Left">
+
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20" />
+                    <RowDefinition Height="30" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!--  Title  -->
                 <Border Grid.Row="0"
-                        BorderThickness="1,1,1,0"
+                        BorderThickness="1,1,1,5"
                         BorderBrush="Transparent">
                     <Grid Background="{StaticResource ListBackgroundBrush}">
                         <Grid.ColumnDefinitions>
@@ -85,43 +83,70 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
-                                   Text="Server"
+                                   Text="Search!"
                                    Margin="10,0,0,0"
-                                   Foreground="{StaticResource ListHeaderTextColor}" />
-                        <TextBlock Grid.Column="1"
-                                   Text="Players"
-                                   Foreground="{StaticResource ListHeaderTextColor}" />
-                        <TextBlock Grid.Column="2"
-                                   Text="Latency"
                                    Foreground="{StaticResource ListHeaderTextColor}" />
                     </Grid>
                 </Border>
-                <!-- Data -->
-                <ListView x:Name="ServerBrowser"
-                          Grid.Row="1"
-                          BorderThickness="0"
-                          Margin="0"
-                          Padding="0"
-                          Height="775"
-                          Background="Transparent"
-                          SelectionMode="Single"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          ItemsSource="{Binding ServersView}"
-                          ItemTemplate="{StaticResource ServerDataTemplate}"
-                          MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
-                          SelectionChanged="ServerBrowserOnSelectionChanged">
-                    <ListView.Resources>
-                        <Style TargetType="Thumb">
-                            <Setter Property="Foreground"
-                                    Value="Yellow"></Setter>
-                        </Style>
-                        <Style TargetType="ScrollBar">
-                            <Setter Property="Background"
-                                    Value="Transparent"></Setter>
-                        </Style>
-                    </ListView.Resources>
-                </ListView>
+
+                <Grid Grid.Row="1"
+                      Grid.IsSharedSizeScope="True"
+                      Width="770"
+                      HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--  Title  -->
+                    <Border Grid.Row="0"
+                            BorderThickness="1,1,1,0"
+                            BorderBrush="Transparent">
+                        <Grid Background="{StaticResource ListBackgroundBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
+                                <ColumnDefinition SharedSizeGroup="PlayersColumn" />
+                                <ColumnDefinition SharedSizeGroup="LatencyColumn" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Text="Server"
+                                       Margin="10,0,0,0"
+                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                            <TextBlock Grid.Column="1"
+                                       Text="Players"
+                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                            <TextBlock Grid.Column="2"
+                                       Text="Latency"
+                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                        </Grid>
+                    </Border>
+                    <!-- Data -->
+                    <ListView x:Name="ServerBrowser"
+                              Grid.Row="1"
+                              BorderThickness="0"
+                              Margin="0"
+                              Padding="0"
+                              Height="775"
+                              Background="Transparent"
+                              SelectionMode="Single"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible"
+                              ItemsSource="{Binding ServersView}"
+                              ItemTemplate="{StaticResource ServerDataTemplate}"
+                              MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
+                              SelectionChanged="ServerBrowserOnSelectionChanged">
+                        <ListView.Resources>
+                            <Style TargetType="Thumb">
+                                <Setter Property="Foreground"
+                                        Value="Yellow"></Setter>
+                            </Style>
+                            <Style TargetType="ScrollBar">
+                                <Setter Property="Background"
+                                        Value="Transparent"></Setter>
+                            </Style>
+                        </ListView.Resources>
+                    </ListView>
+                </Grid>
             </Grid>
 
             <Grid Margin="20,0,0,0"
