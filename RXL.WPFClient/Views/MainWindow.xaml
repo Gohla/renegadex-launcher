@@ -151,7 +151,7 @@
                               BorderThickness="0"
                               Margin="0"
                               Padding="0"
-                              Height="775"
+                              Height="760"
                               Background="Transparent"
                               SelectionMode="Single"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -168,6 +168,8 @@
                             <Style TargetType="ScrollBar">
                                 <Setter Property="Background"
                                         Value="Transparent"></Setter>
+                                <Setter Property="BorderThickness"
+                                        Value="0"></Setter>
                             </Style>
                         </ListView.Resources>
                     </ListView>
