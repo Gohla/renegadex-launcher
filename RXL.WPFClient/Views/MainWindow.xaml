@@ -130,13 +130,16 @@
                             <TextBlock Grid.Column="0"
                                        Text="Server"
                                        Margin="10,0,0,0"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                                       Foreground="{StaticResource ListHeaderTextColor}"
+                                       MouseUp="TextBlockMouseUp" />
                             <TextBlock Grid.Column="1"
                                        Text="Players"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                                       Foreground="{StaticResource ListHeaderTextColor}"
+                                       MouseUp="TextBlockMouseUp" />
                             <TextBlock Grid.Column="2"
                                        Text="Latency"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                                       Foreground="{StaticResource ListHeaderTextColor}"
+                                       MouseUp="TextBlockMouseUp" />
                         </Grid>
                     </Border>
                     <!-- Data -->

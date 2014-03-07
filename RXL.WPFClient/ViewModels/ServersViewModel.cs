@@ -31,10 +31,9 @@ namespace RXL.WPFClient.ViewModels
         private uint _maxLatency = 600;
         private String _searchString = String.Empty;
 
-        private readonly IComparer _serverNameComparer = new GenericComparer<ServerObservable, String>(s => s.Name);
-        private readonly IComparer _serverLatencyComparer = new GenericComparer<ServerObservable, uint>(s => s.Latency);
-        private readonly IComparer _serverPlayersComparer = new GenericComparer<ServerObservable, uint>(s => s.Players, true);
-        private IComparer _comparer;
+        private readonly GenericComparer<ServerObservable, String> _serverNameComparer = new GenericComparer<ServerObservable, String>(s => s.Name);
+        private readonly GenericComparer<ServerObservable, uint> _serverLatencyComparer = new GenericComparer<ServerObservable, uint>(s => s.Latency);
+        private readonly GenericComparer<ServerObservable, uint> _serverPlayersComparer = new GenericComparer<ServerObservable, uint>(s => s.Players, true);
 
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
         public ListCollectionView ServersView { get { return _serversView; } }
@@ -59,8 +58,6 @@ namespace RXL.WPFClient.ViewModels
         public uint MaxLatency { get { return _maxLatency; } set { _maxLatency = value; RefreshView(); } }
         public String SearchString { get { return _searchString; } set { _searchString = value; RefreshView(); } }
 
-        public IComparer Comparer { get { return _comparer; } set { _comparer = value; RefreshView(); } }
-
         public RelayCommand Refresh { get; private set; }
         public RelayCommand PingAll { get; private set; }
         public RelayCommand PingSelected { get; private set; }
@@ -73,11 +70,9 @@ namespace RXL.WPFClient.ViewModels
 
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
 
-            _comparer = _serverPlayersComparer;
-
             _serversView = new CollectionViewSource { Source = _servers }.View as ListCollectionView;
             _serversView.Filter = FilterServer;
-            _serversView.CustomSort = _comparer;
+            _serversView.CustomSort = _serverPlayersComparer;
             foreach(String liveProperty in new[] { "Name", "Players", "Bots", "MaxPlayers", "RequiresPw", "Map", "Latency" })
             {
                 _serversView.LiveFilteringProperties.Add(liveProperty);
@@ -197,6 +192,29 @@ namespace RXL.WPFClient.ViewModels
         public async void DoJoin(ServerObservable server)
         {
             ProcessResults results = await _launcher.Launch(server.Address);
+        }
+
+        public void SortServers(string filterName)
+        {
+            switch (filterName)
+            {
+                case "Server":
+                    {
+                        _serversView.CustomSort = _serverNameComparer;
+                    }
+                    break;
+                case "Players":
+                    {
+                        _serversView.CustomSort = _serverPlayersComparer;
+                    }
+                    break;
+                case "Latency":
+                    {
+                        _serversView.CustomSort = _serverLatencyComparer;
+                    }
+                    break;
+            }
+            RefreshView();
         }
     }
 }
