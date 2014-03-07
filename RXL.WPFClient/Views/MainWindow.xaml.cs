@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Xceed.Wpf.Toolkit;
 
 namespace RXL.WPFClient.Views
 {
@@ -40,7 +41,7 @@ namespace RXL.WPFClient.Views
 
         private void ServerNameOnTextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            _viewModel.SearchString = ((WatermarkTextBox)sender).Text;
         }
     }
 }

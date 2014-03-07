@@ -96,8 +96,8 @@
                                                Background="Transparent"
                                                VerticalAlignment="Center"
                                                Foreground="{StaticResource InfoTextColor2}"
-                                               BorderThickness="0" 
-                                               TextChanged="ServerNameOnTextChanged" />
+                                               BorderThickness="0"
+                                               Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         
                         <Button Grid.Column="3"
                                 Background="Transparent"
