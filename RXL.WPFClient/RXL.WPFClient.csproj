@@ -171,6 +171,10 @@
     <Resource Include="Assets\Maps\cnc-mesaii.png" />
     <Resource Include="Assets\Maps\cnc-walls.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Search.png" />
+    <Resource Include="Assets\Refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

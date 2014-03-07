@@ -37,5 +37,10 @@ namespace RXL.WPFClient.Views
             ServerObservable server = source.DataContext as ServerObservable;
             _viewModel.DoJoin(server);
         }
+
+        private void ServerNameOnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
     }
 }
