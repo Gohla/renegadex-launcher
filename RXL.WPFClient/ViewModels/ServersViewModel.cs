@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Data;
 
@@ -117,7 +118,7 @@ namespace RXL.WPFClient.ViewModels
                 return false;
             if(server.Latency > _maxLatency)
                 return false;
-            if(!_searchString.Equals(String.Empty) && !server.Name.Contains(_searchString))
+            if(!_searchString.Equals(String.Empty) && Regex.IsMatch(server.Name, ".+" + _searchString + ".+", RegexOptions.IgnoreCase))
                 return false;
 
             return true;
