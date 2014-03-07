@@ -122,9 +122,12 @@
                             BorderBrush="Transparent">
                         <Grid Background="{StaticResource ListBackgroundBrush}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
-                                <ColumnDefinition SharedSizeGroup="PlayersColumn" />
-                                <ColumnDefinition SharedSizeGroup="LatencyColumn" />
+                                <ColumnDefinition Width="630"
+                                                  SharedSizeGroup="ServerNameColumn" />
+                                <ColumnDefinition Width="60"
+                                                  SharedSizeGroup="PlayersColumn" />
+                                <ColumnDefinition Width="60"
+                                                  SharedSizeGroup="LatencyColumn" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0"

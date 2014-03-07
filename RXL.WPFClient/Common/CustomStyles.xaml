@@ -174,12 +174,11 @@
             <Border Grid.Column="0"
                     BorderThickness="1,0,1,1"
                     Background="{StaticResource ListBackgroundBrush}"
-                    BorderBrush="Transparent"
-                    Width="650">
+                    BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal"
                             Margin="0,5">
                     <Image Margin="10,0,10,0"
-                           Source="{Binding Map, Converter={StaticResource MapImageConverter}}"/>
+                           Source="{Binding Map, Converter={StaticResource MapImageConverter}}" />
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name}"
@@ -202,7 +201,7 @@
             <Border Grid.Column="1"
                     BorderThickness="0,0,1,1"
                     Background="{StaticResource ListBackgroundBrush}"
-                    BorderBrush="Transparent" Width="50">
+                    BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
@@ -219,8 +218,7 @@
             <Border Grid.Column="2"
                     BorderThickness="0,0,1,1"
                     Background="{StaticResource ListBackgroundBrush}"
-                    BorderBrush="Transparent"
-                    Width="50">
+                    BorderBrush="Transparent">
                 <TextBlock Text="{Binding LatencyString}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
