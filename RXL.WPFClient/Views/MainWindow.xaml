@@ -242,6 +242,36 @@
                        Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"
                        Stretch="UniformToFill" />
 
+                <StackPanel Grid.Row="0"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Height="80"
+                            Width="320"
+                            Background="{StaticResource ListBackgroundBrush}">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="30,10,0,0"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="{Binding SelectedServer.Players}"
+                                   Foreground="{StaticResource ListTextColor}" />
+                        <TextBlock Text="/"
+                                   Margin="5,0"
+                                   Foreground="{StaticResource ListTextColor}" />
+                        <TextBlock Text="{Binding SelectedServer.MaxPlayers}"
+                                   Foreground="{StaticResource ListTextColor}" />
+                        <TextBlock Text="Players"
+                                   Margin="5,0,0,0"
+                                   Foreground="{StaticResource ListTextColor}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="30,10,0,0"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Players"
+                                   Margin="5,0,0,0"
+                                   Foreground="{StaticResource ListTextColor}" />
+                    </StackPanel>
+                </StackPanel>
+
                 <Button Grid.Row="1"
                         Margin="0,10,0,0"
                         BorderBrush="#FFD6BC14"
@@ -293,7 +323,7 @@
                             <TextBlock Grid.Row="4"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="SteamRequired" />
-                            
+
                             <TextBlock Grid.Row="5"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="Password" />
