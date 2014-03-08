@@ -54,17 +54,16 @@ namespace RXL.WPFClient.Observables
         public uint Latency
         {
             get { return _latency; }
-            set { if(SetField(ref _latency, value, () => Latency)) RaisePropertyChanged(() => LatencyString); }
+            set { if (SetField(ref _latency, value, () => Latency)) RaisePropertyChanged(() => LatencyString); }
         }
 
         public String LatencyString
         {
             get
             {
-                if(Latency == uint.MaxValue)
+                if (Latency == uint.MaxValue)
                     return "-";
-                else
-                    return Latency.ToString();
+                return Latency.ToString();
             }
         }
 
@@ -93,7 +92,7 @@ namespace RXL.WPFClient.Observables
 
         public bool Equals(ServerObservable other)
         {
-            if(other == null)
+            if (other == null)
                 return false;
             return Address.Equals(other.Address);
         }

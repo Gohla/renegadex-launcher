@@ -5,7 +5,6 @@ using RXL.Util;
 using RXL.WPFClient.Observables;
 using RXL.WPFClient.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
@@ -26,7 +25,7 @@ namespace RXL.WPFClient.ViewModels
         private bool _showEmpty = true;
         private bool _showFull = true;
         private bool _showPassworded = true;
-        private uint _minPlayers = 0;
+        private uint _minPlayers;
         private uint _maxPlayers = 64;
         private uint _maxLatency = 600;
         private String _searchString = String.Empty;
@@ -161,7 +160,7 @@ namespace RXL.WPFClient.ViewModels
                 if (_servers.Contains(server.Key))
                 {
                     ServerObservable existingServer = _servers[serverData.Address];
-                    Mapper.Map<ServerObservable, ServerObservable>(server, existingServer);
+                    Mapper.Map(server, existingServer);
                 }
                 else
                 {
@@ -216,7 +215,7 @@ namespace RXL.WPFClient.ViewModels
 
         public async void DoJoin(ServerObservable server)
         {
-            ProcessResults results = await _launcher.Launch(server.Address);
+            await _launcher.Launch(server.Address);
         }
 
         public void SortServers(string sortBy)

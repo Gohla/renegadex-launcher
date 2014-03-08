@@ -36,10 +36,9 @@ namespace RXL.WPFClient.Converters
         public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
             String mapName = (String)value;
-            if(_images.ContainsKey(mapName))
+            if (_images.ContainsKey(mapName))
                 return _images[mapName];
-            else
-                return _images["cnc-field"];
+            return _images["cnc-field"];
         }
 
         public Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)

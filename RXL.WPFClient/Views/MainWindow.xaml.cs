@@ -4,7 +4,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Xceed.Wpf.Toolkit;
 
 namespace RXL.WPFClient.Views
 {
@@ -21,7 +20,7 @@ namespace RXL.WPFClient.Views
 
         private void ServerBrowserOnSelectionChanged(Object sender, SelectionChangedEventArgs e)
         {
-            if(e.AddedItems.Count == 0)
+            if (e.AddedItems.Count == 0)
             {
                 _viewModel.SelectedServer = null;
                 return;
@@ -38,7 +37,7 @@ namespace RXL.WPFClient.Views
             ServerObservable server = source.DataContext as ServerObservable;
             _viewModel.DoJoin(server);
         }
-        
+
         private void TextBlockMouseUp(object sender, MouseButtonEventArgs e)
         {
             _viewModel.SortServers(((TextBlock)sender).Text);

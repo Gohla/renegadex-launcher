@@ -136,7 +136,7 @@
                                            Margin="10,0,0,0"
                                            Foreground="{StaticResource ListHeaderTextColor}"
                                            MouseUp="TextBlockMouseUp" />
-                                
+
                                 <Image Margin="5,0,0,0"
                                        Tag="Server"
                                        Stretch="Uniform"
@@ -159,7 +159,7 @@
                                            Margin="0,0,0,0"
                                            Foreground="{StaticResource ListHeaderTextColor}"
                                            MouseUp="TextBlockMouseUp" />
-                                
+
                                 <Image Margin="5,0,0,0"
                                        Tag="Players"
                                        Stretch="Uniform"
@@ -217,13 +217,13 @@
                         <ListView.Resources>
                             <Style TargetType="Thumb">
                                 <Setter Property="Foreground"
-                                        Value="Yellow"></Setter>
+                                        Value="Yellow" />
                             </Style>
                             <Style TargetType="ScrollBar">
                                 <Setter Property="Background"
-                                        Value="Transparent"></Setter>
+                                        Value="Transparent" />
                                 <Setter Property="BorderThickness"
-                                        Value="0"></Setter>
+                                        Value="0" />
                             </Style>
                         </ListView.Resources>
                     </ListView>
@@ -324,9 +324,9 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                   Text="Iets"></TextBlock>
+                                   Text="Iets" />
                         <TextBlock Style="{StaticResource ServerInfoTextBlockStyle}"
-                                   Text="Iets"></TextBlock>
+                                   Text="Iets" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

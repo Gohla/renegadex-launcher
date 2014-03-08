@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using RXL.WPFClient.ViewModels;
 
 namespace RXL.WPFClient.Converters
 {
@@ -12,12 +11,10 @@ namespace RXL.WPFClient.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var image = (Image) values[0];
-            var sortInverted = (bool) values[1];
+            var image = (Image)values[0];
+            var sortInverted = (bool)values[1];
             var sortBy = (string)values[2];
-            //var viewModel = (ServersViewModel) values[1];
 
-            ////image.Source = 
             if (image.Tag.Equals(sortBy))
             {
                 image.Source = sortInverted ? new BitmapImage(new Uri("/Assets/ArrowDown.png", UriKind.Relative)) : new BitmapImage(new Uri("/Assets/ArrowUp.png", UriKind.Relative));
