@@ -301,12 +301,14 @@
                         <Grid Grid.Column="0"
                               Margin="20,10,0,0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
@@ -333,17 +335,27 @@
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="Password" />
 
+                            <TextBlock Grid.Row="6"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="Mine Limit" />
+
+                            <TextBlock Grid.Row="7"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="Vehicle Limit" />
+
                         </Grid>
 
                         <Grid Grid.Column="1"
                               Margin="0,10,0,0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
@@ -370,15 +382,16 @@
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
 
+                            <TextBlock Grid.Row="6"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="{Binding MineLimit}" />
+
+                            <TextBlock Grid.Row="7"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="{Binding VehicleLimit}" />
+
                         </Grid>
                     </Grid>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                   Text="Iets" />
-                        <TextBlock Style="{StaticResource ServerInfoTextBlockStyle}"
-                                   Text="Iets" />
-                    </StackPanel>
                 </StackPanel>
             </Grid>
         </StackPanel>
