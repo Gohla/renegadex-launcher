@@ -248,7 +248,8 @@
                             VerticalAlignment="Bottom"
                             Height="70"
                             Width="320"
-                            Background="{StaticResource ListBackgroundBrush}">
+                            Background="{StaticResource ListBackgroundBrush}"
+                            Visibility="{Binding SelectedServer, Converter={StaticResource SelectedServerToVisibilityConverter}}">
                     <StackPanel Orientation="Horizontal"
                                 Margin="30,5,0,0"
                                 VerticalAlignment="Center">
@@ -270,7 +271,7 @@
                     <StackPanel Orientation="Horizontal"
                                 Margin="30,5,0,0"
                                 VerticalAlignment="Center">
-                        <TextBlock Text="Field"
+                        <TextBlock Text="{Binding SelectedServer.Map, Converter={StaticResource ServerMapToMapNameConverter}}"
                                    FontSize="14"
                                    Foreground="{StaticResource ListTextColor}" />
                     </StackPanel>

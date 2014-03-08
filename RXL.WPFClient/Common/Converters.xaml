@@ -5,5 +5,7 @@
     <converters:MapImageConverter x:Key="MapImageConverter"/>
     <converters:SortButtonConverter x:Key="SortButtonConverter"/>
     <converters:BoolToOnOffConverter x:Key="BoolToOnOffConverter"/>
+    <converters:ServerMapToMapNameConverter x:Key="ServerMapToMapNameConverter"/>
+    <converters:SelectedServerToVisibilityConverter x:Key="SelectedServerToVisibilityConverter"/>
     
 </ResourceDictionary>

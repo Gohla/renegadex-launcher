@@ -86,6 +86,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToOnOffConverter.cs" />
+    <Compile Include="Converters\SelectedServerToVisibilityConverter.cs" />
+    <Compile Include="Converters\ServerMapToMapNameConverter.cs" />
     <Compile Include="Converters\SortButtonConverter.cs" />
     <Compile Include="Observables\ObservableBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />
