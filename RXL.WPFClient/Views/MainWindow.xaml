@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <Border BorderThickness="0,0,0,1"
-                BorderBrush="#FFC9BEBE">
+                BorderBrush="{StaticResource ButtonColorBrush}">
             <Grid Margin="10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
@@ -49,17 +49,22 @@
 
                 <StackPanel Grid.Row="1"
                             Orientation="Horizontal">
-                    <Button Style="{StaticResource MenuButtonStyle}"
-                            Width="150"
-                            Content="Home" />
-                    <Button Style="{StaticResource MenuButtonStyle}"
-                            Width="150"
-                            Margin="10,0,10,0"
-                            Content="Mutliplayer" />
-                    <Button Style="{StaticResource MenuButtonStyle}"
-                            Width="150"
-                            Content="Stats" />
+                    <Button BorderBrush="{StaticResource ButtonColorBrush}"
+                            Background="{StaticResource ListBackgroundBrush2}"
+                            Width="150">
+                        <TextBlock Text="Multiplayer"
+                                   FontSize="18"
+                                   Foreground="{StaticResource ButtonColorBrush}" />
+                    </Button>
 
+                    <Button BorderBrush="{StaticResource ButtonColorBrush}"
+                            Background="{StaticResource ListBackgroundBrush2}"
+                            Width="150"
+                            Margin="5,0,0,0">
+                        <TextBlock Text="Stats"
+                                   FontSize="18"
+                                   Foreground="{StaticResource ButtonColorBrush}" />
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
@@ -84,10 +89,13 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0"
-                               Source="/Assets/Search.png" />
+                               Source="/Assets/Search.png" 
+                               Width="15"
+                               Stretch="Uniform"
+                               VerticalAlignment="Center"/>
                         <TextBlock Grid.Column="1"
                                    Text="Search for server:"
-                                   Margin="10,0,0,0"
+                                   Margin="0,0,0,0"
                                    VerticalAlignment="Center"
                                    Foreground="{StaticResource ListHeaderTextColor}" />
 
@@ -103,7 +111,9 @@
                                 Background="Transparent"
                                 BorderThickness="0"
                                 Command="{Binding Refresh}">
-                            <Image Source="/Assets/Refresh.png" />
+                            <Image Source="/Assets/Refresh.png"
+                                   Width="20"
+                                   Stretch="Uniform"/>
                         </Button>
                     </Grid>
                 </Border>
@@ -279,12 +289,12 @@
 
                 <Button Grid.Row="1"
                         Margin="0,10,0,0"
-                        BorderBrush="#FFD6BC14"
+                        BorderBrush="{StaticResource ButtonColorBrush}"
                         Background="{StaticResource ListBackgroundBrush2}"
                         Command="{Binding JoinSelected}">
                     <TextBlock Text="Join Server"
                                FontSize="30"
-                               Foreground="#FFD6BC14" />
+                               Foreground="{StaticResource ButtonColorBrush}" />
                 </Button>
 
                 <StackPanel Grid.Row="2"

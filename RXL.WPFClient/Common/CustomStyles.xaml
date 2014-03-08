@@ -24,6 +24,9 @@
     <SolidColorBrush x:Key="ListBackgroundBrush2"
                      Color="#BF02020F" />
 
+    <SolidColorBrush x:Key="ButtonColorBrush"
+                     Color="#FFD6BC14" />
+
 
     <Style x:Key="HeaderTextBlockStyle"
            TargetType="{x:Type TextBlock}">
@@ -132,7 +135,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="4"
-                            Background="{TemplateBinding Background}">
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{StaticResource ButtonColorBrush}"
+                            BorderThickness="1">
                         <ContentPresenter x:Name="MyContentPresenter"
                                           Content="{TemplateBinding Content}"
                                           HorizontalAlignment="Center"
@@ -144,7 +149,7 @@
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter Property="Background"
-                                    Value="#E59400" />
+                                    Value="{StaticResource ButtonColorBrush}" />
                             <Setter Property="Foreground"
                                     Value="White" />
                         </Trigger>
