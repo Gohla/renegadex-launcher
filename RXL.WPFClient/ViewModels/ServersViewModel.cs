@@ -215,7 +215,10 @@ namespace RXL.WPFClient.ViewModels
 
         public async void DoJoin(ServerObservable server)
         {
-            await _launcher.Launch(server.Address);
+            if (server != null)
+            {
+                await _launcher.Launch(server.Address);
+            }
         }
 
         public void SortServers(string sortBy)
