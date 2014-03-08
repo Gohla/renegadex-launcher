@@ -32,9 +32,9 @@
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="200" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0"
@@ -44,6 +44,24 @@
 
                     <Image Grid.Column="1"
                            Source="/Assets/RenegadeXLogo.png" />
+
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0,0,10,0">
+
+                        <TextBlock Text="PlayerName"
+                                   Foreground="White" />
+
+                        <TextBlock Text="Config"
+                                   Foreground="White"
+                                   Margin="10,0,0,0" />
+
+                        <TextBlock Text="HALP"
+                                   Foreground="White"
+                                   Margin="10,0,0,0" />
+                    </StackPanel>
 
                 </Grid>
 
@@ -89,10 +107,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0"
-                               Source="/Assets/Search.png" 
+                               Source="/Assets/Search.png"
                                Width="15"
                                Stretch="Uniform"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                         <TextBlock Grid.Column="1"
                                    Text="Search for server:"
                                    Margin="0,0,0,0"
@@ -113,7 +131,7 @@
                                 Command="{Binding Refresh}">
                             <Image Source="/Assets/Refresh.png"
                                    Width="20"
-                                   Stretch="Uniform"/>
+                                   Stretch="Uniform" />
                         </Button>
                     </Grid>
                 </Border>
@@ -141,11 +159,13 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal"
+                                        Tag="Server"
+                                        Background="Transparent"
+                                        MouseUp="StackPanelMouseUp">
                                 <TextBlock Text="Server"
                                            Margin="10,0,0,0"
-                                           Foreground="{StaticResource ListHeaderTextColor}"
-                                           MouseUp="TextBlockMouseUp" />
+                                           Foreground="{StaticResource ListHeaderTextColor}" />
 
                                 <Image Margin="5,0,0,0"
                                        Tag="Server"
@@ -164,11 +184,13 @@
 
                             </StackPanel>
                             <StackPanel Grid.Column="1"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal"
+                                        Tag="Players"
+                                        Background="Transparent"
+                                        MouseUp="StackPanelMouseUp">
                                 <TextBlock Text="Players"
                                            Margin="0,0,0,0"
-                                           Foreground="{StaticResource ListHeaderTextColor}"
-                                           MouseUp="TextBlockMouseUp" />
+                                           Foreground="{StaticResource ListHeaderTextColor}" />
 
                                 <Image Margin="5,0,0,0"
                                        Tag="Players"
@@ -186,11 +208,13 @@
                                 </Image>
                             </StackPanel>
                             <StackPanel Grid.Column="2"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal"
+                                        Tag="Latency"
+                                        Background="Transparent"
+                                        MouseUp="StackPanelMouseUp">
                                 <TextBlock Text="Latency"
                                            Margin="0,0,0,0"
-                                           Foreground="{StaticResource ListHeaderTextColor}"
-                                           MouseUp="TextBlockMouseUp" />
+                                           Foreground="{StaticResource ListHeaderTextColor}"/>
 
                                 <Image Margin="5,0,0,0"
                                        Tag="Latency"

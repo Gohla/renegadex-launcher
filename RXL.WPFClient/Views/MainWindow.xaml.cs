@@ -38,9 +38,9 @@ namespace RXL.WPFClient.Views
             _viewModel.DoJoin(server);
         }
 
-        private void TextBlockMouseUp(object sender, MouseButtonEventArgs e)
+        private void StackPanelMouseUp(object sender, MouseButtonEventArgs e)
         {
-            _viewModel.SortServers(((TextBlock)sender).Text);
+            _viewModel.SortServers(((StackPanel)sender).Tag.ToString());
         }
     }
 }
