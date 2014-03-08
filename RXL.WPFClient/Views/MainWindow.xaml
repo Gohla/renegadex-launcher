@@ -246,28 +246,32 @@
                             Orientation="Vertical"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
-                            Height="80"
+                            Height="70"
                             Width="320"
                             Background="{StaticResource ListBackgroundBrush}">
                     <StackPanel Orientation="Horizontal"
-                                Margin="30,10,0,0"
+                                Margin="30,5,0,0"
                                 VerticalAlignment="Center">
                         <TextBlock Text="{Binding SelectedServer.Players}"
+                                   FontSize="18"
                                    Foreground="{StaticResource ListTextColor}" />
                         <TextBlock Text="/"
+                                   FontSize="18"
                                    Margin="5,0"
                                    Foreground="{StaticResource ListTextColor}" />
                         <TextBlock Text="{Binding SelectedServer.MaxPlayers}"
+                                   FontSize="18"
                                    Foreground="{StaticResource ListTextColor}" />
                         <TextBlock Text="Players"
+                                   FontSize="18"
                                    Margin="5,0,0,0"
                                    Foreground="{StaticResource ListTextColor}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                                Margin="30,10,0,0"
+                                Margin="30,5,0,0"
                                 VerticalAlignment="Center">
-                        <TextBlock Text="Players"
-                                   Margin="5,0,0,0"
+                        <TextBlock Text="Field"
+                                   FontSize="14"
                                    Foreground="{StaticResource ListTextColor}" />
                     </StackPanel>
                 </StackPanel>
