@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToOnOffConverter.cs" />
     <Compile Include="Converters\SortButtonConverter.cs" />
     <Compile Include="Observables\ObservableBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />

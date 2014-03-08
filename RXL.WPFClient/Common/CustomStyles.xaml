@@ -88,13 +88,13 @@
         <Setter Property="TextWrapping"
                 Value="NoWrap" />
         <Setter Property="FontSize"
-                Value="20" />
+                Value="16" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
         <Setter Property="LineStackingStrategy"
                 Value="BlockLineHeight" />
         <Setter Property="LineHeight"
-                Value="25" />
+                Value="21" />
         <Setter Property="Foreground"
                 Value="{StaticResource InfoTextColor2}" />
     </Style>
@@ -108,11 +108,11 @@
         <Setter Property="TextWrapping"
                 Value="NoWrap" />
         <Setter Property="FontSize"
-                Value="20" />
+                Value="16" />
         <Setter Property="LineStackingStrategy"
                 Value="BlockLineHeight" />
         <Setter Property="LineHeight"
-                Value="25" />
+                Value="21" />
         <Setter Property="Foreground"
                 Value="{StaticResource InfoTextColor}" />
     </Style>

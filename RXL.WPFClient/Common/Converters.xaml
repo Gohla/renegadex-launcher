@@ -4,5 +4,6 @@
     
     <converters:MapImageConverter x:Key="MapImageConverter"/>
     <converters:SortButtonConverter x:Key="SortButtonConverter"/>
+    <converters:BoolToOnOffConverter x:Key="BoolToOnOffConverter"/>
     
 </ResourceDictionary>

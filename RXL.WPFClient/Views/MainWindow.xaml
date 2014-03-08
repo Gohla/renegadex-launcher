@@ -276,7 +276,7 @@
 
                             <TextBlock Grid.Row="0"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Password" />
+                                       Text="TimeLimit" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
@@ -288,7 +288,15 @@
 
                             <TextBlock Grid.Row="3"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="Bots" />
+
+                            <TextBlock Grid.Row="4"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="SteamRequired" />
+                            
+                            <TextBlock Grid.Row="5"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="Password" />
 
                         </Grid>
 
@@ -305,19 +313,27 @@
 
                             <TextBlock Grid.Row="0"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding RequiresPw}" />
+                                       Text="{Binding ServerSettings.TimeLimit}" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.SpawnCrates}" />
+                                       Text="{Binding ServerSettings.SpawnCrates, Converter={StaticResource BoolToOnOffConverter}}" />
 
                             <TextBlock Grid.Row="2"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.AutoBalance}" />
+                                       Text="{Binding ServerSettings.AutoBalance, Converter={StaticResource BoolToOnOffConverter}}" />
 
                             <TextBlock Grid.Row="3"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.SteamRequired}" />
+                                       Text="{Binding Bots}" />
+
+                            <TextBlock Grid.Row="4"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="{Binding ServerSettings.SteamRequired, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                            <TextBlock Grid.Row="5"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
 
                         </Grid>
                     </Grid>
