@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:RXL.WPFClient.Converters">
+    
     <converters:MapImageConverter x:Key="MapImageConverter"/>
+    <converters:SortButtonConverter x:Key="SortButtonConverter"/>
+    
 </ResourceDictionary>

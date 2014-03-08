@@ -4,23 +4,25 @@ using System.Collections.Generic;
 
 namespace RXL.WPFClient.Utils
 {
-    public class GenericComparer<T, S> : IComparer<T>, IComparer
+    public class BaseComparer
+    {
+        public bool Invert { get; set; }
+    }
+
+    public class GenericComparer<T, S> : BaseComparer, IComparer<T>, IComparer
         where T : class
     {
         private Func<T, S> _getMember;
-        private bool _invert;
-
-        public bool Invert { get { return _invert; } set { _invert = value; } }
 
         public GenericComparer(Func<T, S> getMember, bool invert = false)
         {
             _getMember = getMember;
-            _invert = invert;
+            Invert = invert;
         }
 
         public int Compare(T x, T y)
         {
-            return Comparer<S>.Default.Compare(_getMember(x), _getMember(y)) * (_invert ? -1 : 1);
+            return Comparer<S>.Default.Compare(_getMember(x), _getMember(y)) * (Invert ? -1 : 1);
         }
 
         public int Compare(Object x, Object y)

@@ -30,6 +30,8 @@ namespace RXL.WPFClient.ViewModels
         private uint _maxPlayers = 64;
         private uint _maxLatency = 600;
         private String _searchString = String.Empty;
+        private string _currentSort = "";
+        private bool _sortInverted = true;
 
         private readonly GenericComparer<ServerObservable, String> _serverNameComparer = new GenericComparer<ServerObservable, String>(s => s.Name);
         private readonly GenericComparer<ServerObservable, uint> _serverLatencyComparer = new GenericComparer<ServerObservable, uint>(s => s.Latency);
@@ -58,6 +60,26 @@ namespace RXL.WPFClient.ViewModels
         public uint MaxLatency { get { return _maxLatency; } set { _maxLatency = value; RefreshView(); } }
         public String SearchString { get { return _searchString; } set { _searchString = value; RefreshView(); } }
 
+        public bool SortInverted
+        {
+            get { return _sortInverted; }
+            set
+            {
+                _sortInverted = value;
+                RaisePropertyChanged(() => SortInverted);
+            }
+        }
+
+        public string CurrentSort
+        {
+            get { return _currentSort; }
+            set
+            {
+                _currentSort = value;
+                RaisePropertyChanged(() => CurrentSort);
+            }
+        }
+
         public RelayCommand Refresh { get; private set; }
         public RelayCommand PingAll { get; private set; }
         public RelayCommand PingSelected { get; private set; }
@@ -73,7 +95,10 @@ namespace RXL.WPFClient.ViewModels
             _serversView = new CollectionViewSource { Source = _servers }.View as ListCollectionView;
             _serversView.Filter = FilterServer;
             _serversView.CustomSort = _serverPlayersComparer;
-            foreach(String liveProperty in new[] { "Name", "Players", "Bots", "MaxPlayers", "RequiresPw", "Map", "Latency" })
+
+            CurrentSort = "Players";
+
+            foreach (String liveProperty in new[] { "Name", "Players", "Bots", "MaxPlayers", "RequiresPw", "Map", "Latency" })
             {
                 _serversView.LiveFilteringProperties.Add(liveProperty);
                 _serversView.LiveSortingProperties.Add(liveProperty);
@@ -101,19 +126,19 @@ namespace RXL.WPFClient.ViewModels
 
         private bool FilterServer(ServerObservable server)
         {
-            if(!_showEmpty && server.Players == 0)
+            if (!_showEmpty && server.Players == 0)
                 return false;
-            if(!_showFull && server.Players == server.MaxPlayers)
+            if (!_showFull && server.Players == server.MaxPlayers)
                 return false;
-            if(!_showPassworded && server.RequiresPw)
+            if (!_showPassworded && server.RequiresPw)
                 return false;
-            if(server.Players < _minPlayers)
+            if (server.Players < _minPlayers)
                 return false;
-            if(server.Players > _maxPlayers)
+            if (server.Players > _maxPlayers)
                 return false;
-            if(server.Latency != uint.MaxValue && server.Latency > _maxLatency)
+            if (server.Latency != uint.MaxValue && server.Latency > _maxLatency)
                 return false;
-            if(!_searchString.Equals(String.Empty) && !Regex.IsMatch(server.Name, Regex.Escape(_searchString), RegexOptions.IgnoreCase))
+            if (!_searchString.Equals(String.Empty) && !Regex.IsMatch(server.Name, Regex.Escape(_searchString), RegexOptions.IgnoreCase))
                 return false;
 
             return true;
@@ -129,11 +154,11 @@ namespace RXL.WPFClient.ViewModels
             IEnumerable<Server> newServers = await _serverList.Refresh();
 
             ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
-            foreach(Server serverData in newServers)
+            foreach (Server serverData in newServers)
             {
                 ServerObservable server = Mapper.Map<Server, ServerObservable>(serverData);
 
-                if(_servers.Contains(server.Key))
+                if (_servers.Contains(server.Key))
                 {
                     ServerObservable existingServer = _servers[serverData.Address];
                     Mapper.Map<ServerObservable, ServerObservable>(server, existingServer);
@@ -145,7 +170,7 @@ namespace RXL.WPFClient.ViewModels
                 removedServers.Remove(server);
             }
 
-            foreach(ServerObservable serverData in removedServers)
+            foreach (ServerObservable serverData in removedServers)
             {
                 _servers.Remove(serverData.Key);
             }
@@ -156,7 +181,7 @@ namespace RXL.WPFClient.ViewModels
         public async void DoPingAll()
         {
             IEnumerable<PingResult> results = await _serverList.Ping(_servers.Keys);
-            foreach(PingResult result in results)
+            foreach (PingResult result in results)
             {
                 HandlePingResult(result);
             }
@@ -176,13 +201,13 @@ namespace RXL.WPFClient.ViewModels
 
         private void HandlePingResult(PingResult result)
         {
-            if(result == null)
+            if (result == null)
                 return;
 
-            if(_servers.Contains(result.Address))
+            if (_servers.Contains(result.Address))
             {
                 ServerObservable server = _servers[result.Address];
-                if(result.Reply.Status == IPStatus.Success)
+                if (result.Reply.Status == IPStatus.Success)
                     server.Latency = (uint)result.Reply.RoundtripTime;
                 else
                     server.Latency = uint.MaxValue;
@@ -194,26 +219,38 @@ namespace RXL.WPFClient.ViewModels
             ProcessResults results = await _launcher.Launch(server.Address);
         }
 
-        public void SortServers(string filterName)
+        public void SortServers(string sortBy)
         {
-            switch (filterName)
+            if (_currentSort.Equals(sortBy))
             {
-                case "Server":
-                    {
-                        _serversView.CustomSort = _serverNameComparer;
-                    }
-                    break;
-                case "Players":
-                    {
-                        _serversView.CustomSort = _serverPlayersComparer;
-                    }
-                    break;
-                case "Latency":
-                    {
-                        _serversView.CustomSort = _serverLatencyComparer;
-                    }
-                    break;
+                ((BaseComparer)_serversView.CustomSort).Invert = SortInverted = !SortInverted;
             }
+            else
+            {
+                switch (sortBy)
+                {
+                    case "Server":
+                        {
+                            _serverNameComparer.Invert = SortInverted = false;
+                            _serversView.CustomSort = _serverNameComparer;
+                        }
+                        break;
+                    case "Players":
+                        {
+                            _serverPlayersComparer.Invert = SortInverted = true;
+                            _serversView.CustomSort = _serverPlayersComparer;
+                        }
+                        break;
+                    case "Latency":
+                        {
+                            _serverLatencyComparer.Invert = SortInverted = false;
+                            _serversView.CustomSort = _serverLatencyComparer;
+                        }
+                        break;
+                }
+                CurrentSort = sortBy;
+            }
+
             RefreshView();
         }
     }

@@ -98,7 +98,7 @@
                                                Foreground="{StaticResource InfoTextColor2}"
                                                BorderThickness="0"
                                                Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        
+
                         <Button Grid.Column="3"
                                 Background="Transparent"
                                 BorderThickness="0"
@@ -122,27 +122,81 @@
                             BorderBrush="Transparent">
                         <Grid Background="{StaticResource ListBackgroundBrush}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="630"
+                                <ColumnDefinition Width="610"
                                                   SharedSizeGroup="ServerNameColumn" />
-                                <ColumnDefinition Width="60"
+                                <ColumnDefinition Width="70"
                                                   SharedSizeGroup="PlayersColumn" />
-                                <ColumnDefinition Width="60"
+                                <ColumnDefinition Width="70"
                                                   SharedSizeGroup="LatencyColumn" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Text="Server"
-                                       Margin="10,0,0,0"
-                                       Foreground="{StaticResource ListHeaderTextColor}"
-                                       MouseUp="TextBlockMouseUp" />
-                            <TextBlock Grid.Column="1"
-                                       Text="Players"
-                                       Foreground="{StaticResource ListHeaderTextColor}"
-                                       MouseUp="TextBlockMouseUp" />
-                            <TextBlock Grid.Column="2"
-                                       Text="Latency"
-                                       Foreground="{StaticResource ListHeaderTextColor}"
-                                       MouseUp="TextBlockMouseUp" />
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal">
+                                <TextBlock Text="Server"
+                                           Margin="10,0,0,0"
+                                           Foreground="{StaticResource ListHeaderTextColor}"
+                                           MouseUp="TextBlockMouseUp" />
+                                
+                                <Image Margin="5,0,0,0"
+                                       Tag="Server"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="SortInverted" />
+                                            <Binding Path="CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+
+                                </Image>
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal">
+                                <TextBlock Text="Players"
+                                           Margin="0,0,0,0"
+                                           Foreground="{StaticResource ListHeaderTextColor}"
+                                           MouseUp="TextBlockMouseUp" />
+                                
+                                <Image Margin="5,0,0,0"
+                                       Tag="Players"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="SortInverted" />
+                                            <Binding Path="CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+
+                                </Image>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal">
+                                <TextBlock Text="Latency"
+                                           Margin="0,0,0,0"
+                                           Foreground="{StaticResource ListHeaderTextColor}"
+                                           MouseUp="TextBlockMouseUp" />
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Latency"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="SortInverted" />
+                                            <Binding Path="CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+
+                                </Image>
+                            </StackPanel>
                         </Grid>
                     </Border>
                     <!-- Data -->
