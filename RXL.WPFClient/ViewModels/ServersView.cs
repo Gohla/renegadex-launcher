@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace RXL.WPFClient.ViewModels
 {
-    public class ServersView : ObservableBase
+    public class ServersView : NotifyPropertyChangedBase
     {
         private readonly ListCollectionView _serversView;
 

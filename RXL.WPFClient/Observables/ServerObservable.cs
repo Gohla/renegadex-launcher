@@ -3,7 +3,7 @@ using System;
 
 namespace RXL.WPFClient.Observables
 {
-    public class ServerObservable : ObservableBase, IKeyedObject<String>
+    public class ServerObservable : NotifyPropertyChangedBase, IKeyedObject<String>
     {
         private String _name;
         private String _address;

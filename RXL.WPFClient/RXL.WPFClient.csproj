@@ -89,7 +89,7 @@
     <Compile Include="Converters\SelectedServerToVisibilityConverter.cs" />
     <Compile Include="Converters\ServerMapToMapNameConverter.cs" />
     <Compile Include="Converters\SortButtonConverter.cs" />
-    <Compile Include="Observables\ObservableBase.cs" />
+    <Compile Include="Utils\NotifyPropertyChangedBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />
     <Compile Include="Utils\GenericComparer.cs" />
     <Compile Include="Utils\RelayCommand.cs" />

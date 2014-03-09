@@ -2,7 +2,7 @@
 
 namespace RXL.WPFClient.Observables
 {
-    public class ServerSettingsObservable : ObservableBase
+    public class ServerSettingsObservable : NotifyPropertyChangedBase
     {
         private uint _maxPlayers;
         private uint _vehicleLimit;
