@@ -28,7 +28,7 @@ namespace RXL.WPFClient.ViewModels
         private uint _maxPlayers = 64;
         private uint _maxLatency = 600;
         private String _searchString = String.Empty;
-        private string _currentSort = "";
+        private String _currentSort = String.Empty;
         private bool _sortInverted = true;
 
         private readonly GenericComparer<ServerObservable, String> _serverNameComparer = new GenericComparer<ServerObservable, String>(s => s.Name);
@@ -220,7 +220,7 @@ namespace RXL.WPFClient.ViewModels
             }
         }
 
-        public void SortServers(string sortBy)
+        public void SortServers(String sortBy)
         {
             if (_currentSort.Equals(sortBy))
             {

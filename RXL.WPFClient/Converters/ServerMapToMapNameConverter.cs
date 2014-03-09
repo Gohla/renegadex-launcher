@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace RXL.WPFClient.Converters
@@ -16,31 +12,31 @@ namespace RXL.WPFClient.Converters
             {
                 case "cnc-field":
                     {
-                        return "CnC Field";
+                        return "C&C Field";
                     }
                 case "cnc-goldrush":
                     {
-                        return "CnC Goldrush";
+                        return "C&C Goldrush";
                     }
                 case "cnc-whiteout":
                     {
-                        return "CnC Whiteout";
+                        return "C&C Whiteout";
                     }
                 case "cnc-islands":
                     {
-                        return "CnC Islands";
+                        return "C&C Islands";
                     }
                 case "cnc-lakeside":
                     {
-                        return "CnC Lakeside";
+                        return "C&C Lakeside";
                     }
                 case "cnc-mesa_ii":
                     {
-                        return "CnC Mesa II";
+                        return "C&C Mesa II";
                     }
                 case "cnc-walls_flying":
                     {
-                        return "CnC Walls Flying";
+                        return "C&C Walls Flying";
                     }
             }
             return "";
