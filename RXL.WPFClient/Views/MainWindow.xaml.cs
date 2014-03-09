@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace RXL.WPFClient.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
         private readonly ServersViewModel _viewModel;
 
@@ -17,6 +17,14 @@ namespace RXL.WPFClient.Views
             _viewModel = new ServersViewModel();
             DataContext = _viewModel;
             InitializeComponent();
+
+            Unloaded += (s, ea) => Dispose();
+            Dispatcher.ShutdownStarted += (s, ea) => Dispose();
+        }
+
+        public void Dispose()
+        {
+            _viewModel.Dispose();
         }
 
         private void ServerBrowserOnSelectionChanged(Object sender, SelectionChangedEventArgs e)
@@ -57,5 +65,6 @@ namespace RXL.WPFClient.Views
                 FilterOptionsGrid.Visibility = Visibility.Visible;
             }
         }
+
     }
 }

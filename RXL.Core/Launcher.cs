@@ -10,12 +10,7 @@ namespace RXL.Core
 {
     public class Launcher
     {
-        public Task<ProcessResults> Launch(String address, String name = "Harvester", String password = "")
-        {
-            return Launch(InstalledPath(), address, name, password);
-        }
-
-        public Task<ProcessResults> Launch(String path, String address, String name = "Harvester", String password = "")
+        public Task<ProcessResults> Launch(String path, String address, String name, String password = "")
         {
             if(path == null)
                 throw new ArgumentNullException("path");

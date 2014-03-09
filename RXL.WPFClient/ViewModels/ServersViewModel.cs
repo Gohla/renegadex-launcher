@@ -10,15 +10,18 @@ using System.Threading;
 
 namespace RXL.WPFClient.ViewModels
 {
-    public class ServersViewModel : BaseViewModel
+    public class ServersViewModel : BaseViewModel, IDisposable
     {
         private readonly ServerList _serverList;
         private readonly Launcher _launcher;
+        private readonly JSONStorage _storage;
+        private Configuration _configuration;
 
         private readonly KeyedCollection<String, ServerObservable> _servers;
         private readonly ServersView _serversView;
         private ServerObservable _selectedServer;
 
+        public Configuration Configuration { get { return _configuration; } }
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
         public ServersView ServersView { get { return _serversView; } }
 
@@ -43,6 +46,11 @@ namespace RXL.WPFClient.ViewModels
         {
             _serverList = new ServerList();
             _launcher = new Launcher();
+            _storage = new JSONStorage();
+            if (_storage.Exists("config.json"))
+                _configuration = _storage.Read<Configuration>("config.json");
+            else
+                _configuration = new Configuration();
 
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
             _serversView = new ServersView(_servers);
@@ -58,6 +66,11 @@ namespace RXL.WPFClient.ViewModels
             Mapper.AssertConfigurationIsValid();
 
             DoRefresh();
+        }
+
+        public void Dispose()
+        {
+            _storage.Write(_configuration, "config.json");
         }
 
         public async void DoRefresh()
@@ -129,7 +142,14 @@ namespace RXL.WPFClient.ViewModels
         {
             if (server != null)
             {
-                await _launcher.Launch(server.Address);
+                String name = _configuration.Name;
+                if (name == null || name.Equals(String.Empty))
+                    name = "Harvester";
+                String installLocation = _configuration.InstallLocation;
+                if (installLocation == null || installLocation.Equals(String.Empty))
+                    installLocation = _launcher.InstalledPath();
+
+                await _launcher.Launch(installLocation, server.Address, name);
             }
         }
     }

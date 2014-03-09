@@ -49,6 +49,10 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RunProcessAsTask">
       <HintPath>..\packages\RunProcessAsTask.1.0.0\lib\RunProcessAsTask.dll</HintPath>
     </Reference>
@@ -89,6 +93,8 @@
     <Compile Include="Converters\SelectedServerToVisibilityConverter.cs" />
     <Compile Include="Converters\ServerMapToMapNameConverter.cs" />
     <Compile Include="Converters\SortButtonConverter.cs" />
+    <Compile Include="Observables\Configuration.cs" />
+    <Compile Include="Utils\JSONStorage.cs" />
     <Compile Include="Utils\NotifyPropertyChangedBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />
     <Compile Include="Utils\GenericComparer.cs" />
