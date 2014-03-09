@@ -21,16 +21,6 @@ namespace RXL.WPFClient.Observables
             RaisePropertyChanged(body.Member.Name);
         }
 
-        protected bool SetField<T>(ref T field, T value, Expression<Func<T>> selectorExpression)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-
-            field = value;
-            RaisePropertyChanged(selectorExpression);
-
-            return true;
-        }
-
         private void RaisePropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
@@ -38,22 +28,12 @@ namespace RXL.WPFClient.Observables
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        [Obsolete("Please use RaisePropertyChanged")]
-        protected virtual void OnPropertyChanged(String propertyName)
+        protected bool SetField<T>(ref T field, T value, Expression<Func<T>> selectorExpression)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        [Obsolete("Please use SetField<T>(ref T field, T value, Expression<Func<T>> selectorExpression)")]
-        protected bool SetField<T>(ref T field, T value, String propertyName)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
 
             field = value;
-            OnPropertyChanged(propertyName);
+            RaisePropertyChanged(selectorExpression);
 
             return true;
         }
