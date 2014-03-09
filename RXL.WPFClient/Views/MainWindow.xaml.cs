@@ -1,10 +1,10 @@
-﻿using System.Windows.Media.Imaging;
-using RXL.WPFClient.Observables;
+﻿using RXL.WPFClient.Observables;
 using RXL.WPFClient.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace RXL.WPFClient.Views
 {
@@ -41,7 +41,7 @@ namespace RXL.WPFClient.Views
 
         private void StackPanelMouseUp(object sender, MouseButtonEventArgs e)
         {
-            _viewModel.SortServers(((StackPanel)sender).Tag.ToString());
+            _viewModel.ServersView.SetServerSorting(((StackPanel)sender).Tag.ToString());
         }
 
         private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)

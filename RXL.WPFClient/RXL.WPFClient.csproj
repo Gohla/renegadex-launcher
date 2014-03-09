@@ -96,6 +96,7 @@
     <Compile Include="Observables\ServerObservable.cs" />
     <Compile Include="Observables\ServerSettingsObservable.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ServersView.cs" />
     <Compile Include="ViewModels\ServersViewModel.cs" />
     <Page Include="Common\Converters.xaml">
       <SubType>Designer</SubType>
