@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using RunProcessAsTask;
 using RXL.Core;
 using RXL.Util;
 using RXL.WPFClient.Observables;

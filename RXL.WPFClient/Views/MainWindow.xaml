@@ -344,7 +344,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="250" />
                     <RowDefinition Height="60" />
-                    <RowDefinition Height="250" />
+                    <RowDefinition Height="300" />
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0"
@@ -422,15 +422,15 @@
 
                             <TextBlock Grid.Row="0"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="TimeLimit" />
+                                       Text="Time limit" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="SpawnCrates" />
+                                       Text="Spawn crates" />
 
                             <TextBlock Grid.Row="2"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="AutoBalance" />
+                                       Text="Auto balance" />
 
                             <TextBlock Grid.Row="3"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
@@ -438,19 +438,19 @@
 
                             <TextBlock Grid.Row="4"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="SteamRequired" />
+                                       Text="Steam required" />
 
                             <TextBlock Grid.Row="5"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Password" />
+                                       Text="Password required" />
 
                             <TextBlock Grid.Row="6"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Mine Limit" />
+                                       Text="Mine limit" />
 
                             <TextBlock Grid.Row="7"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Vehicle Limit" />
+                                       Text="Vehicle limit" />
 
                         </Grid>
 
@@ -493,11 +493,11 @@
 
                             <TextBlock Grid.Row="6"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding MineLimit}" />
+                                       Text="{Binding ServerSettings.MineLimit}" />
 
                             <TextBlock Grid.Row="7"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding VehicleLimit}" />
+                                       Text="{Binding ServerSettings.VehicleLimit}" />
 
                         </Grid>
                     </Grid>
