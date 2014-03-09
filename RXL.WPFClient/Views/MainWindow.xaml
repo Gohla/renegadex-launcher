@@ -6,16 +6,15 @@
         Title="RenegadeX Launcher"
         Icon="/Assets/RenegadeX.ico"
         WindowStartupLocation="CenterScreen"
-        Height="945"
+        Height="760"
+        MinHeight="760"
         Width="1150"
-        MinHeight="945"
         MinWidth="1150"
-        MaxHeight="945"
         MaxWidth="1150">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg"
-                        Stretch="UniformToFill" />
+                        Stretch="None" AlignmentX="Left" AlignmentY="Top" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="90" />
@@ -314,7 +313,6 @@
                               BorderThickness="0"
                               Margin="0"
                               Padding="0"
-                              Height="760"
                               Background="Transparent"
                               SelectionMode="Single"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
