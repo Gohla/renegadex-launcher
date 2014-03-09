@@ -14,7 +14,9 @@
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg"
-                        Stretch="None" AlignmentX="Left" AlignmentY="Top" />
+                        Stretch="None"
+                        AlignmentX="Left"
+                        AlignmentY="Top" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="90" />
@@ -31,9 +33,9 @@
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="400" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="400" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0"
@@ -50,16 +52,36 @@
                                 VerticalAlignment="Center"
                                 Margin="0,0,10,0">
 
-                        <TextBlock Text="PlayerName"
-                                   Foreground="White" />
-
-                        <TextBlock Text="Config"
+                        <TextBlock Text="PlayerName: "
                                    Foreground="White"
-                                   Margin="10,0,0,0" />
+                                   VerticalAlignment="Center" />
 
-                        <TextBlock Text="HALP"
-                                   Foreground="White"
-                                   Margin="10,0,0,0" />
+                        <xctk:WatermarkTextBox Background="Transparent"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource InfoTextColor2}"
+                                               CaretBrush="{StaticResource DarkYellowColorBrush}"
+                                               BorderThickness="0"
+                                               Margin="5,0,0,0"
+                                               Width="100"
+                                               Text="">
+
+                            <xctk:WatermarkTextBox.Watermark>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Your player name"
+                                               Margin="4,0,0,0"
+                                               Foreground="{StaticResource WaterMarkTextColor}" />
+                                </StackPanel>
+                            </xctk:WatermarkTextBox.Watermark>
+
+                        </xctk:WatermarkTextBox>
+
+                        <Button BorderBrush="{StaticResource DarkYellowColorBrush}"
+                                Background="{StaticResource ListBackgroundBrush2}"
+                                Width="50"
+                                Margin="20,0,0,0">
+                            <TextBlock Text="Settings"
+                                       Foreground="{StaticResource DarkYellowColorBrush}" />
+                        </Button>
                     </StackPanel>
 
                 </Grid>
@@ -141,13 +163,13 @@
                                                    CaretBrush="{StaticResource DarkYellowColorBrush}"
                                                    BorderThickness="0"
                                                    Margin="10,0,10,0"
-                                                   Text="{Binding ServersView.SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                                                   Text="{Binding ServersView.SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <xctk:WatermarkTextBox.Watermark>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Enter Server Name"
                                                    Margin="4,0,0,0"
-                                                   Foreground="{StaticResource WaterMarkTextColor}"/>
+                                                   Foreground="{StaticResource WaterMarkTextColor}" />
                                     </StackPanel>
                                 </xctk:WatermarkTextBox.Watermark>
 
