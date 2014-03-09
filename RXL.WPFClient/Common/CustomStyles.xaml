@@ -24,7 +24,7 @@
     <SolidColorBrush x:Key="ListBackgroundBrush2"
                      Color="#BF02020F" />
 
-    <SolidColorBrush x:Key="ButtonColorBrush"
+    <SolidColorBrush x:Key="DarkYellowColorBrush"
                      Color="#FFD6BC14" />
 
 
@@ -136,7 +136,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="4"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="{StaticResource ButtonColorBrush}"
+                            BorderBrush="{StaticResource DarkYellowColorBrush}"
                             BorderThickness="1">
                         <ContentPresenter x:Name="MyContentPresenter"
                                           Content="{TemplateBinding Content}"
@@ -149,7 +149,7 @@
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter Property="Background"
-                                    Value="{StaticResource ButtonColorBrush}" />
+                                    Value="{StaticResource DarkYellowColorBrush}" />
                             <Setter Property="Foreground"
                                     Value="White" />
                         </Trigger>

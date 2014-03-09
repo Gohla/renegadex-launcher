@@ -1,4 +1,5 @@
-﻿using RXL.WPFClient.Observables;
+﻿using System.Windows.Media.Imaging;
+using RXL.WPFClient.Observables;
 using RXL.WPFClient.ViewModels;
 using System;
 using System.Windows;
@@ -41,6 +42,20 @@ namespace RXL.WPFClient.Views
         private void StackPanelMouseUp(object sender, MouseButtonEventArgs e)
         {
             _viewModel.SortServers(((StackPanel)sender).Tag.ToString());
+        }
+
+        private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (FilterOptionsGrid.Visibility == Visibility.Visible)
+            {
+                FilterOptionsImage.Source = new BitmapImage(new Uri("/Assets/MoreOptions.png", UriKind.Relative));
+                FilterOptionsGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                FilterOptionsImage.Source = new BitmapImage(new Uri("/Assets/LessOptions.png", UriKind.Relative));
+                FilterOptionsGrid.Visibility = Visibility.Visible;
+            }
         }
     }
 }
