@@ -12,6 +12,8 @@
                      Color="White" />
     <SolidColorBrush x:Key="ListTextColor2"
                      Color="#FFE7ECC7" />
+    <SolidColorBrush x:Key="WaterMarkTextColor"
+                     Color="#90E7ECC7" />
 
     <SolidColorBrush x:Key="InfoTextColor"
                      Color="White" />

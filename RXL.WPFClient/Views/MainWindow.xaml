@@ -135,14 +135,23 @@
                                    VerticalAlignment="Center" />
 
                             <xctk:WatermarkTextBox Grid.Column="3"
-                                                   Watermark="Server Name"
                                                    Background="Transparent"
                                                    VerticalAlignment="Center"
                                                    Foreground="{StaticResource InfoTextColor2}"
                                                    CaretBrush="{StaticResource DarkYellowColorBrush}"
                                                    BorderThickness="0"
                                                    Margin="10,0,10,0"
-                                                   Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                   Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+
+                                <xctk:WatermarkTextBox.Watermark>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Enter Server Name"
+                                                   Margin="4,0,0,0"
+                                                   Foreground="{StaticResource WaterMarkTextColor}"/>
+                                    </StackPanel>
+                                </xctk:WatermarkTextBox.Watermark>
+
+                            </xctk:WatermarkTextBox>
 
                             <Button Grid.Column="5"
                                     Background="Transparent"
