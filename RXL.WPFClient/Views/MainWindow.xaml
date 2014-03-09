@@ -77,7 +77,8 @@
                     <Button BorderBrush="{StaticResource DarkYellowColorBrush}"
                             Background="{StaticResource ListBackgroundBrush2}"
                             Width="150"
-                            Margin="5,0,0,0">
+                            Margin="5,0,0,0"
+                            Visibility="Hidden">
                         <TextBlock Text="Stats"
                                    FontSize="18"
                                    Foreground="{StaticResource DarkYellowColorBrush}" />
