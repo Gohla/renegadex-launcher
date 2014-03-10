@@ -40,14 +40,12 @@
     <ApplicationIcon>Assets\RenegadeX.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RXL.WPFClient.App</StartupObject>
+    <StartupObject>RXL.WPFClient.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    <Reference Include="AutoMapper, Version=2.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="BugSense-WPF">
       <HintPath>..\packages\BugSense.WPF.Official.3.6.4.0\lib\net45\BugSense-WPF.dll</HintPath>
@@ -108,6 +106,7 @@
     <Compile Include="Converters\ServerMapToMapNameConverter.cs" />
     <Compile Include="Converters\SortButtonConverter.cs" />
     <Compile Include="Observables\Configuration.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Utils\InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
     </Compile>
@@ -241,4 +240,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterResolveReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
+        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
 </Project>
