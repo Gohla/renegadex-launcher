@@ -14,14 +14,15 @@ namespace RXL.WPFClient
             App.Main();
         }
 
-        private static Assembly OnResolveAssembly(object sender, ResolveEventArgs args)
+        private static Assembly OnResolveAssembly(Object sender, ResolveEventArgs args)
         {
-            Console.WriteLine(args.Name);
+            // Redirect unresolved assemblies to assemblies stored inside the executable.
+            // From: http://www.digitallycreated.net/Blog/61/combining-multiple-assemblies-into-a-single-exe-for-a-wpf-application
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             AssemblyName assemblyName = new AssemblyName(args.Name);
 
-            string path = assemblyName.Name + ".dll";
+            String path = assemblyName.Name + ".dll";
             if (assemblyName.CultureInfo.Equals(CultureInfo.InvariantCulture) == false)
             {
                 path = String.Format(@"{0}\{1}", assemblyName.CultureInfo, path);
