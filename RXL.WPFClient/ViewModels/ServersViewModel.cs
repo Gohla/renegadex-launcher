@@ -14,6 +14,7 @@ namespace RXL.WPFClient.ViewModels
     {
         private readonly ServerList _serverList;
         private readonly Launcher _launcher;
+        private readonly PopupService _popupService;
         private readonly JSONStorage _storage;
         private Configuration _configuration;
 
@@ -46,6 +47,7 @@ namespace RXL.WPFClient.ViewModels
         {
             _serverList = new ServerList();
             _launcher = new Launcher();
+            _popupService = new PopupService();
             _storage = new JSONStorage();
             if (_storage.Exists("config.json"))
                 _configuration = _storage.Read<Configuration>("config.json");
@@ -144,13 +146,42 @@ namespace RXL.WPFClient.ViewModels
             {
                 String name = _configuration.Name;
                 if (name == null || name.Equals(String.Empty))
-                    name = "Harvester";
+                {
+                    await _popupService.ShowMessageBox("No player name",
+                        "Please fill in a player name in the top right corner of the application.");
+                    return;
+                }
+
                 String installLocation = _configuration.InstallLocation;
-                if (installLocation == null || installLocation.Equals(String.Empty))
-                    installLocation = _launcher.InstalledPath();
+                if (!IsValidInstallLocation(installLocation))
+                {
+                    installLocation = _launcher.InstallLocationFromRegistry();
+                }
+                if (!IsValidInstallLocation(installLocation))
+                {
+                    installLocation = _launcher.DefaultInstallLocation();
+                }
+                if (!IsValidInstallLocation(installLocation))
+                {
+                    await _popupService.ShowMessageBox("Could not determine RenegadeX's installation location",
+                        "Could not determine the RenegadeX's installation location, please locate the installation directory in the following popup.");
+                    installLocation = await _popupService.ShowFolderDialog("Choose RenegadeX installation location");
+                }
+                if (!IsValidInstallLocation(installLocation))
+                {
+                    await _popupService.ShowMessageBox("Invalid installation location", "The specified installation location is invalid.");
+                    installLocation = String.Empty;
+                    return;
+                }
 
                 await _launcher.Launch(installLocation, server.Address, name);
             }
+        }
+
+        private bool IsValidInstallLocation(String installLocation)
+        {
+            return installLocation != null && !installLocation.Equals(String.Empty) &&
+                _launcher.IsValidInstallLocation(installLocation);
         }
     }
 }

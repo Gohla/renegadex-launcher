@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="RunProcessAsTask">
       <HintPath>..\packages\RunProcessAsTask.1.0.0\lib\RunProcessAsTask.dll</HintPath>
     </Reference>
@@ -98,6 +101,7 @@
     <Compile Include="Utils\NotifyPropertyChangedBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />
     <Compile Include="Utils\GenericComparer.cs" />
+    <Compile Include="Utils\PopupService.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="Observables\ServerObservable.cs" />
     <Compile Include="Observables\ServerSettingsObservable.cs" />
