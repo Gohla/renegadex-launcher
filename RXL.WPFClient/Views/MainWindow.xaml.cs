@@ -15,6 +15,7 @@ namespace RXL.WPFClient.Views
         public MainWindow()
         {
             _viewModel = new ServersViewModel();
+
             DataContext = _viewModel;
             InitializeComponent();
 
