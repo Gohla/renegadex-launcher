@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace RXL.WPFClient.Utils
 {
@@ -10,6 +11,16 @@ namespace RXL.WPFClient.Utils
         public async Task ShowMessageBox(String caption, String message)
         {
             await Task.Run(() => MessageBox.Show(message));
+        }
+
+        public String ShowInputDialog(String caption, String request, String intialInput = "")
+        {
+            InputDialog dialog = new InputDialog(caption, request, intialInput);
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                return dialog.Input.Text;
+            else
+                return null;
         }
 
         public async Task<String> ShowFolderDialog(String caption)

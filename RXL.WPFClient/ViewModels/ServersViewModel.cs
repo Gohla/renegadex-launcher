@@ -174,7 +174,15 @@ namespace RXL.WPFClient.ViewModels
                     return;
                 }
 
-                await _launcher.Launch(installLocation, server.Address, name);
+                String password = String.Empty;
+                if (server.RequiresPw)
+                {
+                    password = _popupService.ShowInputDialog("Password required", "Please fill in the server's password.");
+                    if (password == null)
+                        return;
+                }
+
+                await _launcher.Launch(installLocation, server.Address, name, password);
             }
         }
 

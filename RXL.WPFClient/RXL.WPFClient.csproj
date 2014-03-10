@@ -97,6 +97,9 @@
     <Compile Include="Converters\ServerMapToMapNameConverter.cs" />
     <Compile Include="Converters\SortButtonConverter.cs" />
     <Compile Include="Observables\Configuration.cs" />
+    <Compile Include="Utils\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\JSONStorage.cs" />
     <Compile Include="Utils\NotifyPropertyChangedBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Common\CustomStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Utils\InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
