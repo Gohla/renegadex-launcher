@@ -177,7 +177,7 @@ namespace RXL.WPFClient.ViewModels
                 String password = String.Empty;
                 if (server.RequiresPw)
                 {
-                    password = _popupService.ShowInputDialog("Password required", "Please fill in the server's password.");
+                    password = _popupService.ShowInputDialog("Password required", "Please fill in the server's password.", true);
                     if (password == null)
                         return;
                 }

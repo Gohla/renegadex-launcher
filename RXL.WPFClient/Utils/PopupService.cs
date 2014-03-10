@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace RXL.WPFClient.Utils
 {
@@ -13,12 +12,17 @@ namespace RXL.WPFClient.Utils
             await Task.Run(() => MessageBox.Show(message));
         }
 
-        public String ShowInputDialog(String caption, String request, String intialInput = "")
+        public String ShowInputDialog(String caption, String request, bool password = false, String intialInput = "")
         {
-            InputDialog dialog = new InputDialog(caption, request, intialInput);
+            InputDialog dialog = new InputDialog(caption, request, password, intialInput);
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-                return dialog.Input.Text;
+            {
+                if (password)
+                    return dialog.PasswordInput.Password;
+                else
+                    return dialog.Input.Text;
+            }
             else
                 return null;
         }
