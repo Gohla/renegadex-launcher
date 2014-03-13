@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Threading;
+using System.Windows;
 
 namespace RXL.WPFClient.ViewModels
 {
@@ -77,31 +78,40 @@ namespace RXL.WPFClient.ViewModels
 
         public async void DoRefresh()
         {
-            IEnumerable<Server> newServers = await _serverList.Refresh();
-
-            ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
-            foreach (Server serverData in newServers)
+            Exception exception = null;
+            try
             {
-                ServerObservable server = Mapper.Map<Server, ServerObservable>(serverData);
+                IEnumerable<Server> newServers = await _serverList.Refresh();
 
-                if (_servers.Contains(server.Key))
+                ISet<ServerObservable> removedServers = new HashSet<ServerObservable>(_servers.Values);
+                foreach (Server serverData in newServers)
                 {
-                    ServerObservable existingServer = _servers[serverData.Address];
-                    Mapper.Map(server, existingServer);
+                    ServerObservable server = Mapper.Map<Server, ServerObservable>(serverData);
+
+                    if (_servers.Contains(server.Key))
+                    {
+                        ServerObservable existingServer = _servers[serverData.Address];
+                        Mapper.Map(server, existingServer);
+                    }
+                    else
+                    {
+                        _servers.Add(server);
+                    }
+                    removedServers.Remove(server);
                 }
-                else
+
+                foreach (ServerObservable serverData in removedServers)
                 {
-                    _servers.Add(server);
+                    _servers.Remove(serverData.Key);
                 }
-                removedServers.Remove(server);
-            }
 
-            foreach (ServerObservable serverData in removedServers)
-            {
-                _servers.Remove(serverData.Key);
+                DoPingAll();
             }
+            catch (Exception e) { exception = e; }
 
-            DoPingAll();
+            if (exception != null)
+                await _popupService.ShowMessageBox("Error refreshing server list",
+                    "Could not refresh the server list. " + exception.Message, MessageBoxImage.Error);
         }
 
         public async void DoPingAll()
@@ -148,7 +158,7 @@ namespace RXL.WPFClient.ViewModels
                 if (name == null || name.Equals(String.Empty))
                 {
                     await _popupService.ShowMessageBox("No player name",
-                        "Please fill in a player name in the top right corner of the application.");
+                        "Please fill in a player name in the top right corner of the application.", MessageBoxImage.Hand);
                     return;
                 }
 
@@ -163,13 +173,22 @@ namespace RXL.WPFClient.ViewModels
                 }
                 if (!IsValidInstallLocation(installLocation))
                 {
-                    await _popupService.ShowMessageBox("Could not determine RenegadeX's installation location",
-                        "Could not determine the RenegadeX's installation location, please locate the installation directory in the following popup.");
-                    installLocation = await _popupService.ShowFolderDialog("Choose RenegadeX installation location");
+                    MessageBoxResult result = await _popupService.ShowMessageBox(
+                        "Could not determine RenegadeX's installation location",
+                        "Could not determine the RenegadeX's installation location, please locate the installation directory in the following popup.", 
+                        MessageBoxImage.Question, MessageBoxButton.OKCancel);
+                    if (result == MessageBoxResult.OK)
+                        installLocation = await _popupService.ShowFolderDialog("Choose RenegadeX installation location");
+                    else
+                    {
+                        installLocation = String.Empty;
+                        return;
+                    }
                 }
                 if (!IsValidInstallLocation(installLocation))
                 {
-                    await _popupService.ShowMessageBox("Invalid installation location", "The specified installation location is invalid.");
+                    await _popupService.ShowMessageBox("Invalid installation location", 
+                        "The specified installation location is invalid.", MessageBoxImage.Error);
                     installLocation = String.Empty;
                     return;
                 }
@@ -182,7 +201,16 @@ namespace RXL.WPFClient.ViewModels
                         return;
                 }
 
-                await _launcher.Launch(installLocation, server.Address, name, password);
+                Exception exception = null;
+                try
+                {
+                    await _launcher.Launch(installLocation, server.Address, name, password);
+                }
+                catch (Exception e) { exception = e; }
+
+                if (exception != null)
+                    await _popupService.ShowMessageBox("Error launching game", "Could not launch the game. " + 
+                        exception.Message, MessageBoxImage.Error);
             }
         }
 

@@ -7,9 +7,10 @@ namespace RXL.WPFClient.Utils
 {
     public class PopupService
     {
-        public async Task ShowMessageBox(String caption, String message)
+        public async Task<MessageBoxResult> ShowMessageBox(String caption, String message, 
+            MessageBoxImage image = MessageBoxImage.None, MessageBoxButton buttons = MessageBoxButton.OK)
         {
-            await Task.Run(() => MessageBox.Show(message));
+            return await Task.Run(() => MessageBox.Show(message, caption, buttons, image));
         }
 
         public String ShowInputDialog(String caption, String request, bool password = false, String intialInput = "")
