@@ -1,5 +1,5 @@
-﻿using RXL.WPFClient.Observables;
-using RXL.WPFClient.Utils;
+﻿using RXL.Util;
+using RXL.WPFClient.Observables;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;

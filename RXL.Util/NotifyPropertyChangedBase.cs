@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace RXL.WPFClient.Observables
+namespace RXL.Util
 {
     public abstract class NotifyPropertyChangedBase : INotifyPropertyChanged
     {

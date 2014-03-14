@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Text;
 
-namespace RXL.WPFClient.Utils
+namespace RXL.Util
 {
     public class JSONStorage
     {

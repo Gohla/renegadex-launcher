@@ -88,10 +88,7 @@
     <Compile Include="Utils\InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\JSONStorage.cs" />
-    <Compile Include="Utils\NotifyPropertyChangedBase.cs" />
     <Compile Include="Converters\MapImageConverter.cs" />
-    <Compile Include="Utils\GenericComparer.cs" />
     <Compile Include="Utils\PopupService.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="Observables\ServerObservable.cs" />

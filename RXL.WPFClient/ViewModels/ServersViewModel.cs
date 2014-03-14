@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows;
+using System.Windows.Input;
 
 namespace RXL.WPFClient.ViewModels
 {
@@ -17,11 +18,17 @@ namespace RXL.WPFClient.ViewModels
         private readonly Launcher _launcher;
         private readonly PopupService _popupService;
         private readonly JSONStorage _storage;
-        private Configuration _configuration;
+        private readonly Configuration _configuration;
 
         private readonly KeyedCollection<String, ServerObservable> _servers;
         private readonly ServersView _serversView;
         private ServerObservable _selectedServer;
+
+        private readonly RelayCommand _refresh;
+        private readonly RelayCommand _pingAll;
+        private readonly RelayCommand _pingSelected;
+        private readonly RelayCommand _joinSelected;
+        private readonly RelayCommand _copyAddressSelected;
 
         public Configuration Configuration { get { return _configuration; } }
         public IObservableCollection<ServerObservable> Servers { get { return _servers; } }
@@ -32,20 +39,20 @@ namespace RXL.WPFClient.ViewModels
             get { return _selectedServer; }
             set
             {
-                _selectedServer = value;
-                RaisePropertyChanged(() => SelectedServer);
-                PingSelected.NotifyCanExecuteChanged(_selectedServer);
-                JoinSelected.NotifyCanExecuteChanged(_selectedServer);
-                CopyAddressSelected.NotifyCanExecuteChanged(_selectedServer);
+                if (SetField(ref _selectedServer, value, () => SelectedServer))
+                {
+                    _pingSelected.NotifyCanExecuteChanged(_selectedServer);
+                    _joinSelected.NotifyCanExecuteChanged(_selectedServer);
+                    _copyAddressSelected.NotifyCanExecuteChanged(_selectedServer);
+                }
             }
         }
 
-        public RelayCommand Refresh { get; private set; }
-        public RelayCommand PingAll { get; private set; }
-
-        public RelayCommand PingSelected { get; private set; }
-        public RelayCommand JoinSelected { get; private set; }
-        public RelayCommand CopyAddressSelected { get; private set; }
+        public ICommand Refresh { get { return _refresh; } }
+        public ICommand PingAll { get { return _pingAll; } }
+        public ICommand PingSelected { get { return _pingSelected; } }
+        public ICommand JoinSelected { get { return _joinSelected; } }
+        public ICommand CopyAddressSelected { get { return _copyAddressSelected; } }
 
         public ServersViewModel()
         {
@@ -61,12 +68,11 @@ namespace RXL.WPFClient.ViewModels
             _servers = new KeyedCollection<String, ServerObservable>(SynchronizationContext.Current);
             _serversView = new ServersView(_servers);
 
-            Refresh = new RelayCommand(_ => true, _ => DoRefresh());
-            PingAll = new RelayCommand(_ => true, _ => DoPingAll());
-
-            PingSelected = new RelayCommand(_ => _selectedServer != null, _ => DoPingOne(_selectedServer));
-            JoinSelected = new RelayCommand(_ => _selectedServer != null, _ => DoJoin(_selectedServer));
-            CopyAddressSelected = new RelayCommand(_ => _selectedServer != null, _ => CopyAddress(_selectedServer));
+            _refresh = new RelayCommand(_ => true, _ => DoRefresh());
+            _pingAll = new RelayCommand(_ => true, _ => DoPingAll());
+            _pingSelected = new RelayCommand(_ => _selectedServer != null, _ => DoPingOne(_selectedServer));
+            _joinSelected = new RelayCommand(_ => _selectedServer != null, _ => DoJoin(_selectedServer));
+            _copyAddressSelected = new RelayCommand(_ => _selectedServer != null, _ => CopyAddress(_selectedServer));
 
             Mapper.CreateMap<Server, ServerObservable>();
             Mapper.CreateMap<ServerSettings, ServerSettingsObservable>();
@@ -180,7 +186,7 @@ namespace RXL.WPFClient.ViewModels
                 {
                     MessageBoxResult result = await _popupService.ShowMessageBox(
                         "Could not determine RenegadeX's installation location",
-                        "Could not determine the RenegadeX's installation location, please locate the installation directory in the following popup.", 
+                        "Could not determine the RenegadeX's installation location, please locate the installation directory in the following popup.",
                         MessageBoxImage.Question, MessageBoxButton.OKCancel);
                     if (result == MessageBoxResult.OK)
                         installLocation = await _popupService.ShowFolderDialog("Choose RenegadeX installation location");
@@ -192,7 +198,7 @@ namespace RXL.WPFClient.ViewModels
                 }
                 if (!IsValidInstallLocation(installLocation))
                 {
-                    await _popupService.ShowMessageBox("Invalid installation location", 
+                    await _popupService.ShowMessageBox("Invalid installation location",
                         "The specified installation location is invalid.", MessageBoxImage.Error);
                     installLocation = String.Empty;
                     return;
@@ -214,7 +220,7 @@ namespace RXL.WPFClient.ViewModels
                 catch (Exception e) { exception = e; }
 
                 if (exception != null)
-                    await _popupService.ShowMessageBox("Error launching game", "Could not launch the game. " + 
+                    await _popupService.ShowMessageBox("Error launching game", "Could not launch the game. " +
                         exception.Message, MessageBoxImage.Error);
             }
         }

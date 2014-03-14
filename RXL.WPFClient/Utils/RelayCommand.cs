@@ -28,7 +28,7 @@ namespace RXL.WPFClient.Utils
 
         public void NotifyCanExecuteChanged(Object parameter)
         {
-            if(CanExecuteChanged != null)
+            if (CanExecuteChanged != null)
                 CanExecuteChanged.Invoke(parameter, new EventArgs());
         }
     }

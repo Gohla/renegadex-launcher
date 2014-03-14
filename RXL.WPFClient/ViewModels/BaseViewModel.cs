@@ -1,4 +1,4 @@
-﻿using RXL.WPFClient.Observables;
+﻿using RXL.Util;
 
 namespace RXL.WPFClient.ViewModels
 {

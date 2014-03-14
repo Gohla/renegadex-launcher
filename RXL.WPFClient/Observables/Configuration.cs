@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RXL.Util;
+using System;
 
 namespace RXL.WPFClient.Observables
 {
