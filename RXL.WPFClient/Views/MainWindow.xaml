@@ -356,6 +356,13 @@
                                         Value="0" />
                             </Style>
                         </ListView.Resources>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Ping" Command="{Binding PingSelected}" CommandParameter="{Binding SelectedServer}"/>
+                                <MenuItem Header="Join" Command="{Binding JoinSelected}" CommandParameter="{Binding SelectedServer}"/>
+                                <MenuItem Header="Copy address" Command="{Binding CopyAddressSelected}" CommandParameter="{Binding SelectedServer}"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </Grid>

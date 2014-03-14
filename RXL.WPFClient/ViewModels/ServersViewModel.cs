@@ -36,13 +36,16 @@ namespace RXL.WPFClient.ViewModels
                 RaisePropertyChanged(() => SelectedServer);
                 PingSelected.NotifyCanExecuteChanged(_selectedServer);
                 JoinSelected.NotifyCanExecuteChanged(_selectedServer);
+                CopyAddressSelected.NotifyCanExecuteChanged(_selectedServer);
             }
         }
 
         public RelayCommand Refresh { get; private set; }
         public RelayCommand PingAll { get; private set; }
+
         public RelayCommand PingSelected { get; private set; }
         public RelayCommand JoinSelected { get; private set; }
+        public RelayCommand CopyAddressSelected { get; private set; }
 
         public ServersViewModel()
         {
@@ -60,8 +63,10 @@ namespace RXL.WPFClient.ViewModels
 
             Refresh = new RelayCommand(_ => true, _ => DoRefresh());
             PingAll = new RelayCommand(_ => true, _ => DoPingAll());
+
             PingSelected = new RelayCommand(_ => _selectedServer != null, _ => DoPingOne(_selectedServer));
             JoinSelected = new RelayCommand(_ => _selectedServer != null, _ => DoJoin(_selectedServer));
+            CopyAddressSelected = new RelayCommand(_ => _selectedServer != null, _ => CopyAddress(_selectedServer));
 
             Mapper.CreateMap<Server, ServerObservable>();
             Mapper.CreateMap<ServerSettings, ServerSettingsObservable>();
@@ -218,6 +223,11 @@ namespace RXL.WPFClient.ViewModels
         {
             return installLocation != null && !installLocation.Equals(String.Empty) &&
                 _launcher.IsValidInstallLocation(installLocation);
+        }
+
+        public void CopyAddress(ServerObservable server)
+        {
+            Clipboard.SetText(server.Address);
         }
     }
 }
