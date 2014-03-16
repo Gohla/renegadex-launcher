@@ -250,7 +250,8 @@
                             BorderBrush="Transparent">
                         <Grid Background="{StaticResource ListBackgroundBrush}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="634" Name="ScalableColumnDefinition"
+                                <ColumnDefinition Width="634"
+                                                  Name="ScalableColumnDefinition"
                                                   SharedSizeGroup="ServerNameColumn" />
                                 <ColumnDefinition Width="70"
                                                   SharedSizeGroup="PlayersColumn" />
@@ -338,7 +339,7 @@
                               BorderThickness="0"
                               Margin="0,0,0,10"
                               Padding="0"
-                              Background="Transparent" 
+                              Background="Transparent"
                               SelectionMode="Single"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -347,10 +348,6 @@
                               MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
                               SelectionChanged="ServerBrowserOnSelectionChanged">
                         <ListView.Resources>
-                            <Style TargetType="Thumb">
-                                <Setter Property="Foreground"
-                                        Value="Yellow" />
-                            </Style>
                             <Style TargetType="ScrollBar">
                                 <Setter Property="Background"
                                         Value="Transparent" />
