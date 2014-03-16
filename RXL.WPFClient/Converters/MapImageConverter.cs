@@ -27,7 +27,7 @@ namespace RXL.WPFClient.Converters
         {
             BitmapImage image = new BitmapImage();
             image.BeginInit();
-            image.UriSource = new Uri("pack://application:,,,/RXL.WPFClient;component/Assets/Maps/" + imageName);
+            image.UriSource = new Uri("pack://application:,,,/RXL;component/Assets/Maps/" + imageName);
             image.CacheOption = BitmapCacheOption.OnLoad;
             image.EndInit();
             _images.Add(mapName, image);

@@ -9,11 +9,10 @@
         Height="760"
         MinHeight="760"
         Width="1150"
-        MinWidth="1150"
-        MaxWidth="1150">
+        MinWidth="1150">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/RXL.WPFClient;component/Assets/bg.jpg"
+            <ImageBrush ImageSource="/RXL;component/Assets/bg.jpg"
                         Stretch="None"
                         AlignmentX="Left"
                         AlignmentY="Top" />
