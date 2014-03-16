@@ -14,7 +14,7 @@
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL;component/Assets/bg.jpg"
-                        Stretch="None"
+                        Stretch="UniformToFill"
                         AlignmentX="Left"
                         AlignmentY="Top" />
         </Grid.Background>
