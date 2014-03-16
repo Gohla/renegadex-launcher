@@ -23,7 +23,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="0,0,0,1"
+        <Border Grid.Row="0"
+                BorderThickness="0,0,0,1"
                 BorderBrush="{StaticResource DarkYellowColorBrush}">
             <Grid Margin="10,0,10,0">
                 <Grid.RowDefinitions>
@@ -538,5 +539,29 @@
                 </StackPanel>
             </Grid>
         </Grid>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Background="#80000000"
+                Visibility="Collapsed"
+                Grid.RowSpan="2">
+            <Grid HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Width="400"
+                  Height="400">
+
+                <TextBlock Margin="0"
+                           TextWrapping="Wrap"
+                           Text="Not yet implemented ;)"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#7EFFFFFF" />
+
+            </Grid>
+        </Border>
+
     </Grid>
 </Window>
