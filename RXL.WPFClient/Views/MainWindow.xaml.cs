@@ -67,5 +67,12 @@ namespace RXL.WPFClient.Views
             }
         }
 
+        private const double DefaultWindowsSize = 1150;
+        private const double DefaultScalableColumnWidth = 634.0;
+
+        private void MainWindowOnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ScalableColumnDefinition.Width = new GridLength(DefaultScalableColumnWidth + (e.NewSize.Width - DefaultWindowsSize));
+        }
     }
 }

@@ -9,7 +9,8 @@
         Height="760"
         MinHeight="760"
         Width="1150"
-        MinWidth="1150">
+        MinWidth="1150"
+        SizeChanged="MainWindowOnSizeChanged">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL;component/Assets/bg.jpg"
@@ -249,7 +250,7 @@
                             BorderBrush="Transparent">
                         <Grid Background="{StaticResource ListBackgroundBrush}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="634"
+                                <ColumnDefinition Width="634" Name="ScalableColumnDefinition"
                                                   SharedSizeGroup="ServerNameColumn" />
                                 <ColumnDefinition Width="70"
                                                   SharedSizeGroup="PlayersColumn" />
