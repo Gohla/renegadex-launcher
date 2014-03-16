@@ -377,7 +377,7 @@
 
             <Grid Grid.Column="1"
                   Margin="20,0,0,0"
-                  Width="320">
+                  Width="300">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="250" />
                     <RowDefinition Height="60" />
