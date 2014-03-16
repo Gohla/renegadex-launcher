@@ -176,7 +176,6 @@
                 <ColumnDefinition SharedSizeGroup="ServerNameColumn" />
                 <ColumnDefinition SharedSizeGroup="PlayersColumn" />
                 <ColumnDefinition SharedSizeGroup="LatencyColumn" />
-                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0"
                     BorderThickness="1,0,1,1"

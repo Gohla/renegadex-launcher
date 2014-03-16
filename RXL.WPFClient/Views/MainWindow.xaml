@@ -53,7 +53,7 @@
 
                         <TextBlock Text="Player name: "
                                    Foreground="White"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
 
                         <xctk:WatermarkTextBox Background="Transparent"
                                                VerticalAlignment="Center"
@@ -108,11 +108,15 @@
             </Grid>
         </Border>
 
-        <StackPanel Grid.Row="1"
-                    Margin="10,10,10,0"
-                    Orientation="Horizontal">
 
-            <Grid>
+        <Grid Grid.Row="1"
+              Margin="10,10,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="320" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -135,7 +139,7 @@
                                 <ColumnDefinition Width="15" />
                                 <ColumnDefinition Width="500" />
                                 <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0"
                                    Source="/Assets/Search.png"
@@ -234,7 +238,6 @@
 
                 <Grid Grid.Row="1"
                       Grid.IsSharedSizeScope="True"
-                      Width="770"
                       HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20" />
@@ -246,13 +249,12 @@
                             BorderBrush="Transparent">
                         <Grid Background="{StaticResource ListBackgroundBrush}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="610"
+                                <ColumnDefinition Width="634"
                                                   SharedSizeGroup="ServerNameColumn" />
                                 <ColumnDefinition Width="70"
                                                   SharedSizeGroup="PlayersColumn" />
                                 <ColumnDefinition Width="70"
                                                   SharedSizeGroup="LatencyColumn" />
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0"
                                         Orientation="Horizontal"
@@ -335,7 +337,7 @@
                               BorderThickness="0"
                               Margin="0,0,0,10"
                               Padding="0"
-                              Background="Transparent"
+                              Background="Transparent" 
                               SelectionMode="Single"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -357,16 +359,23 @@
                         </ListView.Resources>
                         <ListView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Ping" Command="{Binding PingSelected}" CommandParameter="{Binding SelectedServer}"/>
-                                <MenuItem Header="Join" Command="{Binding JoinSelected}" CommandParameter="{Binding SelectedServer}"/>
-                                <MenuItem Header="Copy address" Command="{Binding CopyAddressSelected}" CommandParameter="{Binding SelectedServer}"/>
+                                <MenuItem Header="Ping"
+                                          Command="{Binding PingSelected}"
+                                          CommandParameter="{Binding SelectedServer}" />
+                                <MenuItem Header="Join"
+                                          Command="{Binding JoinSelected}"
+                                          CommandParameter="{Binding SelectedServer}" />
+                                <MenuItem Header="Copy address"
+                                          Command="{Binding CopyAddressSelected}"
+                                          CommandParameter="{Binding SelectedServer}" />
                             </ContextMenu>
                         </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </Grid>
 
-            <Grid Margin="20,0,0,0"
+            <Grid Grid.Column="1"
+                  Margin="20,0,0,0"
                   Width="320">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="250" />
@@ -530,6 +539,6 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>
