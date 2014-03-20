@@ -1,6 +1,6 @@
 $launcherExe = "../RXL.WPFClient/bin/Release/RXL.exe"
-$versionObj = [System.Reflection.Assembly]::LoadFrom($launcherExe).GetName().Version
-$version = $versionObj.Major.ToString() + "." + $versionObj.Minor.ToString() + "." + $versionObj.Build.ToString()
+$version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($launcherExe).FileVersion
+$version = $version.Remove($version.LastIndexOf('.'))
 
 "Building installer, setting version to " + $version + "."
 
