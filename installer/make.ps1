@@ -1,17 +1,19 @@
  param (
-    [string]$build
+    [int]$build
  )
 
 $launcherExe = "../RXL.WPFClient/bin/Release/RXL.exe"
 $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($launcherExe).FileVersion
-$version = $version.Remove($version.LastIndexOf('.'));
-$version = $version.Remove($version.LastIndexOf('.'));
-
+$versionMatch = ([regex]"(\d)\.(\d)\.(\d)\.\d").Match($version)
+$major = [int]$versionMatch.Groups[1].Value
+$minor = [int]$versionMatch.Groups[2].Value
+$patch = [int]$versionMatch.Groups[3].Value
 if($build) {
-  $version = $version + "." + $build	
+  $patch = 1000 + $patch + $build
 }
+$version = $major.ToString() + "." + $minor.ToString() + "." + $patch.ToString()
 
-"Building installer, setting version to " + $version + "."
+"Building installer, setting version to " + $version
 
 Remove-Item -Force -Recurse "AnyCPU_ReleaseSetupFiles" -ea SilentlyContinue
 Remove-Item -Force -Recurse "out" -ea SilentlyContinue
