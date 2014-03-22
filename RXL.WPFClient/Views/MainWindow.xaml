@@ -42,9 +42,65 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="1"
-                       Source="/RXL;component/Assets/RenegadeXLogo.png"
-                       VerticalAlignment="Top" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="70" />
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Column="0"
+                           Source="/RXL;component/Assets/RenegadeXLogo.png"
+                           VerticalAlignment="Top" />
+
+                    <Grid Grid.Row="1"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="Search for servers"
+                                   Foreground="#b0cfd7"
+                                   FontSize="16"
+                                   VerticalAlignment="Center" />
+
+                        <Image Grid.Column="1"
+                               Source="/RXL;component/Assets/SearchServerOverlay.png" />
+                        
+                        <xctk:WatermarkTextBox Grid.Column="1"
+                                               Background="Transparent"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource InfoTextColor2}"
+                                               CaretBrush="{StaticResource DarkYellowColorBrush}"
+                                               BorderThickness="0"
+                                               Margin="10,0,10,0"
+                                               Text="{Binding ServersView.SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                            <xctk:WatermarkTextBox.Watermark>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Enter Server Name"
+                                               Margin="4,0,0,0"
+                                               FontStyle="Italic"
+                                               Foreground="#b0cfd7" />
+                                </StackPanel>
+                            </xctk:WatermarkTextBox.Watermark>
+
+                        </xctk:WatermarkTextBox>
+
+                        <Button Grid.Column="2"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Height="40"
+                                Command="{Binding Refresh}">
+                            <Image Source="/RXL;component/Assets/SearchButton.png"
+                                   Stretch="Uniform" />
+                        </Button>
+
+                    </Grid>
+                </Grid>
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
@@ -287,7 +343,7 @@
                                            VerticalAlignment="Bottom"
                                            Margin="0,0,40,0"
                                            Source="/RXL;component/Assets/Blocks.png"
-                                           Stretch="None"/>
+                                           Stretch="None" />
 
                                 </Grid>
                             </Grid>

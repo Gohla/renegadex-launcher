@@ -212,6 +212,12 @@
   <ItemGroup>
     <Resource Include="Assets\Blocks.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchServerOverlay.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
