@@ -26,7 +26,7 @@
                 <ImageBrush ImageSource="/RXL;component/Assets/BackgroundOverlay.png"
                             Stretch="Uniform"
                             AlignmentX="Left"
-                            AlignmentY="Top"/>
+                            AlignmentY="Top" />
             </Grid.Background>
 
             <Grid.RowDefinitions>
@@ -43,8 +43,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="1"
-                       Source="/RXL;component/Assets/RenegadeXLogo.png" 
-                       VerticalAlignment="Top"/>
+                       Source="/RXL;component/Assets/RenegadeXLogo.png"
+                       VerticalAlignment="Top" />
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
@@ -104,13 +104,13 @@
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="924"/>
-                    <ColumnDefinition Width="494"/>
+                    <ColumnDefinition Width="924" />
+                    <ColumnDefinition Width="494" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Grid.Column="0">
                     <Grid.Background>
-                        <ImageBrush ImageSource="/RXL;component/Assets/ServerListOverlay.png"/>
+                        <ImageBrush ImageSource="/RXL;component/Assets/ServerListOverlay.png" />
                     </Grid.Background>
                 </Grid>
 
@@ -119,6 +119,207 @@
                     <Grid.Background>
                         <ImageBrush ImageSource="/RXL;component/Assets/ServerDetailsOverlay.png" />
                     </Grid.Background>
+
+                    <Grid Margin="50,50,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="250" />
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <!--Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"-->
+
+                        <Image Grid.Row="0"
+                               Source="/Assets/Maps/cnc-field.png"
+                               HorizontalAlignment="Left"
+                               Width="350"
+                               Stretch="UniformToFill" />
+
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Height="70"
+                                    Width="350"
+                                    Background="{StaticResource ListBackgroundBrush}"
+                                    Visibility="{Binding SelectedServer, Converter={StaticResource SelectedServerToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="30,5,0,0"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SelectedServer.Players}"
+                                           FontSize="18"
+                                           Foreground="{StaticResource ListTextColor}" />
+                                <TextBlock Text="/"
+                                           FontSize="18"
+                                           Margin="5,0"
+                                           Foreground="{StaticResource ListTextColor}" />
+                                <TextBlock Text="{Binding SelectedServer.MaxPlayers}"
+                                           FontSize="18"
+                                           Foreground="{StaticResource ListTextColor}" />
+                                <TextBlock Text="Players"
+                                           FontSize="18"
+                                           Margin="5,0,0,0"
+                                           Foreground="{StaticResource ListTextColor}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="30,5,0,0"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SelectedServer.Map, Converter={StaticResource ServerMapToMapNameConverter}}"
+                                           FontSize="14"
+                                           Foreground="{StaticResource ListTextColor}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"
+                                    Margin="0,10,0,0"
+                                    DataContext="{Binding SelectedServer}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0"
+                                      Margin="5,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Server version" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Time limit" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Spawn crates" />
+
+                                    <TextBlock Grid.Row="3"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Auto balance" />
+
+                                    <TextBlock Grid.Row="4"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Bots" />
+
+                                    <TextBlock Grid.Row="5"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Steam required" />
+
+                                    <TextBlock Grid.Row="6"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Password required" />
+
+                                    <TextBlock Grid.Row="7"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Mine limit" />
+
+                                    <TextBlock Grid.Row="8"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Vehicle limit" />
+
+                                </Grid>
+
+                                <Grid Grid.Column="1"
+                                      Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.Version}" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.TimeLimit}" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.SpawnCrates, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="3"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.AutoBalance, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="4"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding Bots}" />
+
+                                    <TextBlock Grid.Row="5"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.SteamRequired, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="6"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="7"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.MineLimit}" />
+
+                                    <TextBlock Grid.Row="8"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.VehicleLimit}" />
+
+                                    <Image Grid.Row="7"
+                                           Grid.RowSpan="2"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,0,40,0"
+                                           Source="/RXL;component/Assets/Blocks.png"
+                                           Stretch="None"/>
+
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2"
+                                    Margin="0,25,0,0"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="|"
+                                       Margin="5,0"
+                                       Foreground="#ffffff"
+                                       FontSize="25"
+                                       VerticalAlignment="Center" />
+
+                            <Button BorderBrush="Transparent"
+                                    Background="Transparent"
+                                    Foreground="Transparent"
+                                    Command="{Binding JoinSelected}">
+                                <Image Source="/RXL;component/Assets/JoinButton.png"
+                                       Height="40" />
+                            </Button>
+
+                            <TextBlock Text="|"
+                                       Margin="5,0"
+                                       Foreground="#ffffff"
+                                       FontSize="25"
+                                       VerticalAlignment="Center" />
+
+                        </StackPanel>
+                    </Grid>
                 </Grid>
 
             </Grid>
