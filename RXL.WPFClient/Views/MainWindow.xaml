@@ -13,26 +13,29 @@
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RXL;component/Assets/Background.png"
-                        Stretch="UniformToFill"
                         AlignmentX="Left"
                         AlignmentY="Top" />
         </Grid.Background>
 
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Top"
-              Width="1385"
+              Margin="0,20,0,0"
+              Width="1435"
               Height="865">
             <Grid.Background>
                 <ImageBrush ImageSource="/RXL;component/Assets/BackgroundOverlay.png"
-                            Stretch="UniformToFill" />
+                            Stretch="Uniform"
+                            AlignmentX="Left"
+                            AlignmentY="Top"/>
             </Grid.Background>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="215" />
+                <RowDefinition Height="195" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid Margin="0,30,0,0">
+            <Grid Margin="0,10,0,0"
+                  Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="500" />
@@ -99,6 +102,26 @@
                 </StackPanel>
             </Grid>
 
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="924"/>
+                    <ColumnDefinition Width="494"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/RXL;component/Assets/ServerListOverlay.png"/>
+                    </Grid.Background>
+                </Grid>
+
+                <Grid Grid.Column="1"
+                      Margin="20,0,0,0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/RXL;component/Assets/ServerDetailsOverlay.png" />
+                    </Grid.Background>
+                </Grid>
+
+            </Grid>
 
         </Grid>
 
