@@ -221,7 +221,7 @@
 
                             <StackPanel Grid.Column="0"
                                         Orientation="Horizontal"
-                                        Margin="20,5,0,5" >
+                                        Margin="20,5,0,5">
                                 <CheckBox IsChecked="{Binding ServersView.ShowEmpty}">
                                     <TextBlock Text="Show empty servers"
                                                Margin="5,-2,0,0"
@@ -280,10 +280,9 @@
                             <RowDefinition Height="300" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <!--Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"-->
 
                         <Image Grid.Row="0"
-                               Source="/Assets/Maps/cnc-field.png"
+                               Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"
                                HorizontalAlignment="Left"
                                Width="350"
                                Stretch="UniformToFill" />
