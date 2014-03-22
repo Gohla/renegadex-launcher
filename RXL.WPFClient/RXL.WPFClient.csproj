@@ -179,10 +179,6 @@
     <Resource Include="Assets\Maps\cnc-walls.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Search.png" />
-    <Resource Include="Assets\Refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\ArrowDown.png" />
     <Resource Include="Assets\ArrowUp.png" />
   </ItemGroup>
@@ -220,6 +216,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\MultiplayerButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchSettingsOverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\RefreshButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -38,14 +38,14 @@
                   Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="500" />
+                    <ColumnDefinition Width="550" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="70" />
+                        <RowDefinition Height="60" />
                     </Grid.RowDefinitions>
 
                     <Image Grid.Column="0"
@@ -58,7 +58,7 @@
                             <ColumnDefinition Width="140" />
                             <ColumnDefinition Width="190" />
                             <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="70" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0"
@@ -69,7 +69,7 @@
 
                         <Image Grid.Column="1"
                                Source="/RXL;component/Assets/SearchServerOverlay.png" />
-                        
+
                         <xctk:WatermarkTextBox Grid.Column="1"
                                                Background="Transparent"
                                                VerticalAlignment="Center"
@@ -168,19 +168,19 @@
                     <Grid.Background>
                         <ImageBrush ImageSource="/RXL;component/Assets/ServerListOverlay.png" />
                     </Grid.Background>
-                    
+
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="230"/>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="230" />
+                            <ColumnDefinition Width="0" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <StackPanel Grid.Column="0"
                                     Orientation="Horizontal"
                                     VerticalAlignment="Top">
@@ -193,7 +193,7 @@
                                        VerticalAlignment="Top" />
 
                             <Image Source="/RXL;component/Assets/MultiplayerButton.png"
-                                   Stretch="None"/>
+                                   Stretch="None" />
 
                             <TextBlock Text="|"
                                        Margin="2,0"
@@ -202,10 +202,70 @@
                                        FontWeight="Bold"
                                        VerticalAlignment="Top" />
                         </StackPanel>
-                        
-                        
+
+                        <Image Grid.Column="2"
+                               VerticalAlignment="Bottom"
+                               Source="/RXL;component/Assets/SearchSettingsOverlay.png"
+                               Stretch="None" />
+
+                        <Grid Name="FilterOptionsGrid"
+                              Grid.Column="2"
+                              Margin="40,10,0,0"
+                              VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="210" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        Margin="20,5,0,5" >
+                                <CheckBox IsChecked="{Binding ServersView.ShowEmpty}">
+                                    <TextBlock Text="Show empty servers"
+                                               Margin="5,-2,0,0"
+                                               FontSize="14"
+                                               Foreground="#b0cfd7" />
+                                </CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        Margin="20,5,0,5">
+                                <CheckBox IsChecked="{Binding ServersView.ShowFull}">
+                                    <TextBlock Text="Show full servers"
+                                               Margin="5,-2,0,0"
+                                               FontSize="14"
+                                               Foreground="#b0cfd7" />
+                                </CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal"
+                                        Margin="20,5,0,5">
+                                <CheckBox IsChecked="{Binding ServersView.ShowPassworded}">
+                                    <TextBlock Text="Show passworded servers"
+                                               Margin="5,-2,0,0"
+                                               FontSize="14"
+                                               Foreground="#b0cfd7" />
+                                </CheckBox>
+                            </StackPanel>
+
+                            <Button Grid.Column="3"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Right"
+                                    Margin="10,0,30,0"
+                                    Command="{Binding Refresh}">
+                                <Image Source="/RXL;component/Assets/RefreshButton.png"
+                                       Stretch="None" />
+                            </Button>
+
+                        </Grid>
+
                     </Grid>
-                    
+
                 </Grid>
 
                 <Grid Grid.Column="1"
