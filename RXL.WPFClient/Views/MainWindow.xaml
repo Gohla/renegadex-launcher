@@ -453,37 +453,42 @@
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Time limit" />
+                                       Text="Server version" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Spawn crates" />
+                                       Text="Time limit" />
 
                             <TextBlock Grid.Row="2"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Auto balance" />
+                                       Text="Spawn crates" />
 
                             <TextBlock Grid.Row="3"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Bots" />
+                                       Text="Auto balance" />
 
                             <TextBlock Grid.Row="4"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Steam required" />
+                                       Text="Bots" />
 
                             <TextBlock Grid.Row="5"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Password required" />
+                                       Text="Steam required" />
 
                             <TextBlock Grid.Row="6"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Mine limit" />
+                                       Text="Password required" />
 
                             <TextBlock Grid.Row="7"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="Mine limit" />
+
+                            <TextBlock Grid.Row="8"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="Vehicle limit" />
 
@@ -500,37 +505,42 @@
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.TimeLimit}" />
+                                       Text="{Binding ServerSettings.Version}" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.SpawnCrates, Converter={StaticResource BoolToOnOffConverter}}" />
+                                       Text="{Binding ServerSettings.TimeLimit}" />
 
                             <TextBlock Grid.Row="2"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.AutoBalance, Converter={StaticResource BoolToOnOffConverter}}" />
+                                       Text="{Binding ServerSettings.SpawnCrates, Converter={StaticResource BoolToOnOffConverter}}" />
 
                             <TextBlock Grid.Row="3"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding Bots}" />
+                                       Text="{Binding ServerSettings.AutoBalance, Converter={StaticResource BoolToOnOffConverter}}" />
 
                             <TextBlock Grid.Row="4"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.SteamRequired, Converter={StaticResource BoolToOnOffConverter}}" />
+                                       Text="{Binding Bots}" />
 
                             <TextBlock Grid.Row="5"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
+                                       Text="{Binding ServerSettings.SteamRequired, Converter={StaticResource BoolToOnOffConverter}}" />
 
                             <TextBlock Grid.Row="6"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.MineLimit}" />
+                                       Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
 
                             <TextBlock Grid.Row="7"
+                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                       Text="{Binding ServerSettings.MineLimit}" />
+
+                            <TextBlock Grid.Row="8"
                                        Style="{StaticResource ServerInfoLabelTextBlockStyle}"
                                        Text="{Binding ServerSettings.VehicleLimit}" />
 

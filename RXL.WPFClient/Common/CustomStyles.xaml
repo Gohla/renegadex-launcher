@@ -193,6 +193,15 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Address}"
                                        Style="{StaticResource ListBottomTextBlockStyle}" />
+
+                            <TextBlock Text="*"
+                                       Margin="5,0"
+                                       Style="{StaticResource ListBottomTextBlockStyle}" />
+
+                            <TextBlock Text="{Binding ServerSettings.Version}"
+                                       Style="{StaticResource ListBottomTextBlockStyle}" />
+                            
+                            
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
