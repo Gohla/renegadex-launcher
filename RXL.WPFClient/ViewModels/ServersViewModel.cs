@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoUpdaterDotNET;
 using RXL.Core;
 using RXL.Util;
 using RXL.WPFClient.Observables;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -80,6 +82,7 @@ namespace RXL.WPFClient.ViewModels
             Mapper.AssertConfigurationIsValid();
 
             DoRefresh();
+            DoCheckUpdate();
         }
 
         public void Dispose()
@@ -234,6 +237,12 @@ namespace RXL.WPFClient.ViewModels
         public void CopyAddress(ServerObservable server)
         {
             Clipboard.SetText(server.Address);
+        }
+
+        private async void DoCheckUpdate()
+        {
+            await Task.Delay(500);
+            AutoUpdater.Start("http://rxl.gohla.nl/update.xml");
         }
     }
 }
