@@ -168,6 +168,44 @@
                     <Grid.Background>
                         <ImageBrush ImageSource="/RXL;component/Assets/ServerListOverlay.png" />
                     </Grid.Background>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="230"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Top">
+
+                            <TextBlock Text="|"
+                                       Margin="2,0"
+                                       Foreground="#ffffff"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Top" />
+
+                            <Image Source="/RXL;component/Assets/MultiplayerButton.png"
+                                   Stretch="None"/>
+
+                            <TextBlock Text="|"
+                                       Margin="2,0"
+                                       Foreground="#ffffff"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Top" />
+                        </StackPanel>
+                        
+                        
+                    </Grid>
+                    
                 </Grid>
 
                 <Grid Grid.Column="1"
