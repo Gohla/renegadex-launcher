@@ -174,7 +174,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Grid>
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="230" />
                             <ColumnDefinition Width="0" />
@@ -193,7 +193,7 @@
                                        VerticalAlignment="Top" />
 
                             <Image Source="/RXL;component/Assets/MultiplayerButton.png"
-                                   Stretch="None" />
+                                   Stretch="None"/>
 
                             <TextBlock Text="|"
                                        Margin="2,0"
@@ -264,6 +264,151 @@
 
                         </Grid>
 
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          Grid.IsSharedSizeScope="True"
+                          Margin="10,5,0,10"
+                          HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--  Title  -->
+
+                        <Grid Grid.Row="0"
+                              Background="#803a8a9a">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="695"
+                                                  SharedSizeGroup="ServerNameColumn" />
+                                <ColumnDefinition Width="95"
+                                                  SharedSizeGroup="PlayersColumn" />
+                                <ColumnDefinition Width="95"
+                                                  SharedSizeGroup="LatencyColumn" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        Tag="Server"
+                                        Background="Transparent"
+                                        MouseUp="StackPanelMouseUp">
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Server"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+
+                                </Image>
+                                
+                                <TextBlock Text="Server"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           Foreground="#b0cfd7" />
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        Tag="Players"
+                                        Background="Transparent"
+                                        MouseUp="StackPanelMouseUp"
+                                        HorizontalAlignment="Right">
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Players"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+
+                                </Image>
+                                
+                                <TextBlock Text="Players"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           Margin="5,0,5,0"
+                                           Foreground="#b0cfd7" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal"
+                                        Tag="Latency"
+                                        Background="Transparent"
+                                        MouseUp="StackPanelMouseUp"
+                                        HorizontalAlignment="Right">
+
+                                <Image Tag="Latency"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+
+                                </Image>
+                                
+                                <TextBlock Text="Latency"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           Margin="5,0,5,0"
+                                           Foreground="#b0cfd7" />
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Data -->
+
+                        <ListView x:Name="ServerBrowser"
+                                  Grid.Row="1"
+                                  BorderThickness="0"
+                                  Margin="0,0,0,10"
+                                  Padding="0"
+                                  Background="Transparent"
+                                  SelectionMode="Single"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                  ItemsSource="{Binding ServersView.View}"
+                                  ItemTemplate="{StaticResource ServerDataTemplate}"
+                                  MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
+                                  SelectionChanged="ServerBrowserOnSelectionChanged">
+                            <ListView.Resources>
+                                <Style TargetType="ScrollBar">
+                                    <Setter Property="Background"
+                                            Value="Transparent" />
+                                    <Setter Property="BorderThickness"
+                                            Value="0" />
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Ping"
+                                              Command="{Binding PingSelected}"
+                                              CommandParameter="{Binding SelectedServer}" />
+                                    <MenuItem Header="Join"
+                                              Command="{Binding JoinSelected}"
+                                              CommandParameter="{Binding SelectedServer}" />
+                                    <MenuItem Header="Copy address"
+                                              Command="{Binding CopyAddressSelected}"
+                                              CommandParameter="{Binding SelectedServer}" />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
                     </Grid>
 
                 </Grid>
