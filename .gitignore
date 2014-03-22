@@ -111,3 +111,4 @@ UpgradeLog*.XML
 installer/AnyCPU_ReleaseSetupFiles
 installer/out
 installer/setup-cache
+*.db
