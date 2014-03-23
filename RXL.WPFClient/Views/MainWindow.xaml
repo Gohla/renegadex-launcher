@@ -74,7 +74,7 @@
                                                Background="Transparent"
                                                VerticalAlignment="Center"
                                                Foreground="{StaticResource InfoTextColor2}"
-                                               CaretBrush="{StaticResource DarkYellowColorBrush}"
+                                               CaretBrush="#bf3013"
                                                BorderThickness="0"
                                                Margin="10,0,10,0"
                                                Text="{Binding ServersView.SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -91,10 +91,9 @@
                         </xctk:WatermarkTextBox>
 
                         <Button Grid.Column="2"
-                                Background="Transparent"
-                                BorderBrush="Transparent"
                                 Height="40"
-                                Command="{Binding Refresh}">
+                                Command="{Binding Refresh}"
+                                Style="{StaticResource ButtonStyle}">
                             <Image Source="/RXL;component/Assets/SearchButton.png"
                                    Stretch="Uniform" />
                         </Button>
@@ -116,7 +115,7 @@
                     <xctk:WatermarkTextBox Background="Transparent"
                                            VerticalAlignment="Center"
                                            Foreground="#ff0000"
-                                           CaretBrush="{StaticResource DarkYellowColorBrush}"
+                                           CaretBrush="#bf3013"
                                            BorderThickness="0"
                                            Margin="5,0,0,0"
                                            Width="140"
@@ -139,11 +138,10 @@
                                FontSize="20"
                                VerticalAlignment="Center" />
 
-                    <Button BorderBrush="Transparent"
-                            Background="Transparent"
-                            VerticalAlignment="Center"
+                    <Button VerticalAlignment="Center"
                             Width="100"
-                            Height="35">
+                            Height="35"
+                            Style="{StaticResource ButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Settings"
                                        FontSize="16"
@@ -642,10 +640,12 @@
                                        FontSize="25"
                                        VerticalAlignment="Center" />
 
-                            <Button BorderBrush="Transparent"
-                                    Background="Transparent"
-                                    Foreground="Transparent"
-                                    Command="{Binding JoinSelected}">
+
+                            <!--Background="Transparent"
+                                    Foreground="Transparent"-->
+
+                            <Button Command="{Binding JoinSelected}"
+                                    Style="{StaticResource ButtonStyle}">
                                 <Image Source="/RXL;component/Assets/JoinButton.png"
                                        Height="40" />
                             </Button>
