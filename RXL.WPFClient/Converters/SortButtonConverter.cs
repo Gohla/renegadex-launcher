@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
@@ -14,13 +13,14 @@ namespace RXL.WPFClient.Converters
             var image = (Image)values[0];
             var sortInverted = (bool)values[1];
             var sortBy = (string)values[2];
+            var splitedTag = image.Tag.ToString().Split(':'); // [0] = SortByProperty, [1] = in what order
 
-            if (image.Tag.Equals(sortBy))
+            if (splitedTag[0].Equals(sortBy) && (sortInverted && splitedTag[1].Equals("Down") || !sortInverted && splitedTag[1].Equals("Up")))
             {
-                image.Source = sortInverted ? new BitmapImage(new Uri("/Assets/ArrowDown.png", UriKind.Relative)) : new BitmapImage(new Uri("/Assets/ArrowUp.png", UriKind.Relative));
-                return Visibility.Visible;
+                return new BitmapImage(new Uri(String.Format("/Assets/Arrow{0}Selected.png", splitedTag[1]), UriKind.Relative));
             }
-            return Visibility.Hidden;
+
+            return new BitmapImage(new Uri(String.Format("/Assets/Arrow{0}.png", splitedTag[1]), UriKind.Relative));
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

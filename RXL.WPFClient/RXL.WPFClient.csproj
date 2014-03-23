@@ -110,6 +110,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Common\CustomScrollbarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Common\CustomStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,9 +177,6 @@
     <Resource Include="Assets\RenegadeXLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\Maps\cnc-field.png" />
     <Resource Include="Assets\Maps\cnc-goldrush.png" />
     <Resource Include="Assets\Maps\cnc-hourglassii.png" />
@@ -185,21 +186,47 @@
     <Resource Include="Assets\Maps\cnc-walls.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Search.png" />
-    <Resource Include="Assets\Refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\ArrowDown.png" />
     <Resource Include="Assets\ArrowUp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\MoreOptions.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\LessOptions.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="BugSense\BugSense - SDK License Agreement.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Background.png" />
+    <Resource Include="Assets\BackgroundOverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ServerDetailsOverlay.png" />
+    <Resource Include="Assets\ServerListOverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\JoinButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Blocks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchServerOverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\MultiplayerButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchSettingsOverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\RefreshButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ArrowDownSelected.png" />
+    <Resource Include="Assets\ArrowUpSelected.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

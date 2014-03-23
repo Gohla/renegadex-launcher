@@ -169,6 +169,68 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ButtonStyle"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background"
+                Value="#373737" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="FontSize"
+                Value="15" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="4"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="1">
+                        <ContentPresenter x:Name="MyContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,0,0" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Foreground"
+                                    Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Foreground"
+                                    Value="Transparent" />
+                        </Trigger>
+                        
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="#80b0cfd7" />
+                            <Setter Property="Foreground"
+                                    Value="#80b0cfd7" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="#80bf3013" />
+                            <Setter Property="Foreground"
+                                    Value="#80bf3013" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <DataTemplate x:Key="ServerDataTemplate">
         <Grid Height="50"
               Margin="0">
@@ -268,22 +330,22 @@
                                     TargetName="Bd"
                                     Value="White" />-->
                             <Setter Property="Background"
-                                    Value="White" />
+                                    Value="#80bf3013" />
                             <Setter Property="Foreground"
-                                    Value="White" />
+                                    Value="#80bf3013" />
                             <Setter Property="BorderThickness"
                                     Value="0,1,1,0" />
                             <Setter Property="BorderBrush"
-                                    Value="White" />
+                                    Value="#80bf3013" />
                         </Trigger>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter Property="Background"
-                                    Value="#7FDEDE5D" />
+                                    Value="#80b0cfd7" />
                             <Setter Property="BorderThickness"
                                     Value="0,1,1,0" />
                             <Setter Property="BorderBrush"
-                                    Value="#7FDEDE5D" />
+                                    Value="#80b0cfd7" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

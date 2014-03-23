@@ -4,7 +4,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace RXL.WPFClient.Views
 {
@@ -51,28 +50,6 @@ namespace RXL.WPFClient.Views
         private void StackPanelMouseUp(object sender, MouseButtonEventArgs e)
         {
             _viewModel.ServersView.SetServerSorting(((StackPanel)sender).Tag.ToString());
-        }
-
-        private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (FilterOptionsGrid.Visibility == Visibility.Visible)
-            {
-                FilterOptionsImage.Source = new BitmapImage(new Uri("/Assets/MoreOptions.png", UriKind.Relative));
-                FilterOptionsGrid.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                FilterOptionsImage.Source = new BitmapImage(new Uri("/Assets/LessOptions.png", UriKind.Relative));
-                FilterOptionsGrid.Visibility = Visibility.Visible;
-            }
-        }
-
-        private const double DefaultWindowsSize = 1150;
-        private const double DefaultScalableColumnWidth = 634.0;
-
-        private void MainWindowOnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            ScalableColumnDefinition.Width = new GridLength(DefaultScalableColumnWidth + (e.NewSize.Width - DefaultWindowsSize));
         }
     }
 }

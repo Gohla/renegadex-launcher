@@ -7,6 +7,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Common/Converters.xaml" />
                 <ResourceDictionary Source="Common/CustomStyles.xaml" />
+                <ResourceDictionary Source="Common/CustomScrollbarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -6,201 +6,215 @@
         Title="RenegadeX Launcher"
         Icon="/Assets/RenegadeX.ico"
         WindowStartupLocation="CenterScreen"
-        Height="760"
-        MinHeight="760"
-        Width="1150"
-        MinWidth="1150"
-        SizeChanged="MainWindowOnSizeChanged">
+        Height="980"
+        MinHeight="980"
+        Width="1510"
+        MinWidth="1510">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/RXL;component/Assets/bg.jpg"
-                        Stretch="UniformToFill"
+            <ImageBrush ImageSource="/RXL;component/Assets/Background.png"
                         AlignmentX="Left"
                         AlignmentY="Top" />
         </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Border Grid.Row="0"
-                BorderThickness="0,0,0,1"
-                BorderBrush="{StaticResource DarkYellowColorBrush}">
-            <Grid Margin="10,0,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="0,20,0,0"
+              Width="1435"
+              Height="865">
+            <Grid.Background>
+                <ImageBrush ImageSource="/RXL;component/Assets/BackgroundOverlay.png"
+                            Stretch="Uniform"
+                            AlignmentX="Left"
+                            AlignmentY="Top" />
+            </Grid.Background>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="400" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="400" />
-                    </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="195" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0"
-                               Style="{StaticResource HeaderTextBlockStyle}"
-                               Margin="0,10,0,0"
-                               Text="" />
+            <Grid Margin="0,10,0,0"
+                  Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="550" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="1"
-                           Source="/Assets/RenegadeXLogo.png" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Column="2"
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Margin="0,0,10,0">
+                    <Image Grid.Column="0"
+                           Source="/RXL;component/Assets/RenegadeXLogo.png"
+                           VerticalAlignment="Top" />
 
-                        <TextBlock Text="Player name: "
-                                   Foreground="White"
+                    <Grid Grid.Row="1"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="70" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="Search for servers"
+                                   Foreground="#b0cfd7"
+                                   FontSize="16"
                                    VerticalAlignment="Center" />
 
-                        <xctk:WatermarkTextBox Background="Transparent"
+                        <Image Grid.Column="1"
+                               Source="/RXL;component/Assets/SearchServerOverlay.png" />
+
+                        <xctk:WatermarkTextBox Grid.Column="1"
+                                               Background="Transparent"
                                                VerticalAlignment="Center"
-                                               Foreground="{StaticResource InfoTextColor2}"
-                                               CaretBrush="{StaticResource DarkYellowColorBrush}"
+                                               Foreground="#ff0000"
+                                               CaretBrush="#bf3013"
                                                BorderThickness="0"
-                                               Margin="5,0,0,0"
-                                               Width="110"
-                                               Text="{Binding Configuration.Name, Mode=TwoWay}">
+                                               Margin="10,0,10,0"
+                                               Text="{Binding ServersView.SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                             <xctk:WatermarkTextBox.Watermark>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Your player name"
+                                    <TextBlock Text="Enter Server Name"
                                                Margin="4,0,0,0"
-                                               Foreground="{StaticResource WaterMarkTextColor}" />
+                                               FontStyle="Italic"
+                                               Foreground="#b0cfd7" />
                                 </StackPanel>
                             </xctk:WatermarkTextBox.Watermark>
 
                         </xctk:WatermarkTextBox>
 
-                        <Button BorderBrush="{StaticResource DarkYellowColorBrush}"
-                                Background="{StaticResource ListBackgroundBrush2}"
-                                Width="50"
-                                Margin="20,0,0,0">
-                            <TextBlock Text="Settings"
-                                       Foreground="{StaticResource DarkYellowColorBrush}" />
+                        <Button Grid.Column="2"
+                                Height="40"
+                                Command="{Binding Refresh}"
+                                Style="{StaticResource ButtonStyle}">
+                            <Image Source="/RXL;component/Assets/SearchButton.png"
+                                   Stretch="Uniform" />
                         </Button>
-                    </StackPanel>
 
+                    </Grid>
                 </Grid>
 
-                <StackPanel Grid.Row="1"
-                            Orientation="Horizontal">
-                    <Button BorderBrush="{StaticResource DarkYellowColorBrush}"
-                            Background="{StaticResource ListBackgroundBrush2}"
-                            Width="150">
-                        <TextBlock Text="Multiplayer"
-                                   FontSize="18"
-                                   Foreground="{StaticResource DarkYellowColorBrush}" />
-                    </Button>
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,0,10,0">
 
-                    <Button BorderBrush="{StaticResource DarkYellowColorBrush}"
-                            Background="{StaticResource ListBackgroundBrush2}"
-                            Width="150"
-                            Margin="5,0,0,0"
-                            Visibility="Hidden">
-                        <TextBlock Text="Stats"
-                                   FontSize="18"
-                                   Foreground="{StaticResource DarkYellowColorBrush}" />
+                    <TextBlock Text="Player name: "
+                               Foreground="#b0cfd7"
+                               FontSize="16"
+                               VerticalAlignment="Center" />
+
+                    <xctk:WatermarkTextBox Background="Transparent"
+                                           VerticalAlignment="Center"
+                                           Foreground="#ff0000"
+                                           CaretBrush="#bf3013"
+                                           BorderThickness="0"
+                                           Margin="5,0,0,0"
+                                           Width="140"
+                                           FontSize="16"
+                                           Text="{Binding Configuration.Name, Mode=TwoWay}">
+
+                        <xctk:WatermarkTextBox.Watermark>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Your player name"
+                                           Margin="4,0,0,0"
+                                           Foreground="{StaticResource WaterMarkTextColor}" />
+                            </StackPanel>
+                        </xctk:WatermarkTextBox.Watermark>
+
+                    </xctk:WatermarkTextBox>
+
+                    <TextBlock Text="|"
+                               Margin="10,0"
+                               Foreground="#b0cfd7"
+                               FontSize="20"
+                               VerticalAlignment="Center" />
+
+                    <Button VerticalAlignment="Center"
+                            Width="100"
+                            Height="35"
+                            Style="{StaticResource ButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Settings"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Foreground="#b0cfd7" />
+
+                            <Image Source="/RXL;component/Assets/Settings.png"
+                                   Margin="10,0,0,0"
+                                   Height="24" />
+                        </StackPanel>
                     </Button>
                 </StackPanel>
             </Grid>
-        </Border>
 
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="924" />
+                    <ColumnDefinition Width="494" />
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1"
-              Margin="10,10,10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="320" />
-            </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/RXL;component/Assets/ServerListOverlay.png" />
+                    </Grid.Background>
 
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0"
-                        BorderThickness="1,1,1,5"
-                        BorderBrush="Transparent"
-                        MouseUp="UIElement_OnMouseUp">
-                    <Grid Background="{StaticResource ListBackgroundBrush}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0"
-                              VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30" />
-                                <ColumnDefinition Width="125" />
-                                <ColumnDefinition Width="15" />
-                                <ColumnDefinition Width="500" />
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="50" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"
-                                   Source="/Assets/Search.png"
-                                   Width="15"
-                                   Stretch="Uniform"
-                                   VerticalAlignment="Center" />
-                            <TextBlock Grid.Column="1"
-                                       Text="Search for server:"
-                                       Margin="0,0,0,0"
-                                       VerticalAlignment="Center"
-                                       Foreground="{StaticResource ListHeaderTextColor}" />
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="230" />
+                            <ColumnDefinition Width="0" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                            <Image Name="FilterOptionsImage"
-                                   Grid.Column="2"
-                                   Source="/Assets/MoreOptions.png"
-                                   Width="10"
-                                   Stretch="Uniform"
-                                   VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Top">
 
-                            <xctk:WatermarkTextBox Grid.Column="3"
-                                                   Background="Transparent"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{StaticResource InfoTextColor2}"
-                                                   CaretBrush="{StaticResource DarkYellowColorBrush}"
-                                                   BorderThickness="0"
-                                                   Margin="10,0,10,0"
-                                                   Text="{Binding ServersView.SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBlock Text="|"
+                                       Margin="2,0"
+                                       Foreground="#ffffff"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Top" />
 
-                                <xctk:WatermarkTextBox.Watermark>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Enter Server Name"
-                                                   Margin="4,0,0,0"
-                                                   Foreground="{StaticResource WaterMarkTextColor}" />
-                                    </StackPanel>
-                                </xctk:WatermarkTextBox.Watermark>
+                            <Image Source="/RXL;component/Assets/MultiplayerButton.png"
+                                   Stretch="None"/>
 
-                            </xctk:WatermarkTextBox>
+                            <TextBlock Text="|"
+                                       Margin="2,0"
+                                       Foreground="#ffffff"
+                                       FontSize="30"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Top" />
+                        </StackPanel>
 
-                            <Button Grid.Column="5"
-                                    Background="Transparent"
-                                    BorderThickness="1"
-                                    BorderBrush="{StaticResource DarkYellowColorBrush}"
-                                    Command="{Binding Refresh}">
-                                <Image Source="/Assets/Refresh.png"
-                                       Width="15"
-                                       Margin="2"
-                                       Stretch="Uniform" />
-                            </Button>
-                        </Grid>
-
+                        <Image Grid.Column="2"
+                               VerticalAlignment="Bottom"
+                               Source="/RXL;component/Assets/SearchSettingsOverlay.png"
+                               Stretch="None" />
 
                         <Grid Name="FilterOptionsGrid"
-                              Grid.Row="1"
-                              Visibility="Collapsed"
-                              VerticalAlignment="Top">
+                              Grid.Column="2"
+                              Margin="40,10,0,0"
+                              VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="210" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0"
@@ -208,8 +222,9 @@
                                         Margin="20,5,0,5">
                                 <CheckBox IsChecked="{Binding ServersView.ShowEmpty}">
                                     <TextBlock Text="Show empty servers"
-                                               Margin="5,0,0,0"
-                                               Foreground="{StaticResource ListHeaderTextColor}" />
+                                               Margin="5,-2,0,0"
+                                               FontSize="14"
+                                               Foreground="#b0cfd7" />
                                 </CheckBox>
                             </StackPanel>
 
@@ -218,8 +233,9 @@
                                         Margin="20,5,0,5">
                                 <CheckBox IsChecked="{Binding ServersView.ShowFull}">
                                     <TextBlock Text="Show full servers"
-                                               Margin="5,0,0,0"
-                                               Foreground="{StaticResource ListHeaderTextColor}" />
+                                               Margin="5,-2,0,0"
+                                               FontSize="14"
+                                               Foreground="#b0cfd7" />
                                 </CheckBox>
                             </StackPanel>
 
@@ -228,35 +244,46 @@
                                         Margin="20,5,0,5">
                                 <CheckBox IsChecked="{Binding ServersView.ShowPassworded}">
                                     <TextBlock Text="Show passworded servers"
-                                               Margin="5,0,0,0"
-                                               Foreground="{StaticResource ListHeaderTextColor}" />
+                                               Margin="5,-2,0,0"
+                                               FontSize="14"
+                                               Foreground="#b0cfd7" />
                                 </CheckBox>
                             </StackPanel>
 
+                            <Button Grid.Column="3"
+                                    HorizontalAlignment="Right"
+                                    Margin="10,0,30,0"
+                                    Width="40"
+                                    Height="30"
+                                    Command="{Binding Refresh}"
+                                    Style="{StaticResource ButtonStyle}">
+                                <Image Source="/RXL;component/Assets/RefreshButton.png"
+                                       Stretch="None" />
+                            </Button>
+
                         </Grid>
+
                     </Grid>
 
-                </Border>
+                    <Grid Grid.Row="1"
+                          Grid.IsSharedSizeScope="True"
+                          Margin="10,5,0,10"
+                          HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                <Grid Grid.Row="1"
-                      Grid.IsSharedSizeScope="True"
-                      HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <!--  Title  -->
-                    <Border Grid.Row="0"
-                            BorderThickness="1,1,1,0"
-                            BorderBrush="Transparent">
-                        <Grid Background="{StaticResource ListBackgroundBrush}">
+                        <!--  Title  -->
+
+                        <Grid Grid.Row="0"
+                              Background="#803a8a9a">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="634"
-                                                  Name="ScalableColumnDefinition"
+                                <ColumnDefinition Width="695"
                                                   SharedSizeGroup="ServerNameColumn" />
-                                <ColumnDefinition Width="70"
+                                <ColumnDefinition Width="95"
                                                   SharedSizeGroup="PlayersColumn" />
-                                <ColumnDefinition Width="70"
+                                <ColumnDefinition Width="95"
                                                   SharedSizeGroup="LatencyColumn" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0"
@@ -264,314 +291,380 @@
                                         Tag="Server"
                                         Background="Transparent"
                                         MouseUp="StackPanelMouseUp">
-                                <TextBlock Text="Server"
-                                           Margin="10,0,0,0"
-                                           Foreground="{StaticResource ListHeaderTextColor}" />
 
                                 <Image Margin="5,0,0,0"
-                                       Tag="Server"
+                                       Tag="Server:Down"
                                        Stretch="Uniform"
                                        Width="13">
 
-                                    <Image.Visibility>
+                                    <Image.Source>
                                         <MultiBinding Converter="{StaticResource SortButtonConverter}">
                                             <Binding RelativeSource="{RelativeSource Self}" />
                                             <Binding Path="ServersView.SortInverted" />
                                             <Binding Path="ServersView.CurrentSort" />
                                         </MultiBinding>
-                                    </Image.Visibility>
-
+                                    </Image.Source>
                                 </Image>
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Server:Up"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                                
+                                <TextBlock Text="Server"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           Foreground="#b0cfd7" />
 
                             </StackPanel>
                             <StackPanel Grid.Column="1"
                                         Orientation="Horizontal"
                                         Tag="Players"
                                         Background="Transparent"
-                                        MouseUp="StackPanelMouseUp">
-                                <TextBlock Text="Players"
-                                           Margin="0,0,0,0"
-                                           Foreground="{StaticResource ListHeaderTextColor}" />
+                                        MouseUp="StackPanelMouseUp"
+                                        HorizontalAlignment="Right">
 
                                 <Image Margin="5,0,0,0"
-                                       Tag="Players"
+                                       Tag="Players:Down"
                                        Stretch="Uniform"
                                        Width="13">
 
-                                    <Image.Visibility>
+                                    <Image.Source>
                                         <MultiBinding Converter="{StaticResource SortButtonConverter}">
                                             <Binding RelativeSource="{RelativeSource Self}" />
                                             <Binding Path="ServersView.SortInverted" />
                                             <Binding Path="ServersView.CurrentSort" />
                                         </MultiBinding>
-                                    </Image.Visibility>
-
+                                    </Image.Source>
                                 </Image>
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Players:Up"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+
+                                <TextBlock Text="Players"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           Margin="5,0,5,0"
+                                           Foreground="#b0cfd7" />
                             </StackPanel>
                             <StackPanel Grid.Column="2"
                                         Orientation="Horizontal"
                                         Tag="Latency"
                                         Background="Transparent"
-                                        MouseUp="StackPanelMouseUp">
-                                <TextBlock Text="Latency"
-                                           Margin="0,0,0,0"
-                                           Foreground="{StaticResource ListHeaderTextColor}" />
+                                        MouseUp="StackPanelMouseUp"
+                                        HorizontalAlignment="Right">
 
                                 <Image Margin="5,0,0,0"
-                                       Tag="Latency"
+                                       Tag="Latency:Down"
                                        Stretch="Uniform"
                                        Width="13">
 
-                                    <Image.Visibility>
+                                    <Image.Source>
                                         <MultiBinding Converter="{StaticResource SortButtonConverter}">
                                             <Binding RelativeSource="{RelativeSource Self}" />
                                             <Binding Path="ServersView.SortInverted" />
                                             <Binding Path="ServersView.CurrentSort" />
                                         </MultiBinding>
-                                    </Image.Visibility>
-
+                                    </Image.Source>
                                 </Image>
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Latency:Up"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+
+                                <TextBlock Text="Latency"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           Margin="5,0,5,0"
+                                           Foreground="#b0cfd7" />
                             </StackPanel>
                         </Grid>
-                    </Border>
-                    <!-- Data -->
-                    <ListView x:Name="ServerBrowser"
-                              Grid.Row="1"
-                              BorderThickness="0"
-                              Margin="0,0,0,10"
-                              Padding="0"
-                              Background="Transparent"
-                              SelectionMode="Single"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Visible"
-                              ItemsSource="{Binding ServersView.View}"
-                              ItemTemplate="{StaticResource ServerDataTemplate}"
-                              MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
-                              SelectionChanged="ServerBrowserOnSelectionChanged">
-                        <ListView.Resources>
-                            <Style TargetType="ScrollBar">
-                                <Setter Property="Background"
-                                        Value="Transparent" />
-                                <Setter Property="BorderThickness"
-                                        Value="0" />
-                            </Style>
-                        </ListView.Resources>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Ping"
-                                          Command="{Binding PingSelected}"
-                                          CommandParameter="{Binding SelectedServer}" />
-                                <MenuItem Header="Join"
-                                          Command="{Binding JoinSelected}"
-                                          CommandParameter="{Binding SelectedServer}" />
-                                <MenuItem Header="Copy address"
-                                          Command="{Binding CopyAddressSelected}"
-                                          CommandParameter="{Binding SelectedServer}" />
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                    </ListView>
-                </Grid>
-            </Grid>
 
-            <Grid Grid.Column="1"
-                  Margin="20,0,0,0"
-                  Width="300">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="250" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="300" />
-                </Grid.RowDefinitions>
+                        <!-- Data -->
 
-                <Image Grid.Row="0"
-                       Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"
-                       Stretch="UniformToFill" />
-
-                <StackPanel Grid.Row="0"
-                            Orientation="Vertical"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Height="70"
-                            Width="320"
-                            Background="{StaticResource ListBackgroundBrush}"
-                            Visibility="{Binding SelectedServer, Converter={StaticResource SelectedServerToVisibilityConverter}}">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="30,5,0,0"
-                                VerticalAlignment="Center">
-                        <TextBlock Text="{Binding SelectedServer.Players}"
-                                   FontSize="18"
-                                   Foreground="{StaticResource ListTextColor}" />
-                        <TextBlock Text="/"
-                                   FontSize="18"
-                                   Margin="5,0"
-                                   Foreground="{StaticResource ListTextColor}" />
-                        <TextBlock Text="{Binding SelectedServer.MaxPlayers}"
-                                   FontSize="18"
-                                   Foreground="{StaticResource ListTextColor}" />
-                        <TextBlock Text="Players"
-                                   FontSize="18"
-                                   Margin="5,0,0,0"
-                                   Foreground="{StaticResource ListTextColor}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal"
-                                Margin="30,5,0,0"
-                                VerticalAlignment="Center">
-                        <TextBlock Text="{Binding SelectedServer.Map, Converter={StaticResource ServerMapToMapNameConverter}}"
-                                   FontSize="14"
-                                   Foreground="{StaticResource ListTextColor}" />
-                    </StackPanel>
-                </StackPanel>
-
-                <Button Grid.Row="1"
-                        Margin="0,10,0,0"
-                        BorderBrush="{StaticResource DarkYellowColorBrush}"
-                        Background="{StaticResource ListBackgroundBrush2}"
-                        Command="{Binding JoinSelected}">
-                    <TextBlock Text="Join Server"
-                               FontSize="30"
-                               Foreground="{StaticResource DarkYellowColorBrush}" />
-                </Button>
-
-                <StackPanel Grid.Row="2"
-                            Margin="0,10,0,0"
-                            Background="{StaticResource ListBackgroundBrush}"
-                            DataContext="{Binding SelectedServer}">
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0"
-                              Margin="20,10,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Server version" />
-
-                            <TextBlock Grid.Row="1"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Time limit" />
-
-                            <TextBlock Grid.Row="2"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Spawn crates" />
-
-                            <TextBlock Grid.Row="3"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Auto balance" />
-
-                            <TextBlock Grid.Row="4"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Bots" />
-
-                            <TextBlock Grid.Row="5"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Steam required" />
-
-                            <TextBlock Grid.Row="6"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Password required" />
-
-                            <TextBlock Grid.Row="7"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Mine limit" />
-
-                            <TextBlock Grid.Row="8"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="Vehicle limit" />
-
-                        </Grid>
-
-                        <Grid Grid.Column="1"
-                              Margin="0,10,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.Version}" />
-
-                            <TextBlock Grid.Row="1"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.TimeLimit}" />
-
-                            <TextBlock Grid.Row="2"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.SpawnCrates, Converter={StaticResource BoolToOnOffConverter}}" />
-
-                            <TextBlock Grid.Row="3"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.AutoBalance, Converter={StaticResource BoolToOnOffConverter}}" />
-
-                            <TextBlock Grid.Row="4"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding Bots}" />
-
-                            <TextBlock Grid.Row="5"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.SteamRequired, Converter={StaticResource BoolToOnOffConverter}}" />
-
-                            <TextBlock Grid.Row="6"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
-
-                            <TextBlock Grid.Row="7"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.MineLimit}" />
-
-                            <TextBlock Grid.Row="8"
-                                       Style="{StaticResource ServerInfoLabelTextBlockStyle}"
-                                       Text="{Binding ServerSettings.VehicleLimit}" />
-
-                        </Grid>
+                        <ListView x:Name="ServerBrowser"
+                                  Grid.Row="1"
+                                  BorderThickness="0"
+                                  Margin="0,0,0,10"
+                                  Padding="0"
+                                  Background="Transparent"
+                                  SelectionMode="Single"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                  ItemsSource="{Binding ServersView.View}"
+                                  ItemTemplate="{StaticResource ServerDataTemplate}"
+                                  MouseDoubleClick="ServerBrowserOnMouseDoubleClick"
+                                  SelectionChanged="ServerBrowserOnSelectionChanged">
+                            <ListView.Resources>
+                                <Style TargetType="ScrollBar">
+                                    <Setter Property="Background"
+                                            Value="Transparent" />
+                                    <Setter Property="BorderThickness"
+                                            Value="0" />
+                                    <Setter Property="Template"
+                                            Value="{StaticResource VerticalScrollBar}"></Setter>
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Ping"
+                                              Command="{Binding PingSelected}"
+                                              CommandParameter="{Binding SelectedServer}" />
+                                    <MenuItem Header="Join"
+                                              Command="{Binding JoinSelected}"
+                                              CommandParameter="{Binding SelectedServer}" />
+                                    <MenuItem Header="Copy address"
+                                              Command="{Binding CopyAddressSelected}"
+                                              CommandParameter="{Binding SelectedServer}" />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
                     </Grid>
-                </StackPanel>
+
+                </Grid>
+
+                <Grid Grid.Column="1"
+                      Margin="20,0,0,0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/RXL;component/Assets/ServerDetailsOverlay.png" />
+                    </Grid.Background>
+
+                    <Grid Margin="50,50,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="250" />
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0"
+                               Source="{Binding ElementName=ServerBrowser, Path=SelectedItem.Map, Converter={StaticResource MapImageConverter}}"
+                               HorizontalAlignment="Left"
+                               Width="350"
+                               Stretch="UniformToFill" />
+
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Height="70"
+                                    Width="350"
+                                    Background="{StaticResource ListBackgroundBrush}"
+                                    Visibility="{Binding SelectedServer, Converter={StaticResource SelectedServerToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="30,5,0,0"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SelectedServer.Players}"
+                                           FontSize="18"
+                                           Foreground="{StaticResource ListTextColor}" />
+                                <TextBlock Text="/"
+                                           FontSize="18"
+                                           Margin="5,0"
+                                           Foreground="{StaticResource ListTextColor}" />
+                                <TextBlock Text="{Binding SelectedServer.MaxPlayers}"
+                                           FontSize="18"
+                                           Foreground="{StaticResource ListTextColor}" />
+                                <TextBlock Text="Players"
+                                           FontSize="18"
+                                           Margin="5,0,0,0"
+                                           Foreground="{StaticResource ListTextColor}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="30,5,0,0"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SelectedServer.Map, Converter={StaticResource ServerMapToMapNameConverter}}"
+                                           FontSize="14"
+                                           Foreground="{StaticResource ListTextColor}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"
+                                    Margin="0,10,0,0"
+                                    DataContext="{Binding SelectedServer}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0"
+                                      Margin="5,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Server version" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Time limit" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Spawn crates" />
+
+                                    <TextBlock Grid.Row="3"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Auto balance" />
+
+                                    <TextBlock Grid.Row="4"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Bots" />
+
+                                    <TextBlock Grid.Row="5"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Steam required" />
+
+                                    <TextBlock Grid.Row="6"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Password required" />
+
+                                    <TextBlock Grid.Row="7"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Mine limit" />
+
+                                    <TextBlock Grid.Row="8"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="Vehicle limit" />
+
+                                </Grid>
+
+                                <Grid Grid.Column="1"
+                                      Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.Version}" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.TimeLimit}" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.SpawnCrates, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="3"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.AutoBalance, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="4"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding Bots}" />
+
+                                    <TextBlock Grid.Row="5"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.SteamRequired, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="6"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding RequiresPw, Converter={StaticResource BoolToOnOffConverter}}" />
+
+                                    <TextBlock Grid.Row="7"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.MineLimit}" />
+
+                                    <TextBlock Grid.Row="8"
+                                               Style="{StaticResource ServerInfoLabelTextBlockStyle}"
+                                               Text="{Binding ServerSettings.VehicleLimit}" />
+
+                                    <Image Grid.Row="7"
+                                           Grid.RowSpan="2"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,0,40,0"
+                                           Source="/RXL;component/Assets/Blocks.png"
+                                           Stretch="None" />
+
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2"
+                                    Margin="0,25,0,0"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="|"
+                                       Margin="5,0"
+                                       Foreground="#ffffff"
+                                       FontSize="25"
+                                       VerticalAlignment="Center" />
+
+
+                            <!--Background="Transparent"
+                                    Foreground="Transparent"-->
+
+                            <Button Command="{Binding JoinSelected}"
+                                    Style="{StaticResource ButtonStyle}">
+                                <Image Source="/RXL;component/Assets/JoinButton.png"
+                                       Height="40" />
+                            </Button>
+
+                            <TextBlock Text="|"
+                                       Margin="5,0"
+                                       Foreground="#ffffff"
+                                       FontSize="25"
+                                       VerticalAlignment="Center" />
+
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
             </Grid>
+
         </Grid>
-
-        <Border Grid.Row="0"
-                BorderBrush="Black"
-                BorderThickness="1"
-                Background="#80000000"
-                Visibility="Collapsed"
-                Grid.RowSpan="2">
-            <Grid HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Width="400"
-                  Height="400">
-
-                <TextBlock Margin="0"
-                           TextWrapping="Wrap"
-                           Text="Not yet implemented ;)"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           Foreground="#7EFFFFFF" />
-
-            </Grid>
-        </Border>
-
     </Grid>
 </Window>
