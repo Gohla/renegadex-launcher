@@ -52,27 +52,5 @@ namespace RXL.WPFClient.Views
         {
             _viewModel.ServersView.SetServerSorting(((StackPanel)sender).Tag.ToString());
         }
-
-        //private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (FilterOptionsGrid.Visibility == Visibility.Visible)
-        //    {
-        //        FilterOptionsImage.Source = new BitmapImage(new Uri("/Assets/MoreOptions.png", UriKind.Relative));
-        //        FilterOptionsGrid.Visibility = Visibility.Collapsed;
-        //    }
-        //    else
-        //    {
-        //        FilterOptionsImage.Source = new BitmapImage(new Uri("/Assets/LessOptions.png", UriKind.Relative));
-        //        FilterOptionsGrid.Visibility = Visibility.Visible;
-        //    }
-        //}
-
-        private const double DefaultWindowsSize = 1150;
-        private const double DefaultScalableColumnWidth = 634.0;
-
-        //private void MainWindowOnSizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    ScalableColumnDefinition.Width = new GridLength(DefaultScalableColumnWidth + (e.NewSize.Width - DefaultWindowsSize));
-        //}
     }
 }
