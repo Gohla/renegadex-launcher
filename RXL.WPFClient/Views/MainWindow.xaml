@@ -73,7 +73,7 @@
                         <xctk:WatermarkTextBox Grid.Column="1"
                                                Background="Transparent"
                                                VerticalAlignment="Center"
-                                               Foreground="{StaticResource InfoTextColor2}"
+                                               Foreground="#ff0000"
                                                CaretBrush="#bf3013"
                                                BorderThickness="0"
                                                Margin="10,0,10,0"
