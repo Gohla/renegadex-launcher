@@ -294,18 +294,31 @@
                                         MouseUp="StackPanelMouseUp">
 
                                 <Image Margin="5,0,0,0"
-                                       Tag="Server"
+                                       Tag="Server:Down"
                                        Stretch="Uniform"
                                        Width="13">
 
-                                    <Image.Visibility>
+                                    <Image.Source>
                                         <MultiBinding Converter="{StaticResource SortButtonConverter}">
                                             <Binding RelativeSource="{RelativeSource Self}" />
                                             <Binding Path="ServersView.SortInverted" />
                                             <Binding Path="ServersView.CurrentSort" />
                                         </MultiBinding>
-                                    </Image.Visibility>
+                                    </Image.Source>
+                                </Image>
 
+                                <Image Margin="5,0,0,0"
+                                       Tag="Server:Up"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Source>
                                 </Image>
                                 
                                 <TextBlock Text="Server"
@@ -323,20 +336,33 @@
                                         HorizontalAlignment="Right">
 
                                 <Image Margin="5,0,0,0"
-                                       Tag="Players"
+                                       Tag="Players:Down"
                                        Stretch="Uniform"
                                        Width="13">
 
-                                    <Image.Visibility>
+                                    <Image.Source>
                                         <MultiBinding Converter="{StaticResource SortButtonConverter}">
                                             <Binding RelativeSource="{RelativeSource Self}" />
                                             <Binding Path="ServersView.SortInverted" />
                                             <Binding Path="ServersView.CurrentSort" />
                                         </MultiBinding>
-                                    </Image.Visibility>
-
+                                    </Image.Source>
                                 </Image>
-                                
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Players:Up"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+
                                 <TextBlock Text="Players"
                                            VerticalAlignment="Center"
                                            FontSize="16"
@@ -350,20 +376,34 @@
                                         MouseUp="StackPanelMouseUp"
                                         HorizontalAlignment="Right">
 
-                                <Image Tag="Latency"
+                                <Image Margin="5,0,0,0"
+                                       Tag="Latency:Down"
                                        Stretch="Uniform"
                                        Width="13">
 
-                                    <Image.Visibility>
+                                    <Image.Source>
                                         <MultiBinding Converter="{StaticResource SortButtonConverter}">
                                             <Binding RelativeSource="{RelativeSource Self}" />
                                             <Binding Path="ServersView.SortInverted" />
                                             <Binding Path="ServersView.CurrentSort" />
                                         </MultiBinding>
-                                    </Image.Visibility>
-
+                                    </Image.Source>
                                 </Image>
-                                
+
+                                <Image Margin="5,0,0,0"
+                                       Tag="Latency:Up"
+                                       Stretch="Uniform"
+                                       Width="13">
+
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource SortButtonConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ServersView.SortInverted" />
+                                            <Binding Path="ServersView.CurrentSort" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+
                                 <TextBlock Text="Latency"
                                            VerticalAlignment="Center"
                                            FontSize="16"
